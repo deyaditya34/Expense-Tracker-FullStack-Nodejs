@@ -5,7 +5,8 @@ const APP_PORT = 3000;
 
 const COLLECTION_NAMES = {
     USERS: "users",
-    TRANSACTIONS: "transactions"
+    TRANSACTIONS: "transactions",
+    CATEGORIES: "categories"
 }
 
 const JWT_SECRET = "Bokakhat@123";
