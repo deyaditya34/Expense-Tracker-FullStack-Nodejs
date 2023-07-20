@@ -18,4 +18,4 @@ function getErrorMessage(err) {
 }
 
 
-module.exports = {errorHandler};
+module.exports = errorHandler;

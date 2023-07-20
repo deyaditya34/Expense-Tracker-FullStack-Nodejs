@@ -30,7 +30,7 @@ function encryptPassword(password) {
 async function login(username, password) {
     const user = database.getCollection(COLLECTION_NAMES.USERS).findOne({
         username,
-        password: encryptPassword(password);
+        password: encryptPassword(password)
     })
 
     if (!user) {

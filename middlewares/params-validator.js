@@ -23,7 +23,7 @@ const PARAM_KEY = {
     QUERY: "query"
 };
 
-modules.export = {
+module.exports = {
     createParamValidator,
     PARAM_KEY
 }
