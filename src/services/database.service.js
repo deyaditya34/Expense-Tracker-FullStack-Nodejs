@@ -20,5 +20,3 @@ module.exports = {
     getCollection
 };
 
-
-initialize().catch((err) => console.log("Error is", err))

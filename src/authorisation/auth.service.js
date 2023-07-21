@@ -6,11 +6,12 @@ const {COLLECTION_NAMES, PASSWORD_SALT} = require("../config");
 
 
 async function register(username, password) {
-    const existingUser = database
+    const existingUser = await database
         .getCollection(COLLECTION_NAMES.USERS)
         .findOne({
             username
         })
+    console.log("existing user", existingUser);    
     if (existingUser) {
         throw new httpError.UnprocessableEntity(
             `Username '${username}' is already taken`
@@ -28,7 +29,7 @@ function encryptPassword(password) {
 }
 
 async function login(username, password) {
-    const user = database.getCollection(COLLECTION_NAMES.USERS).findOne({
+    const user = await database.getCollection(COLLECTION_NAMES.USERS).findOne({
         username,
         password: encryptPassword(password)
     })

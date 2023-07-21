@@ -4,7 +4,7 @@ const DB_NAME = "expense-tracker";
 const APP_PORT = 3000;
 
 const COLLECTION_NAMES = {
-    USERS: "users",
+    USERS: "expense-tracker-users",
     TRANSACTIONS: "transactions",
     CATEGORIES: "categories"
 }

@@ -1,17 +1,17 @@
 const httpError = require("http-errors");
 
-const createParamValidator = (params, paramskey) => (req, res, next) => {
-  const reqParams = Reflect.get(req, paramskey);
+const createParamValidator = (params, paramsKey) => (req, res, next) => {
+  const reqParams = Reflect.get(req, paramsKey);
 
   const missingParams = params.filter(
-    (field) => !Reflect.has(reqParams, params)
-  );
+    (param) => !Reflect.has(reqParams, param)
+    );
 
   if (missingParams.length > 0) {
     throw httpError.BadRequest(
       `Required fields '${missingParams.join(
-        ","
-      )}' are missing from '${paramKey}'`
+        ", "
+      )}' are missing from '${paramsKey}'`
     );
   }
 
