@@ -23,20 +23,20 @@ async function controller(req, res) {
 
 function validateParams(req, res, next) {
   const errorTypedFields = ["color", "name", "type"].filter(
-    (field) => typeof Reflect.get(req.body, "field") !== "string"
+    (field) => typeof Reflect.get(req.body, field) !== "string"
   );
-    
+  console.log("ErrorFields are", errorTypedFields); 
   if (errorTypedFields.length > 0) {
     throw new httpError.BadRequest(
-      `Field '${errorTypedFields.join(",")}' should be of string type`
+      `Field '${errorTypedFields.join(", ")}' should be of string type`
     );
   }
 
   let { type } = req.body;
 
-  if (type !== "DEBIT" || type !== "CREDIT") {
+  if (type !== "DEBIT" && type !== "CREDIT") {
     throw new httpError.BadRequest(
-      `Field ${type} should be either 'DEBIT' or 'CREDIT'`
+      `Field 'type' should be either 'DEBIT' or 'CREDIT'`
     );
   }
   next();

@@ -1,10 +1,10 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
 const userResolver = require("../middlewares/user-resolver");
-const getAllCategoriesForUser = require("./categories.service");
+const {getAllCategoriesForUser} = require("./categories.service");
 
 async function controller(req, res, next) {
   let result = await getAllCategoriesForUser();
-
+  console.log("result is", result);
   if (!result) {
     res.json({
       message: "No categories stored in the application to display"

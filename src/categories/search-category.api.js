@@ -2,49 +2,63 @@ const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const searchCategoryForUser = require("./categories.service");
+const {searchCategoryForUser} = require("./categories.service");
 
 async function controller(req, res) {
   let { searchCategory } = req.body;
+  
+  const result = await searchCategoryForUser({...searchCategory });
 
-  const result = await searchCategoryForUser({ searchCategory });
-
-  if (!result) {
+  if (result.length === 0) {
     res.json({
       message: "No categories found for the respective search",
     });
   } else {
     res.json({
       message: "Categories found",
-      data: result._id,
+      data: result
     });
   }
 }
 
 function validateParams(req, res, next) {
-  const errorTypedFields = ["color", "name", "type"].filter(
-    (field) => typeof Reflect.get(req.body, "field") !== "string"
-  );
+  // const errorTypedFields = ["color", "name", "type"].filter(
+  //   (field) => typeof Reflect.get(req.body, "field") !== "string"
+  // );
 
-  if (errorTypedFields.length > 0) {
-    throw new httpError.BadRequest(
-      `Field '${errorTypedFields.join(",")}' should be of string type`
-    );
-  }
+  // if (errorTypedFields.length > 0) {
+  //   throw new httpError.BadRequest(
+  //     `Field '${errorTypedFields.join(",")}' should be of string type`
+  //   );
+  // }
 
   let { name, color, type } = req.body.searchCategory;
 
   let parsedSearchCategory = {};
 
   if (name) {
+    if (typeof name === "string") {
     parsedSearchCategory.name = name;
+  } else {
+    throw new httpError.BadRequest("Field 'name' should be of string type");
+  }
   }
 
   if (color) {
+    if (typeof color === "string") {
     parsedSearchCategory.color = color;
+  } else {
+    throw new httpError.BadRequest("Field 'color' should be of string type");
+  }
   }
 
   if (type) {
+    if (typeof type !== "string") {
+      throw new httpError.BadRequest("Field 'type' should be of string type");
+    }
+    if (type !== "DEBIT" && type !== "CREDIT") {
+      throw new httpError.BadRequest("Field 'type' should be either 'DEBIT' or 'CREDIT'");
+    } 
     parsedSearchCategory.type = type;
   }
 
@@ -54,13 +68,13 @@ function validateParams(req, res, next) {
     );
   }
 
-  Reflect.set(req.body, "searchCategory", "parsedSearchCategory");
+  Reflect.set(req.body, "searchCategory", parsedSearchCategory);
 
   next();
 }
 
 const missingParamsValidator = paramsValidator.createParamValidator(
-  "searchCategory",
+  ["searchCategory"],
   paramsValidator.PARAM_KEY.BODY
 );
 

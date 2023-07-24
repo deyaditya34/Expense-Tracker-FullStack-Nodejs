@@ -1,40 +1,35 @@
 const database = require("../services/database.service");
 const { COLLECTION_NAMES } = require("../config");
-const { ObjectID } = require("mongodb");
+const { ObjectId } = require("mongodb");
 
-console.log("")
 function createCategoryForUser(categoryDetails) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .insertOne({ ...categoryDetails});
-
+    .insertOne({ ...categoryDetails });
 }
 
 function getAllCategoriesForUser() {
-  return database
-    .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find({})
-    .toArray();
+  return database.getCollection(COLLECTION_NAMES.CATEGORIES).find({}).toArray();
 }
 
-function searchCategoryForUser(categoryDetails) {
+function searchCategoryForUser(searchCategory) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find({...categoryDetails})
+    .find({ ...searchCategory })
     .toArray();
 }
 
 function getCategoryForUser(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find({_id: new ObjectID(id)})
-    .toArray();;
+    .find({ _id: new ObjectId(id) })
+    .toArray();
 }
 
 function deleteCategoryForUser(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .delete({_id: new ObjectID(id)})
+    .deleteOne({ _id: new ObjectId(id) });
 }
 
 module.exports = {
@@ -42,5 +37,5 @@ module.exports = {
   getAllCategoriesForUser,
   searchCategoryForUser,
   getCategoryForUser,
-  deleteCategoryForUser
-}
+  deleteCategoryForUser,
+};

@@ -1,15 +1,15 @@
 const httpError = require("http-errors");
+const {getCategoryForUser} = require("./categories.service");
+const userResolver = require("../middlewares/user-resolver");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
-const userResolver = require("../middlewares/user-resolver");
-const getCategoryForUser = require("./categories.service");
 
 async function controller(req, res) {
   const id = req.body;
 
   const result = await getCategoryForUser(id);
 
-  if (!result) {
+  if (result.length === 0) {
     res.json({
       message: "No category found for the id",
     });
@@ -23,7 +23,7 @@ async function controller(req, res) {
 
 function validateParams(req, res, next) {
   const errorTypedFields = ["id"].filter(
-    (field) => typeof Reflect.get(req.body, "id") !== "string"
+    (field) => typeof Reflect.get(req.body, field) !== "string"
   );
 
   if (errorTypedFields.length > 0) {
