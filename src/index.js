@@ -22,6 +22,7 @@ async function start() {
 
   server.use("/transaction", transactionRouter);
   server.use("/auth", authRouter);
+  
   server.use("/category", categoryRouter);  
 
 
