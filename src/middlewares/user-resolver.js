@@ -17,6 +17,7 @@ async function userResolver(req, res, next) {
   }
   console.log("User is", user);
   Reflect.set(req.body, "user", user);
+  next();
 }
 
 module.exports = userResolver;
