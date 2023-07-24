@@ -2,7 +2,6 @@ const httpError = require("http-errors");
 
 const createParamValidator = (params, paramsKey) => (req, res, next) => {
   const reqParams = Reflect.get(req, paramsKey);
-
   const missingParams = params.filter(
     (param) => !Reflect.has(reqParams, param)
     );
