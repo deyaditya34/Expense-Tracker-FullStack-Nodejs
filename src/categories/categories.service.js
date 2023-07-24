@@ -2,10 +2,12 @@ const database = require("../services/database.service");
 const { COLLECTION_NAMES } = require("../config");
 const { ObjectID } = require("mongodb");
 
+console.log("")
 function createCategoryForUser(categoryDetails) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .insertOne({ ...categoryDetails});
+
 }
 
 function getAllCategoriesForUser() {

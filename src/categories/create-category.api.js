@@ -4,11 +4,12 @@ const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
 const { createCategoryForUser } = require("./categories.service");
 
-async function controller(req, res, next) {
+
+async function controller(req, res) {
   let { color, name, type } = req.body;
-
+  
   const result = await createCategoryForUser({ color, name, type });
-
+  
   res.json({
     success: result.acknowledged,
     data: {
@@ -17,13 +18,14 @@ async function controller(req, res, next) {
       },
     },
   });
+  
 }
 
 function validateParams(req, res, next) {
   const errorTypedFields = ["color", "name", "type"].filter(
     (field) => typeof Reflect.get(req.body, "field") !== "string"
   );
-
+    
   if (errorTypedFields.length > 0) {
     throw new httpError.BadRequest(
       `Field '${errorTypedFields.join(",")}' should be of string type`
