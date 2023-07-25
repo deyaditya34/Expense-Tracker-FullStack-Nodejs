@@ -15,7 +15,7 @@ let transaction = {
 };
 
 function createTransactionForUser(transactionDetails) {
- Reflect.set(transactionDetails, "date", Date.now());
+ Reflect.set(transactionDetails, "date", new Date());
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .insertOne({ ...transactionDetails });
