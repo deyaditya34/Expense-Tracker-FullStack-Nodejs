@@ -1,10 +1,10 @@
-  const express = require("express");
+const express = require("express");
 const config = require("./config");
 
 const database = require("./services/database.service");
 const authRouter = require("./authorisation/auth.api.router");
 const transactionRouter = require("./transactions/transactions.api.router");
-const categoryRouter = require("./categories/categories.api.router")
+const categoryRouter = require("./categories/categories.api.router");
 
 const requestLogger = require("./middlewares/request-logger");
 const errrorHandler = require("./api-utils/error-handler");
@@ -22,9 +22,7 @@ async function start() {
 
   server.use("/transaction", transactionRouter);
   server.use("/auth", authRouter);
-  
-  server.use("/category", categoryRouter);  
-
+  server.use("/category", categoryRouter);
 
   server.use(notFoundHandler);
   server.use(errrorHandler);

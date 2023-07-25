@@ -1,23 +1,23 @@
-const httpError = require("http-errors");
-const {getCategoryForUser} = require("./categories.service");
-const userResolver = require("../middlewares/user-resolver");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
+const userResolver = require("../middlewares/user-resolver");
+const {getTransactionForUser} = require("./transactions.service");
+const httpError= require("http-errors");
 
 async function controller(req, res) {
-  const id = req.body;
+  const {id} = req.body;
 
-  const result = await getCategoryForUser(id);
+  const result = await getTransactionForUser(id);
 
-  if (result.length === 0) {
+  if (!result) {
     res.json({
-      message: "No category found for the id",
-    });
+      message: `No transaction found for the id '${id}'`
+    })
   } else {
     res.json({
-      message: "Category Found",
-      data: result,
-    });
+      message: "Transaction found",
+      data: result
+    })
   }
 }
 

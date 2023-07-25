@@ -2,7 +2,7 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 const userResolver = require("../middlewares/user-resolver");
 const {getAllCategoriesForUser} = require("./categories.service");
 
-async function controller(req, res, next) {
+async function controller(req, res) {
   let result = await getAllCategoriesForUser();
   console.log("result is", result);
   if (!result) {
@@ -17,4 +17,4 @@ async function controller(req, res, next) {
   }
 }
 
-module.exports = buildApiHandler(controller, [userResolver]);
+module.exports = buildApiHandler([controller], [userResolver]);

@@ -1,7 +1,7 @@
-function buildApiHandler(controller, validatorChain = []) {
+function buildApiHandler(controller = [], validatorChain = []) {
   return [
     ...validatorChain.map((validatorFn) => wrapErrorHandling(validatorFn)),
-    wrapErrorHandling(controller),
+    ...controller.map((validatorFn) => wrapErrorHandling(validatorFn)),
   ];
 }
 
@@ -14,5 +14,3 @@ const wrapErrorHandling = (apiHandler) => async (req, res, next) => {
 };
 
 module.exports = buildApiHandler;
-
-
