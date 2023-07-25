@@ -48,7 +48,8 @@ async function validateParams(req, res, next) {
   if (transactionCategoryValidator.length === 0) {
     throw new httpError.BadRequest("Field 'id' is invalid");
   } else {
-    Reflect.set(req.body, "category", id);
+    Reflect.set(req.body, "category", {});
+    Reflect.set(req.body.category, "_id", id)
   }
 
   next();
