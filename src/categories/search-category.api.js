@@ -2,12 +2,12 @@ const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const {searchCategoryForUser} = require("./categories.service");
+const {searchCategory} = require("./categories.service");
 
 async function controller(req, res) {
-  let { searchCategory } = req.body;
+  let { query } = req.body;
   
-  const result = await searchCategoryForUser({...searchCategory });
+  const result = await searchCategory(query);
 
   if (result.length === 0) {
     res.json({
@@ -23,13 +23,13 @@ async function controller(req, res) {
 
 function validateParams(req, res, next) {
 
-  let { name, color, type } = req.body.searchCategory;
+  let { name, color, type } = req.body.query;
 
-  let parsedSearchCategory = {};
+  let parsedQuery = {};
 
   if (name) {
     if (typeof name === "string") {
-    parsedSearchCategory.name = name;
+    parsedQuery.name = name;
   } else {
     throw new httpError.BadRequest("Field 'name' should be of string type");
   }
@@ -37,7 +37,7 @@ function validateParams(req, res, next) {
 
   if (color) {
     if (typeof color === "string") {
-    parsedSearchCategory.color = color;
+    parsedQuery.color = color;
   } else {
     throw new httpError.BadRequest("Field 'color' should be of string type");
   }
@@ -50,7 +50,7 @@ function validateParams(req, res, next) {
     if (type !== "DEBIT" && type !== "CREDIT") {
       throw new httpError.BadRequest("Field 'type' should be either 'DEBIT' or 'CREDIT'");
     } 
-    parsedSearchCategory.type = type;
+    parsedQuery.type = type;
   }
 
   if (!name && !color && !type) {
@@ -59,13 +59,13 @@ function validateParams(req, res, next) {
     );
   }
 
-  Reflect.set(req.body, "searchCategory", parsedSearchCategory);
+  Reflect.set(req.body, "query", parsedQuery);
 
   next();
 }
 
 const missingParamsValidator = paramsValidator.createParamValidator(
-  ["searchCategory"],
+  ["query"],
   paramsValidator.PARAM_KEY.BODY
 );
 

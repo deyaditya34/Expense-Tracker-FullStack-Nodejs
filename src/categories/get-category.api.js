@@ -1,5 +1,5 @@
 const httpError = require("http-errors");
-const {getCategoryForUser} = require("./categories.service");
+const {getCategory} = require("./categories.service");
 const userResolver = require("../middlewares/user-resolver");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
@@ -7,7 +7,7 @@ const paramsValidator = require("../middlewares/params-validator");
 async function controller(req, res) {
   const id = req.body;
 
-  const result = await getCategoryForUser(id);
+  const result = await getCategory(id);
 
   if (result.length === 0) {
     res.json({

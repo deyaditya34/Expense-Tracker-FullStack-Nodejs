@@ -14,37 +14,36 @@ let transaction = {
   date: "2023-07-20T16:01:37.204Z",
 };
 
-function createTransactionForUser(transactionDetails) {
- Reflect.set(transactionDetails, "date", new Date());
+function createTransaction(transactionDetails) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
-    .insertOne({ ...transactionDetails });
+    .insertOne(transactionDetails);
 }
 
-function getAllTransactionsForUser() {
+function getAllTransactions() {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .find({})
     .toArray();
 }
 
-function getTransactionForUser(transactionId) {
+function getTransaction(transactionId) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .find({ _id: new ObjectId(transactionId) })
     .toArray();
 }
 
-function searchTransactionForUser(transactionDetails) {
+function searchTransaction(transactionDetails) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
-    .find({ ...transactionDetails })
+    .find(transactionDetails)
     .toArray();
 }
 
 module.exports = {
-  createTransactionForUser,
-  getAllTransactionsForUser,
-  getTransactionForUser,
-  searchTransactionForUser,
+  createTransaction,
+  getAllTransactions,
+  getTransaction,
+  searchTransaction,
 };

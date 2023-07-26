@@ -2,12 +2,12 @@ const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const {deleteCategoryForUser} = require("./categories.service");
+const {deleteCategory} = require("./categories.service");
 
 async function controller(req, res) {
   const { id } = req.body;
 
-  const result = await deleteCategoryForUser(id);
+  const result = await deleteCategory(id);
 
   if (!result) {
     res.json({

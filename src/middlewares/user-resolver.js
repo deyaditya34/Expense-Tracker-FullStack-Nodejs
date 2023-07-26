@@ -16,8 +16,7 @@ async function userResolver(req, res, next) {
     throw new httpError.Forbidden("Invalid Token");
   }
   console.log("User is", user);
-  Reflect.set(req.body, "createdBy", user);
-  Reflect.set(req.body, "createdAt", new Date());
+  Reflect.set(req.body, "user", user);
   next();
 }
 

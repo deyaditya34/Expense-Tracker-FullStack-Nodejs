@@ -4,7 +4,7 @@
   "description": "expense tracking application",
   "main": "index.js",
   "scripts": {
-    "execute": "node src/index.js"
+    "dev": "node src/index.js"
   },
   "author": "",
   "license": "ISC",

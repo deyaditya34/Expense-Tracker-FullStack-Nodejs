@@ -2,40 +2,40 @@ const database = require("../services/database.service");
 const { COLLECTION_NAMES } = require("../config");
 const { ObjectId } = require("mongodb");
 
-function createCategoryForUser(categoryDetails) {
+function createCategory(categoryDetails) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .insertOne({ ...categoryDetails });
+    .insertOne(categoryDetails);
 }
 
-function getAllCategoriesForUser() {
+function getAllCategories() {
   return database.getCollection(COLLECTION_NAMES.CATEGORIES).find({}).toArray();
 }
 
-function searchCategoryForUser(searchCategory) {
+function searchCategory(searchCategory) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find({ ...searchCategory })
+    .find(searchCategory)
     .toArray();
 }
 
-function getCategoryForUser(id) {
+function getCategory(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .find({ _id: { $in: [new ObjectId(id)] } })
     .toArray();
 }
 
-function deleteCategoryForUser(id) {
+function deleteCategory(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .deleteOne({ _id: {$in: [new ObjectId(id)]} });
 }
 
 module.exports = {
-  createCategoryForUser,
-  getAllCategoriesForUser,
-  searchCategoryForUser,
-  getCategoryForUser,
-  deleteCategoryForUser,
+  createCategory,
+  getAllCategories,
+  searchCategory,
+  getCategory,
+  deleteCategory,
 };

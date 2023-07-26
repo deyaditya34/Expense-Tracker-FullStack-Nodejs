@@ -1,9 +1,9 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
 const userResolver = require("../middlewares/user-resolver");
-const {getAllCategoriesForUser} = require("./categories.service");
+const {getAllCategories} = require("./categories.service");
 
 async function controller(req, res) {
-  let result = await getAllCategoriesForUser();
+  let result = await getAllCategories();
   console.log("result is", result);
   if (!result) {
     res.json({

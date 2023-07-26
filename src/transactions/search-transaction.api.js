@@ -2,12 +2,12 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
 const httpError = require("http-errors");
-const {searchTransactionForUser} = require("./transactions.service");
+const {searchTransaction} = require("./transactions.service");
 
 async function controller(req, res) {
-  const {searchTransaction} = req.body;
+  const {query} = req.body;
 
-  const result = await searchTransactionForUser({...searchTransaction });
+  const result = await searchTransaction(query);
 
   if (result.length === 0) {
     res.json({
@@ -22,13 +22,13 @@ async function controller(req, res) {
 }
 
 function validateParams(req, res, next) {
-  let { type, amount } = req.body.searchTransaction;
+  let { type, amount } = req.body.query;
 
-  let parsedSearchTransaction = {};
+  let parsedQuery = {};
 
   if (amount) {
     if (typeof amount === "number") {
-    parsedSearchTransaction.amount = amount;
+    parsedQuery.amount = amount;
   } else {
     throw new httpError.BadRequest("Field 'amount' should be of 'number' type");
   }
@@ -41,7 +41,7 @@ function validateParams(req, res, next) {
     if (type !== "DEBIT" && type !== "CREDIT") {
       throw new httpError.BadRequest("Field 'type' should be either 'DEBIT' or 'CREDIT'");
     } 
-    parsedSearchTransaction.type = type;
+    parsedQuery.type = type;
   }
   
   if (!type && !amount) {
@@ -50,7 +50,7 @@ function validateParams(req, res, next) {
     );
   }
 
-  Reflect.set(req.body, "searchTransaction", parsedSearchTransaction);
+  Reflect.set(req.body, "query", parsedQuery);
 
   next();
 }

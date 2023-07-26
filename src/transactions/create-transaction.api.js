@@ -1,20 +1,20 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramValidator = require("../middlewares/params-validator");
 const httpError = require("http-errors");
-const { createTransactionForUser } = require("./transactions.service");
+const { createTransaction } = require("./transactions.service");
 const userResolver = require("../middlewares/user-resolver");
-const { getCategoryForUser } = require("../categories/categories.service");
+const { getCategory} = require("../categories/categories.service");
 
 async function controller(req, res) {
-  const { type, amount, category, date, createdAt, createdBy } = req.body;
+  const { type, amount, category, date, user } = req.body;
 
-  const result = await createTransactionForUser({
+  const result = await createTransaction({
     type,
     amount,
     category,
     date,
-    createdAt,
-    createdBy
+    createdAt: new Date(),
+    createdBy: user
   });
 
   res.json({
@@ -28,7 +28,7 @@ async function controller(req, res) {
 }
 
 async function validateParams(req, res, next) {
-  const { type, amount, id } = req.body;
+  const { type, amount, date, categoryId } = req.body;
 
   if (typeof type === "string") {
     if (type !== "DEBIT" && type !== "CREDIT") {
@@ -46,18 +46,28 @@ async function validateParams(req, res, next) {
     );
   }
 
-  const transactionCategoryValidator = await getCategoryForUser(id);
+  const transactionCategoryValidator = await getCategory(categoryId);
   if (transactionCategoryValidator.length === 0) {
-    throw new httpError.BadRequest("Field 'id' is invalid");
+    throw new httpError.BadRequest("Field 'categoryId' is invalid");
   } else {
     Reflect.set(req.body, "category", transactionCategoryValidator);
   }
 
-  next();
+  if (date) {
+    if (typeof date !== "string") {
+      throw new httpError.BadRequest("'Date' should be 'string' type");
+    }
+
+    if (new Date(date).valueOf() > 0) {
+      next();
+    } else {
+      throw new httpError.BadRequest(`invalid 'Date' - '${date}. 'Date' should be either in format 'year-month-day' or 'month-day-year'`)
+    }
+  }
 }
 
 const missingParamsValidator = paramValidator.createParamValidator(
-  ["type", "amount", "id"],
+  ["type", "amount", "categoryId", "date"],
   paramValidator.PARAM_KEY.BODY
 );
 

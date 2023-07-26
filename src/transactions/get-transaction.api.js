@@ -1,13 +1,13 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const {getTransactionForUser} = require("./transactions.service");
+const {getTransaction} = require("./transactions.service");
 const httpError= require("http-errors");
 
 async function controller(req, res) {
   const {id} = req.body;
 
-  const result = await getTransactionForUser(id);
+  const result = await getTransaction(id);
 
   if (!result) {
     res.json({

@@ -2,13 +2,14 @@ const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const { createCategoryForUser } = require("./categories.service");
-const {searchCategoryForUser} = require("./categories.service");
+const { createCategory } = require("./categories.service");
+const {searchCategory} = require("./categories.service");
+const checkAdminRights = require("../middlewares/check-admin-rights");
 
 async function controller(req, res) {
   let { color, name, type } = req.body;
 
-  const result = await createCategoryForUser({ color, name, type });
+  const result = await createCategory({ color, name, type });
 
   res.json({
     success: result.acknowledged,
@@ -39,7 +40,7 @@ async function validateParams(req, res, next) {
     );
   }
   
-  const categoryValidator = await searchCategoryForUser({name});
+  const categoryValidator = await searchCategory({name});
   
   if (categoryValidator.length > 0) {
     throw new httpError.BadRequest(`Category '${name}' already exists.`)
@@ -55,6 +56,7 @@ const missingParamsValidator = paramsValidator.createParamValidator(
 
 module.exports = buildApiHandler([controller], [
   userResolver,
+  checkAdminRights,
   missingParamsValidator,
   validateParams,
 ]);
