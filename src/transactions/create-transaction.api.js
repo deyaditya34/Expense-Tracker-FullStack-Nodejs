@@ -6,13 +6,15 @@ const userResolver = require("../middlewares/user-resolver");
 const { getCategoryForUser } = require("../categories/categories.service");
 
 async function controller(req, res) {
-  const { type, amount, category, date } = req.body;
+  const { type, amount, category, date, createdAt, createdBy } = req.body;
 
   const result = await createTransactionForUser({
     type,
     amount,
     category,
     date,
+    createdAt,
+    createdBy
   });
 
   res.json({
