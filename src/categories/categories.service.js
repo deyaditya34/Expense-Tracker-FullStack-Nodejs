@@ -22,14 +22,14 @@ function searchCategoryForUser(searchCategory) {
 function getCategoryForUser(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find({ _id: new ObjectId(id) })
+    .find({ _id: { $in: [new ObjectId(id)] } })
     .toArray();
 }
 
 function deleteCategoryForUser(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .deleteOne({ _id: new ObjectId(id) });
+    .deleteOne({ _id: {$in: [new ObjectId(id)]} });
 }
 
 module.exports = {

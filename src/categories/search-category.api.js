@@ -2,7 +2,7 @@ const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const searchCategoryForUser = require("./categories.service");
+const {searchCategoryForUser} = require("./categories.service");
 
 async function controller(req, res) {
   let { searchCategory } = req.body;
