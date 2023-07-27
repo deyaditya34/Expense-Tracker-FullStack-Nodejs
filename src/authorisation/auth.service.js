@@ -20,7 +20,8 @@ async function register(username, password) {
 
     await database.getCollection(COLLECTION_NAMES.USERS).insertOne({
         username,
-        password: encryptPassword(password)
+        password: encryptPassword(password),
+        role: "NON-ADMIN"
     })
 }
 
@@ -57,8 +58,15 @@ async function getUserFromToken(token) {
     return user;
 }
 
+function getAllUsers() {
+    return database.getCollection(COLLECTION_NAMES.USERS)
+    .find()
+    .toArray()
+}
+
 module.exports = {
     register,
     login,
-    getUserFromToken
+    getUserFromToken,
+    getAllUsers
 }

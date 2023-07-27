@@ -8,7 +8,7 @@ function checkAdminRights(req, res, next) {
   }
 
   if (user.role !== "ADMIN") {
-    throw new httpError.Unauthorized("User not authorized");
+    throw new httpError.Unauthorized("User not authorized. Please provide a valid token");
   }
 
   next();

@@ -2,6 +2,8 @@ const httpError = require("http-errors");
 const authService = require("../authorisation/auth.service");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
+const userResolver = require("../middlewares/user-resolver");
+const checkAdminRights = require("../middlewares/check-admin-rights");
 
 async function controller(req, res) {
   const { username, password } = req.body;
@@ -36,4 +38,6 @@ const missingParamsValidator = paramsValidator.createParamValidator(
 module.exports = buildApiHandler([controller], [
   missingParamsValidator,
   validateParams,
+  userResolver,
+  checkAdminRights
 ]);

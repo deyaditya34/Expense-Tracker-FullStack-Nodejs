@@ -7,7 +7,7 @@ async function userResolver(req, res, next) {
   const token = Reflect.get(req.headers, AUTH_TOKEN_HEADER_FIELD);
 
   if(!token) {
-    throw new httpError.Forbidden("Access Denied");
+    throw new httpError.Forbidden("Access Denied. Please provide the relevant Token");
   }
 
   const user = await getUserFromToken(token);
@@ -17,6 +17,7 @@ async function userResolver(req, res, next) {
   }
   console.log("User is", user);
   Reflect.set(req.body, "user", user);
+  
   next();
 }
 
