@@ -20,8 +20,15 @@ async function start() {
   server.use(express.json());
   server.use(requestLogger);
 
+  /**
+   * @fix resource paths should be plural (`transactions` instead of `transaction`)
+   */
   server.use("/transaction", transactionRouter);
   server.use("/auth", authRouter);
+
+  /**
+   * @fix same as `transaction`
+   */
   server.use("/category", categoryRouter);
 
   server.use(notFoundHandler);

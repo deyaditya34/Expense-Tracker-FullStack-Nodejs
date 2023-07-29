@@ -11,6 +11,9 @@ async function register(username, password) {
         .findOne({
             username
         })
+    /**
+     * @fix remove console logging
+     */
     console.log("existing user", existingUser);    
     if (existingUser) {
         throw new httpError.UnprocessableEntity(
@@ -18,6 +21,10 @@ async function register(username, password) {
         )
     }
 
+    /**
+     * @fix use a method like `buildUser` to build the record first and 
+     *      then pass it to `insertOne()`
+     */
     await database.getCollection(COLLECTION_NAMES.USERS).insertOne({
         username,
         password: encryptPassword(password),
@@ -60,6 +67,11 @@ async function getUserFromToken(token) {
 
 function getAllUsers() {
     return database.getCollection(COLLECTION_NAMES.USERS)
+    /**
+     * @fix why is the name `getAllUsers` if the method is not actually getting ALL users
+     * 
+     * move the query part to controller. maybe rename this method to `queryUsers()`
+     */
     .find({ role: {$ne : "ADMIN"}})
     .toArray()
 }

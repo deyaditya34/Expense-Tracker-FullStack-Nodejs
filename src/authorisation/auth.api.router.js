@@ -1,3 +1,6 @@
+/**
+ * @fix name connsistency for `auth`
+ */
 const express = require("express");
 
 const loginUser = require("./auth.login.api");

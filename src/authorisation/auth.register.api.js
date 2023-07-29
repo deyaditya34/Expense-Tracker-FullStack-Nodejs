@@ -16,6 +16,10 @@ async function controller(req, res) {
   });
 }
 
+/**
+ * @fix move common code to `auth.utils.js`
+ */
+
 function validateParams(req, res, next) {
   const { username, password } = req.body;
 

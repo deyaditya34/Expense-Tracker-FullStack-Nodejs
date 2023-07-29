@@ -1,3 +1,7 @@
+/**
+ * @fix merge both params into a single one.
+ * Maybe something like `handlers = []`
+ */
 function buildApiHandler(controller = [], validatorChain = []) {
   return [
     ...validatorChain.map((validatorFn) => wrapErrorHandling(validatorFn)),
