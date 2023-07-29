@@ -2,6 +2,8 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 const httpError = require("http-errors");
 const {getAllUsers} = require("./auth.service");
 const userResolver = require("../middlewares/user-resolver");
+const checkAdminRights = require("../middlewares/check-admin-rights");
+
 
 async function controller(req, res) {
   const result = await getAllUsers();
@@ -18,4 +20,4 @@ async function controller(req, res) {
   }
 }
 
-module.exports = buildApiHandler([controller]);
+module.exports = buildApiHandler([controller], [userResolver, checkAdminRights]);
