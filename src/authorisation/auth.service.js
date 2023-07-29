@@ -21,7 +21,7 @@ async function register(username, password) {
     await database.getCollection(COLLECTION_NAMES.USERS).insertOne({
         username,
         password: encryptPassword(password),
-        role: "NON-ADMIN"
+        role: "USER"
     })
 }
 
