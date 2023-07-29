@@ -1,7 +1,6 @@
-const buildApiHandler = require("../api-utils/build-api-handler");
-const httpError = require("http-errors");
 const {getAllUsers} = require("./auth.service");
 const userResolver = require("../middlewares/user-resolver");
+const buildApiHandler = require("../api-utils/build-api-handler");
 const checkAdminRights = require("../middlewares/check-admin-rights");
 
 

@@ -60,7 +60,7 @@ async function getUserFromToken(token) {
 
 function getAllUsers() {
     return database.getCollection(COLLECTION_NAMES.USERS)
-    .find()
+    .find({ role: {$ne : "ADMIN"}})
     .toArray()
 }
 
