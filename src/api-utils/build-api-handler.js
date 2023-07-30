@@ -1,12 +1,5 @@
-/**
- * @fix merge both params into a single one.
- * Maybe something like `handlers = []`
- */
-function buildApiHandler(controller = [], validatorChain = []) {
-  return [
-    ...validatorChain.map((validatorFn) => wrapErrorHandling(validatorFn)),
-    ...controller.map((validatorFn) => wrapErrorHandling(validatorFn)),
-  ];
+function buildApiHandler(handlers = []) {
+  return [...handlers.map((handlerFn) => wrapErrorHandling(handlerFn))];
 }
 
 const wrapErrorHandling = (apiHandler) => async (req, res, next) => {
