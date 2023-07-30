@@ -3,6 +3,7 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
 const {deleteCategory} = require("./categories.service");
+const checkAdminRights = require("../middlewares/check-admin-rights")
 
 async function controller(req, res) {
   const { id } = req.body;
@@ -37,4 +38,4 @@ const missingParamsValidator = paramsValidator.createParamValidator(
   paramsValidator.PARAM_KEY.BODY
 );
 
-module.exports = buildApiHandler([controller], [userResolver, missingParamsValidator, validateParams]);
+module.exports = buildApiHandler([userResolver, checkAdminRights, missingParamsValidator, validateParams, controller]);

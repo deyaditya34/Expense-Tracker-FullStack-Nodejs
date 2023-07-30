@@ -54,9 +54,10 @@ const missingParamsValidator = paramsValidator.createParamValidator(
   paramsValidator.PARAM_KEY.BODY
 );
 
-module.exports = buildApiHandler([controller], [
+module.exports = buildApiHandler([
   userResolver,
   checkAdminRights,
   missingParamsValidator,
   validateParams,
+  controller
 ]);

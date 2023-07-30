@@ -72,6 +72,5 @@ const missingParamsValidator = paramValidator.createParamValidator(
 );
 
 module.exports = buildApiHandler(
-  [controller],
-  [userResolver, missingParamsValidator, validateParams]
+  [userResolver, missingParamsValidator, validateParams, controller]
 );

@@ -19,4 +19,4 @@ async function controller(req, res) {
   }
 }
 
-module.exports = buildApiHandler([controller], [userResolver])
+module.exports = buildApiHandler([userResolver, controller])
