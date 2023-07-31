@@ -1,0 +1,13 @@
+Admin Details :- 
+token - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMTIzIiwiaWF0IjoxNjkwNzE1MzkwfQ.PIkhDhuO-ivc87c0v1G0vN9QhyPd8rTpr5xyHYf17qA	
+username - admin123
+password - pass@123
+
+Non-Admin Details :-
+token - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluMTIzIiwiaWF0IjoxNjkwNzE1MzkwfQ.PIkhDhuO-ivc87c0v1G0vN9QhyPd8rTpr5xyHYf17qA
+username - non-admin123
+password - pass@123
+
+token - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRleWFkaXR5YTM0IiwiaWF0IjoxNjkwNzE3NDY4fQ.x95y9ex_BF6BTeuW2UWElY9D-Czs07ux88ubNVjiPhI
+username - deyaditya34
+password - pass@123
