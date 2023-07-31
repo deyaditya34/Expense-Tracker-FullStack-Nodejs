@@ -2,7 +2,7 @@ const express = require("express");
 const config = require("./config");
 
 const database = require("./services/database.service");
-const authRouter = require("./authorisation/auth.api.router");
+const authRouter = require("./auth/auth.api.router");
 const transactionRouter = require("./transactions/transactions.api.router");
 const categoryRouter = require("./categories/categories.api.router");
 
@@ -20,16 +20,10 @@ async function start() {
   server.use(express.json());
   server.use(requestLogger);
 
-  /**
-   * @fix resource paths should be plural (`transactions` instead of `transaction`)
-   */
-  server.use("/transaction", transactionRouter);
+  server.use("/transactions", transactionRouter);
   server.use("/auth", authRouter);
 
-  /**
-   * @fix same as `transaction`
-   */
-  server.use("/category", categoryRouter);
+  server.use("/categories", categoryRouter);
 
   server.use(notFoundHandler);
   server.use(errrorHandler);
