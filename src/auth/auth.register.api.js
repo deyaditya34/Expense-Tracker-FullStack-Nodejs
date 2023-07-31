@@ -1,9 +1,10 @@
-const httpError = require("http-errors");
+
 const authService = require("./auth.service");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
 const checkAdminRights = require("../middlewares/check-admin-rights");
+const {validateUsername} = require("./auth.utils");
 
 async function controller(req, res) {
   const { username, password } = req.body;
@@ -16,23 +17,7 @@ async function controller(req, res) {
   });
 }
 
-/**
- * @fix move common code to `auth.utils.js`
- */
-
-function validateParams(req, res, next) {
-  const { username, password } = req.body;
-
-  if (typeof username !== "string" || typeof password !== "string") {
-    throw new httpError.BadRequest("Username and Password should be text only");
-  }
-
-  if (username.length < 8) {
-    throw new httpError.BadRequest("Username must be atleast 8 characters");
-  }
-
-  next();
-}
+const usernameValidator = validateUsername;
 
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["username", "password"],
@@ -40,9 +25,9 @@ const missingParamsValidator = paramsValidator.createParamValidator(
 );
 
 module.exports = buildApiHandler([
-  missingParamsValidator,
-  validateParams,
   userResolver,
   checkAdminRights,
+  missingParamsValidator,
+  usernameValidator,
   controller
 ]);
