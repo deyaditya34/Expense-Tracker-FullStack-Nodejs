@@ -8,7 +8,7 @@ async function register(username, password) {
   const existingUser = await database
     .getCollection(COLLECTION_NAMES.USERS)
     .findOne({
-      username: username,
+      username
     });
 
   if (existingUser) {
