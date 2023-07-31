@@ -1,7 +1,7 @@
-const httpError = require("http-errors");
 const authService = require("./auth.service");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
+const {validateUsername} = require("./auth.utils");
 
 async function controller(req, res) {
   const { username, password } = req.body;
@@ -17,21 +17,7 @@ async function controller(req, res) {
   });
 }
 
-function validateParams(req, res, next) {
-  const { username, password } = req.body;
-
-  if (!typeof username === "string" || !typeof password === "string") {
-    throw new httpError.BadRequest(
-      "Username and Password should be string type"
-    );
-  }
-
-  if (username.length < 8) {
-    throw new httpError.BadRequest("Username should be atleast 8 characters");
-  }
-
-  next();
-}
+const usernameValidator = validateUsername;
 
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["username", "password"],
@@ -40,6 +26,6 @@ const missingParamsValidator = paramsValidator.createParamValidator(
 
 module.exports = buildApiHandler([
   missingParamsValidator,
-  validateParams,
+  usernameValidator,
   controller
 ]);
