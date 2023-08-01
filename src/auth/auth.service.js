@@ -5,6 +5,7 @@ const { COLLECTION_NAMES } = require("../config");
 const { buildUser, encryptPassword } = require("./auth.utils");
 
 async function register(username, password) {
+
   const existingUser = await database
     .getCollection(COLLECTION_NAMES.USERS)
     .findOne({
@@ -18,8 +19,8 @@ async function register(username, password) {
   }
 
   const userDetails = buildUser(username, password);
-
-  await database.getCollection(COLLECTION_NAMES.USERS).insertOne({userDetails});
+  console.log("userDetails", userDetails)
+  await database.getCollection(COLLECTION_NAMES.USERS).insertOne(userDetails);
 }
 
 async function login(username, password) {
