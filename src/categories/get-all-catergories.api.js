@@ -1,10 +1,15 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
 const userResolver = require("../middlewares/user-resolver");
 const {getAllCategories} = require("./categories.service");
+const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
-  let result = await getAllCategories();
-  console.log("result is", result);
+  const {pageNo, limit} = req.query;
+ const skipList = parseInt(pageNo);
+ const limitList = parseInt(limit);
+
+  let result = await getAllCategories(skipList, limitList);
+  
   if (!result) {
     res.json({
       message: "No categories stored in the application to display"
@@ -17,4 +22,4 @@ async function controller(req, res) {
   }
 }
 
-module.exports = buildApiHandler([userResolver, controller]);
+module.exports = buildApiHandler([userResolver, pagination, controller]);

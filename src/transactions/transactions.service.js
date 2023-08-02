@@ -20,24 +20,30 @@ function createTransaction(transactionDetails) {
     .insertOne(transactionDetails);
 }
 
-function getAllTransactions() {
+function getAllTransactions(pageNo, limit) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .find({})
+    .skip((pageNo-1)*limit)
+    .limit(limit)
     .toArray();
 }
 
-function getTransaction(transactionId) {
+function getTransaction(transactionId, pageNo, limit) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .find({ _id: new ObjectId(transactionId) })
+    .skip((pageNo-1)*limit)
+    .limit(limit)
     .toArray();
 }
 
-function searchTransaction(transactionDetails) {
+function searchTransaction(transactionDetails, pageNo, limit) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .find(transactionDetails)
+    .skip((pageNo-1)*limit)
+    .limit(limit)
     .toArray();
 }
 

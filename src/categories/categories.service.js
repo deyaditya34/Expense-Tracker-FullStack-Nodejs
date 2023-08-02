@@ -8,28 +8,37 @@ function createCategory(categoryDetails) {
     .insertOne(categoryDetails);
 }
 
-function getAllCategories() {
-  return database.getCollection(COLLECTION_NAMES.CATEGORIES).find({}).toArray();
-}
-
-function searchCategory(searchCategory) {
+function getAllCategories(pageNo, limit) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find(searchCategory)
+    .find({})
+    .skip((pageNo-1)*limit)
+    .limit(limit)
     .toArray();
 }
 
-function getCategory(id) {
+function searchCategory(searchCategory, pageNo, limit) {
+  return database
+    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .find(searchCategory)
+    .skip((pageNo-1)*limit)
+    .limit(limit)
+    .toArray();
+}
+
+function getCategory(id, pageNo, limit) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .find({ _id: { $in: [new ObjectId(id)] } })
+    .skip((pageNo-1)*limit)
+    .limit(limit)
     .toArray();
 }
 
 function deleteCategory(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .deleteOne({ _id: {$in: [new ObjectId(id)]} });
+    .deleteOne({ _id: { $in: [new ObjectId(id)] } });
 }
 
 module.exports = {

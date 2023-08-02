@@ -1,23 +1,26 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
+const pagination = require("../middlewares/pagination");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const {getTransaction} = require("./transactions.service");
-const httpError= require("http-errors");
+const { getTransaction } = require("./transactions.service");
+const httpError = require("http-errors");
 
 async function controller(req, res) {
-  const {id} = req.query;
+  const { id, pageNo, limit } = req.query;
+  const skipList = parseInt(pageNo);
+  const limitList = parseInt(limit);
 
-  const result = await getTransaction(id);
+  const result = await getTransaction(id, skipList, limitList);
 
   if (!result) {
     res.json({
-      message: `No transaction found for the id '${id}'`
-    })
+      message: `No transaction found for the id '${id}'`,
+    });
   } else {
     res.json({
       message: "Transaction found",
-      data: result
-    })
+      data: result,
+    });
   }
 }
 
@@ -40,4 +43,10 @@ const missingParamsValidator = paramsValidator.createParamValidator(
   paramsValidator.PARAM_KEY.QUERY
 );
 
-module.exports = buildApiHandler([userResolver, missingParamsValidator, validateParams, controller])
+module.exports = buildApiHandler([
+  userResolver,
+  missingParamsValidator,
+  validateParams,
+  pagination,
+  controller,
+]);

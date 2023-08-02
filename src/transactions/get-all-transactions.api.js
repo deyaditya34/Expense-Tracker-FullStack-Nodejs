@@ -1,11 +1,14 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
-const paramsValidator = require("../middlewares/params-validator");
+const pagination = require("../middlewares/pagination");
 const userResolver = require("../middlewares/user-resolver");
 const { getAllTransactions } = require("./transactions.service");
-const httpError = require("http-errors");
+
 
 async function controller(req, res) {
-  const result = await getAllTransactions();
+  const { pageNo, limit } = req.query;
+  const skipList = parseInt(pageNo);
+  const limitList = parseInt(limit);
+  const result = await getAllTransactions(skipList, limitList);
 
   if (result.length === 0) {
     res.json({
@@ -14,9 +17,9 @@ async function controller(req, res) {
   } else {
     res.json({
       message: "transactions found",
-      data: result
-    })
+      data: result,
+    });
   }
 }
 
-module.exports = buildApiHandler([userResolver, controller])
+module.exports = buildApiHandler([userResolver, pagination, controller]);
