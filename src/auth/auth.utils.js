@@ -3,7 +3,7 @@ const {scryptSync} = require("crypto");
 const {PASSWORD_SALT} = require("../config")
 
 function validateUsername(req, res, next) {
-  const { username, password } = req.body;
+  const { username, password } = req.query;
 
   if (typeof username !== "string" || typeof password !== "string") {
     throw new httpError.BadRequest("Username and Password should be text only");

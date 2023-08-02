@@ -25,7 +25,7 @@ async function validateParams(req, res, next) {
   const errorTypedFields = ["color", "name", "type"].filter(
     (field) => typeof Reflect.get(req.body, field) !== "string"
   );
-  console.log("ErrorFields are", errorTypedFields);
+  
   if (errorTypedFields.length > 0) {
     throw new httpError.BadRequest(
       `Field '${errorTypedFields.join(", ")}' should be of string type`

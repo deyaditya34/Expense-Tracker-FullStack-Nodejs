@@ -5,7 +5,7 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 
 async function controller(req, res) {
-  const id = req.body;
+  const id = req.query;
 
   const result = await getCategory(id);
 
@@ -22,8 +22,9 @@ async function controller(req, res) {
 }
 
 function validateParams(req, res, next) {
+ 
   const errorTypedFields = ["id"].filter(
-    (field) => typeof Reflect.get(req.body, field) !== "string"
+    (field) => typeof Reflect.get(req.query, field) !== "string"
   );
 
   if (errorTypedFields.length > 0) {
@@ -37,7 +38,7 @@ function validateParams(req, res, next) {
 
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["id"],
-  paramsValidator.PARAM_KEY.BODY
+  paramsValidator.PARAM_KEY.QUERY
 );
 
 module.exports = buildApiHandler([userResolver, missingParamsValidator, validateParams, controller])
