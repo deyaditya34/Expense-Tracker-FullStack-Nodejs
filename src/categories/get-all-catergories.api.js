@@ -4,11 +4,9 @@ const {getAllCategories} = require("./categories.service");
 const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
-  const {pageNo, limit} = req.query;
- const skipList = parseInt(pageNo);
- const limitList = parseInt(limit);
+  let {pageNo, pageSize} = req.query;
 
-  let result = await getAllCategories(skipList, limitList);
+  let result = await getAllCategories(pageNo, pageSize);
   
   if (!result) {
     res.json({

@@ -8,30 +8,30 @@ function createCategory(categoryDetails) {
     .insertOne(categoryDetails);
 }
 
-function getAllCategories(pageNo, limit) {
+function getAllCategories(pageNo, pageSize) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .find({})
-    .skip((pageNo-1)*limit)
-    .limit(limit)
+    .skip((pageNo - 1) * pageSize)
+    .limit(pageSize)
     .toArray();
 }
 
-function searchCategory(searchCategory, pageNo, limit) {
+function searchCategory(searchCategory, pageNo, pageSize) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .find(searchCategory)
-    .skip((pageNo-1)*limit)
-    .limit(limit)
+    .skip((pageNo - 1) * pageSize)
+    .limit(pageSize)
     .toArray();
 }
 
-function getCategory(id, pageNo, limit) {
+function getCategory(id, pageNo, pageSize) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .find({ _id: { $in: [new ObjectId(id)] } })
-    .skip((pageNo-1)*limit)
-    .limit(limit)
+    .skip((pageNo - 1) * pageSize)
+    .limit(pageSize)
     .toArray();
 }
 

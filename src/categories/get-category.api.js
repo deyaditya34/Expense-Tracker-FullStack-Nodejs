@@ -6,11 +6,10 @@ const paramsValidator = require("../middlewares/params-validator");
 const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
-  const {id, pageNo, limit} = req.query;
-  const skipList = parseInt(pageNo);
-  const limitList = parseInt(limit);
+  const {id, pageNo, pageSize} = req.query;
+  
 
-  const result = await getCategory(id, skipList, limitList);
+  const result = await getCategory(id, pageNo, pageSize);
 
   if (result.length === 0) {
     res.json({
