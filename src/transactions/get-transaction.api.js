@@ -6,11 +6,10 @@ const { getTransaction } = require("./transactions.service");
 const httpError = require("http-errors");
 
 async function controller(req, res) {
-  const { id, pageNo, limit } = req.query;
-  const skipList = parseInt(pageNo);
-  const limitList = parseInt(limit);
+  const { id, pageNo, pageSize } = req.query;
+  
 
-  const result = await getTransaction(id, skipList, limitList);
+  const result = await getTransaction(id, pageNo, pageSize);
 
   if (!result) {
     res.json({

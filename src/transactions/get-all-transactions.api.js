@@ -5,10 +5,9 @@ const { getAllTransactions } = require("./transactions.service");
 
 
 async function controller(req, res) {
-  const { pageNo, limit } = req.query;
-  const skipList = parseInt(pageNo);
-  const limitList = parseInt(limit);
-  const result = await getAllTransactions(skipList, limitList);
+  const { pageNo, pageSize } = req.query;
+  
+  const result = await getAllTransactions(pageNo, pageSize);
 
   if (result.length === 0) {
     res.json({
