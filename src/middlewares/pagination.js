@@ -2,6 +2,7 @@ const httpError = require("http-errors");
 
 function pagination(req, res, next) {
   const { pageNo, pageSize } = req.query;
+  
   if (pageNo) {
     let pageNumber = parseInt(pageNo);
 
