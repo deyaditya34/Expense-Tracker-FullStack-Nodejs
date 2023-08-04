@@ -11,7 +11,7 @@ async function userResolver(req, res, next) {
   }
 
   const user = await getUserFromToken(token);
-
+  
   if(!user) {
     throw new httpError.Forbidden("Invalid Token");
   }

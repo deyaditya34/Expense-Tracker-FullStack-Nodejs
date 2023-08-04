@@ -81,5 +81,4 @@ module.exports = buildApiHandler(
     pagination,
     controller,
   ],
-  controller
 );
