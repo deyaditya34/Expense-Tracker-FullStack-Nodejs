@@ -55,6 +55,7 @@ async function validateParams(req, res, next) {
         "'Category Type' retrieved from the 'categoryId' does not match with the requested 'type'"
       );
     }
+    console.log("transactionCategoryValidator", transactionCategoryValidator);
     Reflect.set(req.body, "category", transactionCategoryValidator);
   }
 

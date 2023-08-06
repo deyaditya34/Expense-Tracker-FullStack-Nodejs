@@ -2,15 +2,10 @@ const httpError = require("http-errors");
 const { getCategory } = require("./categories.service");
 const userResolver = require("../middlewares/user-resolver");
 const buildApiHandler = require("../api-utils/build-api-handler");
-const paramsValidator = require("../middlewares/params-validator");
-const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
   const {id}  = req.params;
-  const {pageNo, pageSize} = req.query;  
-  console.log("id -", id, "pageNo -", pageNo, "pageSize -", pageSize)
-
-  const result = await getCategory(id, pageNo, pageSize);
+  const result = await getCategory(id);
 
   if (result.length === 0) {
     res.json({
@@ -40,7 +35,5 @@ function validateParams(req, res, next) {
 
 module.exports = buildApiHandler([
   userResolver,
-  validateParams,
-  pagination,
   controller,
 ]);

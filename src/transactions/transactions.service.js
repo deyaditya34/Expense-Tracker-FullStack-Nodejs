@@ -15,6 +15,7 @@ let transaction = {
 };
 
 function createTransaction(transactionDetails) {
+  console.log("transactionDetails", transactionDetails);
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .insertOne(transactionDetails);
