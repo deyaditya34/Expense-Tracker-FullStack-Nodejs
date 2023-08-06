@@ -20,6 +20,7 @@ function createTransaction(transactionDetails) {
     .insertOne(transactionDetails);
 }
 
+
 function getAllTransactions(pageNo, pageSize) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
@@ -29,16 +30,15 @@ function getAllTransactions(pageNo, pageSize) {
     .toArray();
 }
 
-function getTransaction(transactionId, pageNo, pageSize) {
+function getTransaction(transactionId) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .find({ _id: new ObjectId(transactionId) })
-    .skip((pageNo - 1) * pageSize)
-    .limit(pageSize)
-    .toArray();
+    .toArray()
 }
 
 function searchTransaction(transactionDetails, pageNo, pageSize) {
+  console.log("transaction details", transactionDetails);
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
     .find(transactionDetails)

@@ -21,6 +21,7 @@ const createParamValidator = (params, paramsKey) => (req, res, next) => {
 const PARAM_KEY = {
   BODY: "body",
   QUERY: "query",
+  PARAMS: "params"
 };
 
 module.exports = {

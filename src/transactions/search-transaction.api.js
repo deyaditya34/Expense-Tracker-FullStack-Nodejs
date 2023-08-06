@@ -1,17 +1,44 @@
-const buildApiHandler = require("../api-utils/build-api-handler");
-const paramsValidator = require("../middlewares/params-validator");
-const userResolver = require("../middlewares/user-resolver");
 const httpError = require("http-errors");
-const { searchTransaction } = require("./transactions.service");
 const pagination = require("../middlewares/pagination");
+const userResolver = require("../middlewares/user-resolver");
+const { searchTransaction } = require("./transactions.service");
+const buildApiHandler = require("../api-utils/build-api-handler");
 
 async function controller(req, res) {
-  const { query } = req.body;
-  const { pageNo, limit } = req.query;
-  const skipList = parseInt(pageNo);
-  const limitList = parseInt(limit);
+  const { type, amount, categoryName, categoryId, pageNo, pageSize } =
+    req.query;
 
-  const result = await searchTransaction(query, skipList, limitList);
+  let searchTransactionParams = {};
+
+  if (type) {
+    searchTransactionParams.type = type;
+  }
+
+  if (amount) {
+    searchTransactionParams.amount = amount;
+  }
+  if (categoryName) {
+    searchTransactionParams["category"] = [];
+    searchTransactionParams["category"][0] = {};
+    searchTransactionParams["category"][0].name = categoryName;
+  }
+  if (categoryId) {
+    searchTransactionParams["category"] = [];
+    searchTransactionParams["category"][0] = {};
+    searchTransactionParams["category"][0]._id = categoryId;
+  }
+  if (categoryName && categoryId) {
+    searchTransactionParams["category"] = [];
+    searchTransactionParams["category"][0] = {};
+    searchTransactionParams["category"][0].name = categoryName;
+    searchTransactionParams["category"][0]._id = categoryId;
+  }
+
+  const result = await searchTransaction(
+    searchTransactionParams,
+    pageNo,
+    pageSize
+  );
 
   if (result.length === 0) {
     res.json({
@@ -26,52 +53,33 @@ async function controller(req, res) {
 }
 
 function validateParams(req, res, next) {
-  let { type, amount } = req.body.query;
-
-  let parsedQuery = {};
+  let { type, amount } = req.query;
 
   if (amount) {
-    if (typeof amount === "number") {
-      parsedQuery.amount = amount;
-    } else {
+    let amountParseInt = parseInt(amount);
+
+    if (Number.isNaN(amountParseInt) === true) {
       throw new httpError.BadRequest(
-        "Field 'amount' should be of 'number' type"
+        "Invalid 'Field' - 'amount'. It supports only numbers."
       );
     }
+    Reflect.set(req.query, "amount", amountParseInt);
   }
 
   if (type) {
-    if (typeof type !== "string") {
-      throw new httpError.BadRequest("Field 'type' should be of string type");
-    }
     if (type !== "DEBIT" && type !== "CREDIT") {
       throw new httpError.BadRequest(
         "Field 'type' should be either 'DEBIT' or 'CREDIT'"
       );
     }
-    parsedQuery.type = type;
   }
-
-  if (!type && !amount) {
-    throw new httpError.BadRequest(
-      `Fields 'name', 'amount' or 'type' is mandatory in the request`
-    );
-  }
-
-  Reflect.set(req.body, "query", parsedQuery);
 
   next();
 }
 
-const missingParamsValidator = paramsValidator.createParamValidator(
-  ["searchTransaction"],
-  paramsValidator.PARAM_KEY.BODY
-);
-
 module.exports = buildApiHandler([
   userResolver,
-  missingParamsValidator,
-  validateParams,
   pagination,
+  validateParams,
   controller,
 ]);

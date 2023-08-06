@@ -1,9 +1,9 @@
-const buildApiHandler = require("../api-utils/build-api-handler");
-const paramValidator = require("../middlewares/params-validator");
 const httpError = require("http-errors");
-const { createTransaction } = require("./transactions.service");
 const userResolver = require("../middlewares/user-resolver");
-const { getCategory} = require("../categories/categories.service");
+const { createTransaction } = require("./transactions.service");
+const paramValidator = require("../middlewares/params-validator");
+const buildApiHandler = require("../api-utils/build-api-handler");
+const { getCategory } = require("../categories/categories.service");
 
 async function controller(req, res) {
   const { type, amount, category, date, user } = req.body;
@@ -14,7 +14,7 @@ async function controller(req, res) {
     category,
     date,
     createdAt: new Date(),
-    createdBy: user
+    createdBy: user,
   });
 
   res.json({
@@ -50,6 +50,11 @@ async function validateParams(req, res, next) {
   if (transactionCategoryValidator.length === 0) {
     throw new httpError.BadRequest("Field 'categoryId' is invalid");
   } else {
+    if (transactionCategoryValidator[0].type !== type) {
+      throw new httpError.BadRequest(
+        "'Category Type' retrieved from the 'categoryId' does not match with the requested 'type'"
+      );
+    }
     Reflect.set(req.body, "category", transactionCategoryValidator);
   }
 
@@ -61,7 +66,9 @@ async function validateParams(req, res, next) {
     if (new Date(date).valueOf() > 0) {
       next();
     } else {
-      throw new httpError.BadRequest(`invalid 'Date' - '${date}. 'Date' should be either in format 'year-month-day' or 'month-day-year'`)
+      throw new httpError.BadRequest(
+        `invalid 'Date' - '${date}. 'Date' should be either in format 'year-month-day' or 'month-day-year'`
+      );
     }
   }
 }
@@ -71,6 +78,9 @@ const missingParamsValidator = paramValidator.createParamValidator(
   paramValidator.PARAM_KEY.BODY
 );
 
-module.exports = buildApiHandler(
-  [userResolver, missingParamsValidator, validateParams, controller]
-);
+module.exports = buildApiHandler([
+  userResolver,
+  missingParamsValidator,
+  validateParams,
+  controller,
+]);

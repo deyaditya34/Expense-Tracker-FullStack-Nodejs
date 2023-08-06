@@ -7,7 +7,7 @@ async function controller(req, res) {
   let {pageNo, pageSize} = req.query;
 
   let result = await getAllCategories(pageNo, pageSize);
-  
+  console.log(result);
   if (!result) {
     res.json({
       message: "No categories stored in the application to display"

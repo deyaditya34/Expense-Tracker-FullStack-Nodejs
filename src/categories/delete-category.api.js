@@ -2,11 +2,11 @@ const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const {deleteCategory} = require("./categories.service");
-const checkAdminRights = require("../middlewares/check-admin-rights")
+const { deleteCategory } = require("./categories.service");
+const checkAdminRights = require("../middlewares/check-admin-rights");
 
 async function controller(req, res) {
-  const { id } = req.body;
+  const { id } = req.params;
 
   const result = await deleteCategory(id);
 
@@ -35,7 +35,13 @@ function validateParams(req, res, next) {
 
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["id"],
-  paramsValidator.PARAM_KEY.BODY
+  paramsValidator.PARAM_KEY.PARAMS
 );
 
-module.exports = buildApiHandler([userResolver, checkAdminRights, missingParamsValidator, validateParams, controller]);
+module.exports = buildApiHandler([
+  userResolver,
+  checkAdminRights,
+  missingParamsValidator,
+  validateParams,
+  controller,
+]);

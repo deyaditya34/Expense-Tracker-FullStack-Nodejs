@@ -1,16 +1,24 @@
 const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
-const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
 const { searchCategory } = require("./categories.service");
 const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
-  let { query } = req.body;
-  const { pageNo, limit } = req.query;
-  const skipList = parseInt(pageNo);
-  const limitList = parseInt(limit);
-  const result = await searchCategory(query, skipList, limitList);
+  const { name, color, type, pageNo, pageSize } = req.query;
+
+  let searchCategoryParams = {};
+  if (name) {
+    searchCategoryParams.name = name;
+  }
+  if (color) {
+    searchCategoryParams.color = color;
+  }
+  if (type) {
+    searchCategoryParams.type = type;
+  }
+
+  const result = await searchCategory(searchCategoryParams, pageNo, pageSize);
 
   if (result.length === 0) {
     res.json({
@@ -25,22 +33,16 @@ async function controller(req, res) {
 }
 
 function validateParams(req, res, next) {
-  let { name, color, type } = req.body.query;
-
-  let parsedQuery = {};
+  let { name, color, type } = req.query;
 
   if (name) {
-    if (typeof name === "string") {
-      parsedQuery.name = name;
-    } else {
+    if (typeof name !== "string") {
       throw new httpError.BadRequest("Field 'name' should be of string type");
     }
   }
 
   if (color) {
     if (typeof color === "string") {
-      parsedQuery.color = color;
-    } else {
       throw new httpError.BadRequest("Field 'color' should be of string type");
     }
   }
@@ -54,31 +56,14 @@ function validateParams(req, res, next) {
         "Field 'type' should be either 'DEBIT' or 'CREDIT'"
       );
     }
-    parsedQuery.type = type;
   }
-
-  if (!name && !color && !type) {
-    throw new httpError.BadRequest(
-      `Fields 'name', 'color' or 'type' is mandatory in the request`
-    );
-  }
-
-  Reflect.set(req.body, "query", parsedQuery);
 
   next();
 }
 
-const missingParamsValidator = paramsValidator.createParamValidator(
-  ["query"],
-  paramsValidator.PARAM_KEY.BODY
-);
-
-module.exports = buildApiHandler(
-  [
-    userResolver,
-    missingParamsValidator,
-    validateParams,
-    pagination,
-    controller,
-  ],
-);
+module.exports = buildApiHandler([
+  userResolver,
+  validateParams,
+  pagination,
+  controller,
+]);

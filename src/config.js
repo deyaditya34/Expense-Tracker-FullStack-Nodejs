@@ -1,7 +1,7 @@
 const MONGOURI = "mongodb://127.0.0.1:27017";
 const DB_NAME = "expense-tracker";
 
-const APP_PORT = 3020;
+const APP_PORT = 3090;
 
 const COLLECTION_NAMES = {
     USERS: "expense-tracker-users",

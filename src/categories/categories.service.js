@@ -26,12 +26,10 @@ function searchCategory(searchCategory, pageNo, pageSize) {
     .toArray();
 }
 
-function getCategory(id, pageNo, pageSize) {
+function getCategory(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find({ _id: { $in: [new ObjectId(id)] } })
-    .skip((pageNo - 1) * pageSize)
-    .limit(pageSize)
+    .find({ _id: new ObjectId(id) })
     .toArray();
 }
 
@@ -39,6 +37,10 @@ function deleteCategory(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
     .deleteOne({ _id: { $in: [new ObjectId(id)] } });
+}
+
+function getCategoryTransactions(id, pageNo, pageSize) {
+  return database.getCollection(COLLECTION_NAMES.TRANSACTIONS).find({});
 }
 
 module.exports = {

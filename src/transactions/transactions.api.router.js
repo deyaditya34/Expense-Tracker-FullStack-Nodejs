@@ -1,16 +1,13 @@
 const express = require("express");
 
-const createTransaction = require("./create-transaction.api")
-const getTransactions = require("./get-all-transactions.api")
+const createTransaction = require("./create-transaction.api");
 const getTransaction = require("./get-transaction.api");
-const searchTransaction = require("./search-transaction.api")
+const searchTransaction = require("./search-transaction.api");
 
 const router = express.Router();
 
 router.post("/", createTransaction);
-router.get("/all", getTransactions);
-router.get("/", getTransaction);
 router.get("/search", searchTransaction);
-
+router.get("/:id", getTransaction);
 
 module.exports = router;

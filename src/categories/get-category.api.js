@@ -6,8 +6,9 @@ const paramsValidator = require("../middlewares/params-validator");
 const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
-  const {id, pageNo, pageSize} = req.query;
-  
+  const {id}  = req.params;
+  const {pageNo, pageSize} = req.query;  
+  console.log("id -", id, "pageNo -", pageNo, "pageSize -", pageSize)
 
   const result = await getCategory(id, pageNo, pageSize);
 
@@ -25,7 +26,7 @@ async function controller(req, res) {
 
 function validateParams(req, res, next) {
   const errorTypedFields = ["id"].filter(
-    (field) => typeof Reflect.get(req.query, field) !== "string"
+    (field) => typeof Reflect.get(req.params, field) !== "string"
   );
 
   if (errorTypedFields.length > 0) {
@@ -37,14 +38,8 @@ function validateParams(req, res, next) {
   next();
 }
 
-const missingParamsValidator = paramsValidator.createParamValidator(
-  ["id"],
-  paramsValidator.PARAM_KEY.QUERY
-);
-
 module.exports = buildApiHandler([
   userResolver,
-  missingParamsValidator,
   validateParams,
   pagination,
   controller,
