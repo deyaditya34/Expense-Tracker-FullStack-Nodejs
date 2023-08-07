@@ -19,7 +19,7 @@ async function controller(req, res) {
   }
   
   if (categoryName) {
-    searchTransactionParams = {"category.name": categoryName}
+    searchTransactionParams['category.name'] = categoryName;
 
   }
 
