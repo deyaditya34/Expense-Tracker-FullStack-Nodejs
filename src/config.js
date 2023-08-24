@@ -6,7 +6,8 @@ const APP_PORT = 3090;
 const COLLECTION_NAMES = {
     USERS: "expense-tracker-users",
     TRANSACTIONS: "transactions",
-    CATEGORIES: "categories"
+    CATEGORIES: "categories",
+    BUSINESS: "balance"
 }
 
 const JWT_SECRET = "Bokakhat@123";

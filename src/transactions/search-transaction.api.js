@@ -24,7 +24,7 @@ async function controller(req, res) {
   }
 
   const result = await searchTransaction(
-    {...searchTransactionParams},
+    searchTransactionParams,
     pageNo,
     pageSize
   );
