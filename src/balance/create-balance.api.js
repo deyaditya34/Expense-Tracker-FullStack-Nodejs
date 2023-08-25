@@ -5,9 +5,9 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 
 async function controller(req, res) {
-  const { amount } = req.body;
+  const { balance } = req.body;
 
-  let result = await createBalance({ amount });
+  let result = await createBalance({ balance });
 
   res.json({
     message: "Success",
@@ -16,23 +16,23 @@ async function controller(req, res) {
 }
 
 function validateParams(req, res, next) {
-  const { amount } = req.body;
+  const { balance } = req.body;
 
-  if (amount) {
-    if (typeof amount !== "number") {
+  if (balance) {
+    if (typeof balance !== "number") {
       throw new httpError.BadRequest(
-        "Field 'amount' should be of 'number' type"
+        "Field 'balance' should be of 'number' type"
       );
     }
   }
 
-  Reflect.set(req.query, "amount", amount);
+  Reflect.set(req.query, "balance", balance);
 
   next();
 }
 
 const missingParamsValidator = paramsValidator.createParamValidator(
-  ["amount"],
+  ["balance"],
   paramsValidator.PARAM_KEY.BODY
 );
 

@@ -31,12 +31,12 @@ function updateBalance(balance) {
   database
     .getCollection(COLLECTION_NAMES.BUSINESS)
     .updateOne(
-      { _id: new ObjectId("64e72a79e5e1b5e0237e6b33") },
-      { $inc: { amount: balance } }
+      { _id: new ObjectId("64e89af3a993c3f974954218") },
+      { $inc: { balance: balance } }
     );
 
   return database.getCollection(COLLECTION_NAMES.BUSINESS)
-  .findOne({_id: new ObjectId("64e72a79e5e1b5e0237e6b33")});
+  .findOne({_id: new ObjectId("64e89af3a993c3f974954218")});
 
 }
 

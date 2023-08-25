@@ -7,7 +7,7 @@ const COLLECTION_NAMES = {
     USERS: "expense-tracker-users",
     TRANSACTIONS: "transactions",
     CATEGORIES: "categories",
-    BUSINESS: "balance"
+    BUSINESS: "business"
 }
 
 const JWT_SECRET = "Bokakhat@123";

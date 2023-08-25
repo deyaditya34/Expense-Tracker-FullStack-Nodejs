@@ -31,7 +31,7 @@ async function controller(req, res) {
     data: {
       transaction: {
         _id: result.insertedId,
-        balance: balanceUpdate.amount,
+        balance: balanceUpdate.balance,
       },
     },
   });
