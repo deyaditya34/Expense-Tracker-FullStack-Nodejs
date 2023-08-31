@@ -20,16 +20,10 @@ async function controller(req, res) {
 
   const result = await searchCategory(searchCategoryParams, pageNo, pageSize);
 
-  if (result.length === 0) {
-    res.json({
-      message: "No categories found for the respective search",
-    });
-  } else {
-    res.json({
-      message: "Categories found",
-      data: result,
-    });
-  }
+  res.json({
+    message: "Categories found",
+    data: result,
+  });
 }
 
 function validateParams(req, res, next) {

@@ -5,8 +5,7 @@ const { searchTransaction } = require("./transactions.service");
 const buildApiHandler = require("../api-utils/build-api-handler");
 
 async function controller(req, res) {
-  const { type, amount, categoryName, pageNo, pageSize } =
-    req.query;
+  const { type, amount, categoryName, pageNo, pageSize } = req.query;
 
   let searchTransactionParams = {};
 
@@ -17,10 +16,9 @@ async function controller(req, res) {
   if (amount) {
     searchTransactionParams.amount = amount;
   }
-  
-  if (categoryName) {
-    searchTransactionParams['category.name'] = categoryName;
 
+  if (categoryName) {
+    searchTransactionParams["category.name"] = categoryName;
   }
 
   const result = await searchTransaction(
@@ -29,16 +27,10 @@ async function controller(req, res) {
     pageSize
   );
 
-  if (result.length === 0) {
-    res.json({
-      message: "No transactions found for the respective search",
-    });
-  } else {
-    res.json({
-      message: "Transactions found",
-      data: result,
-    });
-  }
+  res.json({
+    message: "Transactions found",
+    data: result,
+  });
 }
 
 function validateParams(req, res, next) {
