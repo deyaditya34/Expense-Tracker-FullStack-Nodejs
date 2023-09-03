@@ -4,7 +4,9 @@ const { createTransaction } = require("./transactions.service");
 const paramValidator = require("../middlewares/params-validator");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const { getCategory } = require("../categories/categories.service");
-const {updateBalance} = require("../balance/balance.service");
+const eventBridge = require("../events/event.service");
+const { EVENT_NAMES } = require("../config");
+
 
 async function controller(req, res) {
   const { type, amount, category, date, user } = req.body;
@@ -18,20 +20,13 @@ async function controller(req, res) {
     createdBy: user,
   });
 
-  let balanceUpdate = 0;
-
-  if (type === "DEBIT") {
-    balanceUpdate = await updateBalance(-amount);
-  } else {
-    balanceUpdate = await updateBalance(amount);
-  }
+  eventBridge.emit(EVENT_NAMES.TRANSACTION_CREATED, type, amount);
 
   res.json({
     success: result.acknowledged,
     data: {
       transaction: {
-        _id: result.insertedId,
-        balance: balanceUpdate.balance,
+        _id: result.insertedId
       },
     },
   });

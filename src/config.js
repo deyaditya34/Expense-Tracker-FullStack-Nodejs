@@ -10,6 +10,10 @@ const COLLECTION_NAMES = {
     BUSINESS: "business"
 }
 
+const EVENT_NAMES = {
+    TRANSACTION_CREATED: "transaction_created",
+}
+
 const JWT_SECRET = "Bokakhat@123";
 
 const AUTH_TOKEN_HEADER_FIELD = "token";
@@ -21,6 +25,7 @@ module.exports = {
     DB_NAME,
     APP_PORT,
     COLLECTION_NAMES,
+    EVENT_NAMES,
     JWT_SECRET,
     AUTH_TOKEN_HEADER_FIELD,
     PASSWORD_SALT
