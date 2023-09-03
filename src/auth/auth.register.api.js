@@ -7,7 +7,7 @@ const checkAdminRights = require("../middlewares/check-admin-rights");
 const {validateUsername} = require("./auth.utils");
 
 async function controller(req, res) {
-  const { username, password } = req.query;
+  const { username, password } = req.body;
 
   await authService.register(username, password);
 
@@ -21,7 +21,7 @@ const usernameValidator = validateUsername;
 
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["username", "password"],
-  paramsValidator.PARAM_KEY.QUERY
+  paramsValidator.PARAM_KEY.BODY
 );
 
 module.exports = buildApiHandler([

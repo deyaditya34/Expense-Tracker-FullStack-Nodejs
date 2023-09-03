@@ -4,7 +4,7 @@ const paramsValidator = require("../middlewares/params-validator");
 const {validateUsername} = require("./auth.utils");
 
 async function controller(req, res) {
-  const { username, password } = req.query;
+  const { username, password } = req.body;
 
   const token = await authService.login(username, password);
 
@@ -21,7 +21,7 @@ const usernameValidator = validateUsername;
 
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["username", "password"],
-  paramsValidator.PARAM_KEY.QUERY
+  paramsValidator.PARAM_KEY.BODY
 );
 
 module.exports = buildApiHandler([
