@@ -60,9 +60,29 @@ async function findUsers(criteria) {
     .toArray();
 }
 
+async function changePassword(username, password, newPassword) {
+  const user = await database.getCollection(COLLECTION_NAMES.USERS).findOne({
+    username,
+    password: encryptPassword(password),
+  });
+
+  if (!user) {
+    throw new httpError.Unauthorized("Username/Password combo incorrect");
+  }
+
+  let updatedUser = buildUser(username, newPassword);
+  
+  await database.getCollection(COLLECTION_NAMES.USERS).updateOne({username}, {$set: {password: updatedUser.password}});
+  
+  const token = jwtService.createToken({username});
+
+  return token;
+}
+
 module.exports = {
   register,
   login,
   getUserFromToken,
   findUsers,
+  changePassword
 };

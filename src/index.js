@@ -5,7 +5,7 @@ const database = require("./services/database.service");
 const authRouter = require("./auth/auth.api.router");
 const transactionRouter = require("./transactions/transactions.api.router");
 const categoryRouter = require("./categories/categories.api.router");
-const balanceRouter = require("./balance/balance.api.router");
+
 const businessRouter = require("./business/business.api.router");
 const requestLogger = require("./middlewares/request-logger");
 const errrorHandler = require("./api-utils/error-handler");
@@ -25,7 +25,6 @@ async function start() {
   server.use("/auth", authRouter);
 
   server.use("/categories", categoryRouter);
-  server.use("/balance", balanceRouter);
   server.use("/business", businessRouter);
   server.use(notFoundHandler);
   server.use(errrorHandler);

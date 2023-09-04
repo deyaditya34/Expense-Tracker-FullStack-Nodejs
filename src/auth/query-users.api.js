@@ -12,7 +12,7 @@ async function controller(req, res) {
 
   if (result.length === 0) {
     res.json({
-      message: "NO User Found",
+      message: "No User Found",
     });
   } else {
     res.json({
