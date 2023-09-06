@@ -2,20 +2,18 @@ const authService = require("./auth.service");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const { validateUsername } = require("./auth.utils");
-
+const userResolver = require("../middlewares/user-resolver");
 
 async function controller(req, res) {
-  const { username, password, newPassword } = req.body;
+  const { user, password, newPassword } = req.body;
 
-  const updatedToken = await authService.changePassword(
-    username,
-    password,
-    newPassword
-  );
+  const userDetails = await authService.retrieveUserDetails(user.username);
+  console.log("user -", userDetails);
+
+  await authService.updatePassword(userDetails, password, newPassword);
 
   res.json({
     message: "Password Changed Successfully",
-    token: updatedToken,
   });
 }
 
@@ -27,6 +25,7 @@ const missingParamsValidator = paramsValidator.createParamValidator(
 );
 
 module.exports = buildApiHandler([
+  userResolver,
   missingParamsValidator,
   usernameValidator,
   controller,

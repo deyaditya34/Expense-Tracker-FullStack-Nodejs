@@ -5,11 +5,10 @@ const { COLLECTION_NAMES } = require("../config");
 const { buildUser, encryptPassword } = require("./auth.utils");
 
 async function register(username, password) {
-
   const existingUser = await database
     .getCollection(COLLECTION_NAMES.USERS)
     .findOne({
-      username
+      username,
     });
 
   if (existingUser) {
@@ -19,7 +18,7 @@ async function register(username, password) {
   }
 
   const userDetails = buildUser(username, password);
-  console.log("userDetails", userDetails)
+  console.log("userDetails", userDetails);
   await database.getCollection(COLLECTION_NAMES.USERS).insertOne(userDetails);
 }
 
@@ -48,7 +47,10 @@ async function getUserFromToken(token) {
   const username = payload.username;
   const user = await database
     .getCollection(COLLECTION_NAMES.USERS)
-    .findOne({ username }, { projection: { _id: false, password: false, role: false } });
+    .findOne(
+      { username },
+      { projection: { _id: false, password: false, role: false } }
+    );
 
   return user;
 }
@@ -71,12 +73,36 @@ async function changePassword(username, password, newPassword) {
   }
 
   let updatedUser = buildUser(username, newPassword);
-  
-  await database.getCollection(COLLECTION_NAMES.USERS).updateOne({username}, {$set: {password: updatedUser.password}});
-  
-  const token = jwtService.createToken({username});
+
+  await database
+    .getCollection(COLLECTION_NAMES.USERS)
+    .updateOne({ username }, { $set: { password: updatedUser.password } });
+
+  const token = jwtService.createToken({ username });
 
   return token;
+}
+
+async function retrieveUserDetails(username) {
+  return database
+    .getCollection(COLLECTION_NAMES.USERS)
+    .findOne({ username: username });
+}
+
+async function updatePassword(userDetails, password, newPassword) {
+
+  if (userDetails.password !== encryptPassword(password)) {
+    throw new httpError.Unauthorized(
+      "Password doesnot match with the user Password saved in the database."
+    );
+  }
+
+  await database
+    .getCollection(COLLECTION_NAMES.USERS)
+    .updateOne(
+      { username: userDetails.username },
+      { $set: { password: encryptPassword(newPassword) } }
+    );
 }
 
 module.exports = {
@@ -84,5 +110,7 @@ module.exports = {
   login,
   getUserFromToken,
   findUsers,
-  changePassword
+  changePassword,
+  retrieveUserDetails,
+  updatePassword,
 };
