@@ -8,10 +8,11 @@ const { ObjectId } = require("mongodb");
 async function controller(req, res) {
   const { id } = req.params;
   const { pageNo, pageSize } = req.query;
+  const { user} = req.body;
 
   const resultFromGetCategory = await getCategory(id);
 
-  if (resultFromGetCategory.length === 0) {
+  if (!resultFromGetCategory) {
     res.json({
       message: "No category found for the id",
     });
@@ -19,6 +20,7 @@ async function controller(req, res) {
 
   const resultFromSearchTransaction = await searchTransaction(
     { "category._id": new ObjectId(id) },
+    user.username,
     pageNo,
     pageSize
   );

@@ -1,4 +1,5 @@
 const httpError = require("http-errors");
+
 const buildApiHandler = require("../api-utils/build-api-handler");
 const userResolver = require("../middlewares/user-resolver");
 const { searchCategory } = require("./categories.service");

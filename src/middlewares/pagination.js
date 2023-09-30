@@ -30,13 +30,13 @@ function pagination(req, res, next) {
       );
     }
 
-    if (pageSize > 20) {
+    if (pageSz > 20) {
       throw new httpError.BadRequest(
         `'Field' - 'Page Size' should be lesser than or equal to '20'`
       );
     }
 
-    if (pageSize < 1) {
+    if (pageSz < 1) {
       throw new httpError.BadRequest(
         `'Field' - 'Page Size' should be greater than or equal to '1'`
       );

@@ -21,7 +21,6 @@ function createTransaction(transactionDetails) {
     .insertOne(transactionDetails);
 }
 
-
 function getAllTransactions(pageNo, pageSize) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
@@ -34,15 +33,13 @@ function getAllTransactions(pageNo, pageSize) {
 function getTransaction(transactionId) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
-    .find({ _id: new ObjectId(transactionId) })
-    .toArray()
+    .findOne({ _id: new ObjectId(transactionId) });
 }
 
-function searchTransaction(transactionDetails, pageNo, pageSize) {
-  console.log("transaction details", transactionDetails);
+function searchTransaction(transactionDetails, username, pageNo, pageSize) {
   return database
     .getCollection(COLLECTION_NAMES.TRANSACTIONS)
-    .find(transactionDetails)
+    .find(transactionDetails, { username: { $eq: username } })
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
     .toArray();

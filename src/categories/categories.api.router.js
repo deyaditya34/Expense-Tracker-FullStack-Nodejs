@@ -9,8 +9,8 @@ const router = express.Router();
 
 router.post("/", createCategory);
 router.delete("/:id", deleteCategory);
-router.get("/search", searchCatergory);
-router.get("/:id/transactions", getCategoryWithTransactions)
+router.get("/", searchCatergory);
 router.get("/:id", getCategory);
+router.get("/:id/transactions", getCategoryWithTransactions)
 
 module.exports = router;

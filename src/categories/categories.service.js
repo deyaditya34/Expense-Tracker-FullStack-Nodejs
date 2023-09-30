@@ -26,11 +26,16 @@ function searchCategory(searchCategory, pageNo, pageSize) {
     .toArray();
 }
 
+function getCategoryByName(categoryName) {
+  return database
+    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .findOne(categoryName);
+}
+
 function getCategory(id) {
   return database
     .getCollection(COLLECTION_NAMES.CATEGORIES)
-    .find({ _id: new ObjectId(id) })
-    .toArray();
+    .findOne({ _id: new ObjectId(id) })
 }
 
 function deleteCategory(id) {
@@ -49,4 +54,5 @@ module.exports = {
   searchCategory,
   getCategory,
   deleteCategory,
+  getCategoryByName, 
 };

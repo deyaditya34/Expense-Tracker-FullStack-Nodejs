@@ -47,10 +47,7 @@ async function getUserFromToken(token) {
   const username = payload.username;
   const user = await database
     .getCollection(COLLECTION_NAMES.USERS)
-    .findOne(
-      { username },
-      { projection: { _id: false, password: false, role: false } }
-    );
+    .findOne({ username }, { projection: { _id: false, password: false } });
 
   return user;
 }
@@ -89,7 +86,12 @@ async function retrieveUserDetails(username) {
     .findOne({ username: username });
 }
 
-async function updatePassword(userDetails, password, newPassword) {
+async function updatePassword(userDetails, username, password, newPassword) {
+  if (userDetails.username !== username) {
+    throw new httpError.Unauthorized(
+      "Username provided does not match with the username stored in the database."
+    );
+  }
 
   if (userDetails.password !== encryptPassword(password)) {
     throw new httpError.Unauthorized(

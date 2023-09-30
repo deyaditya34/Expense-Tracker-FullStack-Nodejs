@@ -7,7 +7,7 @@ const searchTransaction = require("./search-transaction.api");
 const router = express.Router();
 
 router.post("/", createTransaction);
-router.get("/search", searchTransaction);
 router.get("/:id", getTransaction);
+router.get("/", searchTransaction);
 
 module.exports = router;

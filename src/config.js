@@ -11,7 +11,7 @@ const COLLECTION_NAMES = {
 }
 
 const EVENT_NAMES = {
-    TRANSACTION_CREATED: "transaction_created",
+    TRANSACTION_CREATED: "transaction-created",
 }
 
 const JWT_SECRET = "Bokakhat@123";

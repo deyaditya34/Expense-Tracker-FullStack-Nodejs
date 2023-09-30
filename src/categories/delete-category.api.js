@@ -15,33 +15,11 @@ async function controller(req, res) {
       message: "No category available to delete",
     });
   } else {
-    res.json({ message: "Category Deteled", data: result });
+    res.json({
+      message: "Category Deleted",
+      data: result.deletedCount,
+    });
   }
 }
 
-function validateParams(req, res, next) {
-  const errorTypedFields = ["id"].filter(
-    (field) => typeof Reflect.get(req.body, "id") !== "string"
-  );
-
-  if (errorTypedFields.length > 0) {
-    throw new httpError.BadRequest(
-      `Field '${errorTypedFields.join(",")}' should be of string type`
-    );
-  }
-
-  next();
-}
-
-const missingParamsValidator = paramsValidator.createParamValidator(
-  ["id"],
-  paramsValidator.PARAM_KEY.PARAMS
-);
-
-module.exports = buildApiHandler([
-  userResolver,
-  checkAdminRights,
-  missingParamsValidator,
-  validateParams,
-  controller,
-]);
+module.exports = buildApiHandler([userResolver, checkAdminRights, controller]);

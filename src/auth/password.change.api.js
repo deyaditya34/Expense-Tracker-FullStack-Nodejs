@@ -5,12 +5,17 @@ const { validateUsername } = require("./auth.utils");
 const userResolver = require("../middlewares/user-resolver");
 
 async function controller(req, res) {
-  const { user, password, newPassword } = req.body;
+  const { user, username, password, newPassword } = req.body;
 
   const userDetails = await authService.retrieveUserDetails(user.username);
   console.log("user -", userDetails);
 
-  await authService.updatePassword(userDetails, password, newPassword);
+  await authService.updatePassword(
+    userDetails,
+    username,
+    password,
+    newPassword
+  );
 
   res.json({
     message: "Password Changed Successfully",

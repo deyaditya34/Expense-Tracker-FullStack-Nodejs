@@ -34,7 +34,7 @@ async function controller(req, res) {
 }
 
 function validateParams(req, res, next) {
-  let { type, amount } = req.query;
+  let { type, amount, categoryName } = req.query;
 
   if (amount) {
     let amountParseInt = parseInt(amount);
@@ -52,6 +52,14 @@ function validateParams(req, res, next) {
       throw new httpError.BadRequest(
         "Field 'type' should be either 'DEBIT' or 'CREDIT'"
       );
+    }
+  }
+
+  if (categoryName) {
+    if (typeof categoryName !== "string") {
+      throw new httpError.BadRequest(
+        `Field categoryName -'${categoryName}' should be 'string' type.`
+      )
     }
   }
 

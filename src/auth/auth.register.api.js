@@ -1,4 +1,3 @@
-
 const authService = require("./auth.service");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
@@ -17,7 +16,7 @@ async function controller(req, res) {
   });
 }
 
-const usernameValidator = validateUsername;
+
 
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["username", "password"],
@@ -28,6 +27,6 @@ module.exports = buildApiHandler([
   userResolver,
   checkAdminRights,
   missingParamsValidator,
-  usernameValidator,
+  validateUsername,
   controller
 ]);

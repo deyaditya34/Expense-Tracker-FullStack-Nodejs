@@ -1,5 +1,5 @@
 function buildApiHandler(handlers = []) {
-  return [...handlers.map((handlerFn) => wrapErrorHandling(handlerFn))];
+  return handlers.map((handlerFn) => wrapErrorHandling(handlerFn));
 }
 
 const wrapErrorHandling = (apiHandler) => async (req, res, next) => {
@@ -11,3 +11,4 @@ const wrapErrorHandling = (apiHandler) => async (req, res, next) => {
 };
 
 module.exports = buildApiHandler;
+

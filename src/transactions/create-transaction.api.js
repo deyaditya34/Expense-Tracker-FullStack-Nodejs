@@ -1,10 +1,11 @@
 const httpError = require("http-errors");
+const eventBridge = require("../events/event.service");
+
 const userResolver = require("../middlewares/user-resolver");
 const { createTransaction } = require("./transactions.service");
 const paramValidator = require("../middlewares/params-validator");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const { getCategory } = require("../categories/categories.service");
-const eventBridge = require("../events/event.service");
 const { EVENT_NAMES } = require("../config");
 
 
