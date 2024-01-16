@@ -31,5 +31,3 @@ module.exports = buildApiHandler([
   usernameValidator,
   controller
 ]);
-
-console.log("Aditya")

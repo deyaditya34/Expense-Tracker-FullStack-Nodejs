@@ -1,6 +1,4 @@
-// get transaction
-// list transactions
-// create transaction
+
 const database = require("../services/database.service");
 const { COLLECTION_NAMES } = require("../config");
 const { ObjectId } = require("mongodb");

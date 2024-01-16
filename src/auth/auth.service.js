@@ -26,14 +26,16 @@ async function login(username, password) {
   const user = await database.getCollection(COLLECTION_NAMES.USERS).findOne({
     username,
     password: encryptPassword(password),
+  
   });
 
   if (!user) {
     throw new httpError.Unauthorized("Username/Password combo incorrect");
+  
   }
 
   const token = jwtService.createToken({ username });
-
+  
   return token;
 }
 
