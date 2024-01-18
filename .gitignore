@@ -1,4 +1,4 @@
 node_modules
-config.js
-process.env
-user-details.json
+src/*config.js
+src/*process.env
+src/*user-details.txt
