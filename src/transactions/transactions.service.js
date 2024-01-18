@@ -1,27 +1,17 @@
-
-const database = require("../services/database.service");
-const { COLLECTION_NAMES } = require("../config");
 const { ObjectId } = require("mongodb");
-
-let transaction = {
-  type: "DEBIT",
-  amount: 550,
-  category: {
-    _id: "64b911e8e02c43d67aa5e7a8",
-  },
-  date: "2023-07-20T16:01:37.204Z",
-};
+const env = require("../middlewares/env-resolver");
+const database = require("../services/database.service");
 
 function createTransaction(transactionDetails) {
   console.log("transactionDetails", transactionDetails);
   return database
-    .getCollection(COLLECTION_NAMES.TRANSACTIONS)
+    .getCollection(env.result.COLLECTION_NAMES_TRANSACTIONS)
     .insertOne(transactionDetails);
 }
 
 function getAllTransactions(pageNo, pageSize) {
   return database
-    .getCollection(COLLECTION_NAMES.TRANSACTIONS)
+    .getCollection(env.result.COLLECTION_NAMES_TRANSACTIONS)
     .find({})
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
@@ -30,13 +20,13 @@ function getAllTransactions(pageNo, pageSize) {
 
 function getTransaction(transactionId) {
   return database
-    .getCollection(COLLECTION_NAMES.TRANSACTIONS)
+    .getCollection(env.result.COLLECTION_NAMES_TRANSACTIONS)
     .findOne({ _id: new ObjectId(transactionId) });
 }
 
 function searchTransaction(transactionDetails, username, pageNo, pageSize) {
   return database
-    .getCollection(COLLECTION_NAMES.TRANSACTIONS)
+    .getCollection(env.result.COLLECTION_NAMES_TRANSACTIONS)
     .find(transactionDetails, { username: { $eq: username } })
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)

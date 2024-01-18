@@ -1,16 +1,16 @@
 const database = require("../services/database.service");
-const { COLLECTION_NAMES } = require("../config");
+const env = require("../middlewares/env-resolver");
 const { ObjectId } = require("mongodb");
 
 function createCategory(categoryDetails) {
   return database
-    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .getCollection(env.result.COLLECTION_NAMES_CATEGORIES)
     .insertOne(categoryDetails);
 }
 
 function getAllCategories(pageNo, pageSize) {
   return database
-    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .getCollection(env.result.COLLECTION_NAMES_CATEGORIES)
     .find({})
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
@@ -19,7 +19,7 @@ function getAllCategories(pageNo, pageSize) {
 
 function searchCategory(searchCategory, pageNo, pageSize) {
   return database
-    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .getCollection(env.result.COLLECTION_NAMES_CATEGORIES)
     .find(searchCategory)
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
@@ -28,24 +28,20 @@ function searchCategory(searchCategory, pageNo, pageSize) {
 
 function getCategoryByName(categoryName) {
   return database
-    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .getCollection(env.result.COLLECTION_NAMES_CATEGORIES)
     .findOne(categoryName);
 }
 
 function getCategory(id) {
   return database
-    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .getCollection(env.result.COLLECTION_NAMES_CATEGORIES)
     .findOne({ _id: new ObjectId(id) })
 }
 
 function deleteCategory(id) {
   return database
-    .getCollection(COLLECTION_NAMES.CATEGORIES)
+    .getCollection(env.result.COLLECTION_NAMES_CATEGORIES)
     .deleteOne({ _id: { $in: [new ObjectId(id)] } });
-}
-
-function getCategoryTransactions(id, pageNo, pageSize) {
-  return database.getCollection(COLLECTION_NAMES.TRANSACTIONS).find({});
 }
 
 module.exports = {

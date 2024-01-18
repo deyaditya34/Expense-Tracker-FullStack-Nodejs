@@ -1,12 +1,12 @@
 const httpError = require("http-errors");
+const env = require("../middlewares/env-resolver");
 const database = require("../services/database.service");
 const jwtService = require("../services/jwt.service");
-const { COLLECTION_NAMES } = require("../config");
 const { buildUser, encryptPassword } = require("./auth.utils");
 
 async function register(username, password) {
   const existingUser = await database
-    .getCollection(COLLECTION_NAMES.USERS)
+    .getCollection(env.result.COLLECTION_NAMES_USERS)
     .findOne({
       username,
     });
@@ -19,11 +19,11 @@ async function register(username, password) {
 
   const userDetails = buildUser(username, password);
   console.log("userDetails", userDetails);
-  await database.getCollection(COLLECTION_NAMES.USERS).insertOne(userDetails);
+  await database.getCollection(env.result.COLLECTION_NAMES_USERS).insertOne(userDetails);
 }
 
 async function login(username, password) {
-  const user = await database.getCollection(COLLECTION_NAMES.USERS).findOne({
+  const user = await database.getCollection(env.result.COLLECTION_NAMES_USERS).findOne({
     username,
     password: encryptPassword(password),
   
@@ -48,7 +48,7 @@ async function getUserFromToken(token) {
 
   const username = payload.username;
   const user = await database
-    .getCollection(COLLECTION_NAMES.USERS)
+    .getCollection(env.result.COLLECTION_NAMES_USERS)
     .findOne({ username }, { projection: { _id: false, password: false } });
 
   return user;
@@ -56,13 +56,13 @@ async function getUserFromToken(token) {
 
 async function findUsers(criteria) {
   return database
-    .getCollection(COLLECTION_NAMES.USERS)
+    .getCollection(env.result.COLLECTION_NAMES_USERS)
     .find(criteria)
     .toArray();
 }
 
 async function changePassword(username, password, newPassword) {
-  const user = await database.getCollection(COLLECTION_NAMES.USERS).findOne({
+  const user = await database.getCollection(env.result.COLLECTION_NAMES_USERS).findOne({
     username,
     password: encryptPassword(password),
   });
@@ -74,7 +74,7 @@ async function changePassword(username, password, newPassword) {
   let updatedUser = buildUser(username, newPassword);
 
   await database
-    .getCollection(COLLECTION_NAMES.USERS)
+    .getCollection(env.result.COLLECTION_NAMES_USERS)
     .updateOne({ username }, { $set: { password: updatedUser.password } });
 
   const token = jwtService.createToken({ username });
@@ -84,7 +84,7 @@ async function changePassword(username, password, newPassword) {
 
 async function retrieveUserDetails(username) {
   return database
-    .getCollection(COLLECTION_NAMES.USERS)
+    .getCollection(env.result.COLLECTION_NAMES_USERS)
     .findOne({ username: username });
 }
 
@@ -102,7 +102,7 @@ async function updatePassword(userDetails, username, password, newPassword) {
   }
 
   await database
-    .getCollection(COLLECTION_NAMES.USERS)
+    .getCollection(env.result.COLLECTION_NAMES_USERS)
     .updateOne(
       { username: userDetails.username },
       { $set: { password: encryptPassword(newPassword) } }

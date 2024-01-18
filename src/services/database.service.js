@@ -1,14 +1,14 @@
 const mongodb = require("mongodb");
-const config = require("../config");
+const env = require("../middlewares/env-resolver")
 
-const client = new mongodb.MongoClient(config.MONGOURI);
+const client = new mongodb.MongoClient(env.result.MONGODBURI);
 
 let database = null;
 
 async function initialize() {
     await client.connect();
     
-    database = client.db(config.DB_NAME);
+    database = client.db(env.result.DB_NAME);
 }
 
 function getCollection(collectionName) {

@@ -6,7 +6,7 @@ const { createTransaction } = require("./transactions.service");
 const paramValidator = require("../middlewares/params-validator");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const { getCategory } = require("../categories/categories.service");
-const { EVENT_NAMES } = require("../config");
+const env = require("../middlewares/env-resolver");
 
 
 async function controller(req, res) {
@@ -21,7 +21,7 @@ async function controller(req, res) {
     createdBy: user,
   });
 
-  eventBridge.emit(EVENT_NAMES.TRANSACTION_CREATED, type, amount);
+  eventBridge.emit(env.result.EVENT_NAMES_TRANSACTIONS_CREATED, type, amount);
 
   res.json({
     success: result.acknowledged,
