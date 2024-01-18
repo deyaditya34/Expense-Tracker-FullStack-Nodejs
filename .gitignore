@@ -1,4 +1,4 @@
 node_modules
 config.js
 process.env
-user-details.txt
+user-details.json
