@@ -1,6 +1,4 @@
-const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
-const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
 const { deleteCategory } = require("./categories.service");
 const checkAdminRights = require("../middlewares/check-admin-rights");

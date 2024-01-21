@@ -1,5 +1,3 @@
-const httpError = require("http-errors");
-
 const { getCategory } = require("./categories.service");
 const userResolver = require("../middlewares/user-resolver");
 const buildApiHandler = require("../api-utils/build-api-handler");

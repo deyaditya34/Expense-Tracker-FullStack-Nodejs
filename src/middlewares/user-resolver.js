@@ -1,10 +1,9 @@
 const httpError = require("http-errors");
-const env = require("../middlewares/env-resolver")
 const {getUserFromToken} = require("../auth/auth.service");
 
 
 async function userResolver(req, res, next) {
-  const token = Reflect.get(req.headers, env.result.AUTH_TOKEN_HEADER_FIELD);
+  const token = Reflect.get(req.headers, process.env.AUTH_TOKEN_HEADER_FIELD);
 
   if(!token) {
     throw new httpError.Forbidden("Access Denied");

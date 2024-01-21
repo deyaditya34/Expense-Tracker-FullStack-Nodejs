@@ -1,5 +1,5 @@
 const express = require("express");
-const config = require("./config");
+require("dotenv").config()
 
 const database = require("./services/database.service");
 const authRouter = require("./auth/auth.api.router");
@@ -29,10 +29,10 @@ async function start() {
   server.use(notFoundHandler);
   server.use(errrorHandler);
 
-  server.listen(config.APP_PORT, () => {
+  server.listen(process.env.APP_PORT, () => {
     console.log(
       "[init]: expense-tracker application running on",
-      config.APP_PORT
+      process.env.APP_PORT
     );
   });
 }
