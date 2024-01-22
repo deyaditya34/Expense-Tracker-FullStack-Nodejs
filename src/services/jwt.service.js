@@ -1,14 +1,15 @@
 const jwt = require("jsonwebtoken");
+const config = require("../config")
 
 function createToken(payload) {
-    const token = jwt.sign(payload, process.env.JWT_SECRET);
+    const token = jwt.sign(payload, config.JWT_SECRET);
 
     return token;
 }
 
 function decodeToken(token) {
     try {
-        return jwt.verify(token, process.env.JWT_SECRET);
+        return jwt.verify(token, config.JWT_SECRET);
     } catch (err) {
         console.log("Invalid Token", token);
         return null;

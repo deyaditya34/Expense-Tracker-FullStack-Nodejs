@@ -222,6 +222,9 @@ This application can be your reliable companion for managing and tracking your f
     All the transactions API are in the same architecture as the categories API and for a deep dive into the exact request components, error handling, architructure etc please refer to the code directly. 
     ```
 
+### **_
+
+
 ### **_Conclusion_** ###
 
 To sum up, the Finance Tracker Back-End project embodies the latest in web development, utilizing powerful technologies to create a system that is both scalable and secure. Whether you're a developer delving into architecture or a user seeking financial management solutions, this project offers a deep dive into the world of efficient back-end development. 

@@ -1,4 +1,4 @@
 node_modules
 src/*config.js
-src/*process.env
+src/*.env
 src/*user-details.txt

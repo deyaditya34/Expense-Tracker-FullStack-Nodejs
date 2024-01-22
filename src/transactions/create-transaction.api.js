@@ -1,6 +1,6 @@
 const httpError = require("http-errors");
 const eventBridge = require("../events/event.service");
-
+const config = require("../config");
 const userResolver = require("../middlewares/user-resolver");
 const { createTransaction } = require("./transactions.service");
 const paramValidator = require("../middlewares/params-validator");
@@ -20,7 +20,7 @@ async function controller(req, res) {
     createdBy: user,
   });
 
-  eventBridge.emit(process.env.EVENT_NAMES_TRANSACTIONS_CREATED, type, amount);
+  eventBridge.emit(config.EVENT_NAMES_TRANSACTIONS_CREATED, type, amount);
 
   res.json({
     success: result.acknowledged,

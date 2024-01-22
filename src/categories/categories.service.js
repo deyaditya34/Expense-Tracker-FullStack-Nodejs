@@ -1,15 +1,16 @@
+const config = require("../config")
 const database = require("../services/database.service");
 const { ObjectId } = require("mongodb");
 
 function createCategory(categoryDetails) {
   return database
-    .getCollection(process.env.COLLECTION_NAMES_CATEGORIES)
+    .getCollection(config.COLLECTION_NAMES_CATEGORIES)
     .insertOne(categoryDetails);
 }
 
 function getAllCategories(pageNo, pageSize) {
   return database
-    .getCollection(process.env.COLLECTION_NAMES_CATEGORIES)
+    .getCollection(config.COLLECTION_NAMES_CATEGORIES)
     .find({})
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
@@ -18,7 +19,7 @@ function getAllCategories(pageNo, pageSize) {
 
 function searchCategory(searchCategory, pageNo, pageSize) {
   return database
-    .getCollection(process.env.COLLECTION_NAMES_CATEGORIES)
+    .getCollection(config.COLLECTION_NAMES_CATEGORIES)
     .find(searchCategory)
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
@@ -27,19 +28,19 @@ function searchCategory(searchCategory, pageNo, pageSize) {
 
 function getCategoryByName(categoryName) {
   return database
-    .getCollection(process.env.COLLECTION_NAMES_CATEGORIES)
+    .getCollection(config.COLLECTION_NAMES_CATEGORIES)
     .findOne(categoryName);
 }
 
 function getCategory(id) {
   return database
-    .getCollection(process.env.COLLECTION_NAMES_CATEGORIES)
+    .getCollection(config.COLLECTION_NAMES_CATEGORIES)
     .findOne({ _id: new ObjectId(id) })
 }
 
 function deleteCategory(id) {
   return database
-    .getCollection(process.env.COLLECTION_NAMES_CATEGORIES)
+    .getCollection(config.COLLECTION_NAMES_CATEGORIES)
     .deleteOne({ _id: { $in: [new ObjectId(id)] } });
 }
 

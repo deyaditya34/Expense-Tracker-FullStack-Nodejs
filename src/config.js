@@ -1,32 +1,16 @@
-const MONGOURI = "mongodb://127.0.0.1:27017";
-const DB_NAME = "expense-tracker";
-
-const APP_PORT = 3090;
-
-const COLLECTION_NAMES = {
-    USERS: "expense-tracker-users",
-    TRANSACTIONS: "transactions",
-    CATEGORIES: "categories",
-    BUSINESS: "business"
-}
-
-const EVENT_NAMES = {
-    TRANSACTION_CREATED: "transaction-created",
-}
-
-const JWT_SECRET = "Bokakhat@123";
-
-const AUTH_TOKEN_HEADER_FIELD = "token";
-
-const PASSWORD_SALT = "Bokakhat@123";
+require("dotenv").config();
 
 module.exports = {
-    MONGOURI,
-    DB_NAME,
-    APP_PORT,
-    COLLECTION_NAMES,
-    EVENT_NAMES,
-    JWT_SECRET,
-    AUTH_TOKEN_HEADER_FIELD,
-    PASSWORD_SALT
-}
+  MONGODBURI: process.env.MONGODBURI,
+  DB_NAME: process.env.DB_NAME,
+  APP_PORT: process.env.APP_PORT,
+  COLLECTION_NAMES_USERS: process.env.COLLECTION_NAMES_USERS,
+  COLLECTION_NAMES_TRANSACTIONS: process.env.COLLECTION_NAMES_TRANSACTIONS,
+  COLLECTION_NAMES_CATEGORIES: process.env.COLLECTION_NAMES_CATEGORIES,
+  COLLECTION_NAMES_BUSINESS : process.env.COLLECTION_NAMES_BUSINESS,
+  EVENT_NAMES_TRANSACTIONS_CREATED:
+    process.env.EVENT_NAMES_TRANSACTIONS_CREATED,
+  JWT_SECRET: process.env.JWT_SECRET,
+  AUTH_TOKEN_HEADER_FIELD: process.env.AUTH_TOKEN_HEADER_FIELD,
+  PASSWORD_SALT: process.env.PASSWORD_SALT,
+};
