@@ -235,4 +235,4 @@ This application can be your reliable companion for managing and tracking your f
 
 To sum up, the Finance Tracker Back-End project embodies the latest in web development, utilizing powerful technologies to create a system that is both scalable and secure. Whether you're a developer delving into architecture or a user seeking financial management solutions, this project offers a deep dive into the world of efficient back-end development. 
 
-  * If interested, Contact me in [**Linkedin**](https://www.linkedin.com/in/aditya-kumar-dey-699a1a54/) 
+  * If interested, connect with me in [**Linkedin**](https://www.linkedin.com/in/aditya-kumar-dey-699a1a54/) 
