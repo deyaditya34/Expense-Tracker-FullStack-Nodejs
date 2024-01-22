@@ -8,6 +8,7 @@ This application can be your reliable companion for managing and tracking your f
 * **Express.js :** All the API's are built using express.js.
 * **MongoDB :** As a NoSQL database, it is very efficient for storing and managing data.  
 * **JWT Authentication :** JSON Web Token (JWT) authentication system is used to ensure secure data sessions.
+* **DOTNEV :** All the configuration variables, passwords etc are isolated using dotenv library. 
 * **Crypto :** Crypto is being used for encrypting the passwords for storing it to the database.
 * **RESTAPI :** RESTAPI architecture is followed throughout the application.
 
@@ -222,9 +223,14 @@ This application can be your reliable companion for managing and tracking your f
     All the transactions API are in the same architecture as the categories API and for a deep dive into the exact request components, error handling, architructure etc please refer to the code directly. 
     ```
 
-### **_
+### **_How to run the application_** ###
 
+  #### **Steps to be done** ####
 
+  1. Copy the **".env.example"** file and rename it as **".env"**. Modify the values as needed per requirements.
+  2. Run the code **npm run dev** from root directory.
+   
+    
 ### **_Conclusion_** ###
 
 To sum up, the Finance Tracker Back-End project embodies the latest in web development, utilizing powerful technologies to create a system that is both scalable and secure. Whether you're a developer delving into architecture or a user seeking financial management solutions, this project offers a deep dive into the world of efficient back-end development. 
