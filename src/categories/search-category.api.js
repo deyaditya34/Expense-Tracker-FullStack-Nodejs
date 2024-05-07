@@ -9,6 +9,7 @@ async function controller(req, res) {
   const { name, color, type, pageNo, pageSize } = req.query;
 
   let searchCategoryParams = {};
+  
   if (name) {
     searchCategoryParams.name = name;
   }

@@ -6,11 +6,10 @@ const userResolver = require("../middlewares/user-resolver");
 const { createCategory, getCategoryByName } = require("./categories.service");
 const checkAdminRights = require("../middlewares/check-admin-rights");
 
-
 async function controller(req, res) {
-  let { color, name, type } = req.body;
+  let { name, type } = req.body;
 
-  const result = await createCategory({ color, name, type });
+  const result = await createCategory({ name, type });
 
   res.json({
     success: result.acknowledged,
@@ -23,17 +22,17 @@ async function controller(req, res) {
 }
 
 async function validateParams(req, res, next) {
-  const errorTypedFields = ["color", "name", "type"].filter(
+  const errorTypedFields = ["name", "type"].filter(
     (field) => typeof Reflect.get(req.body, field) !== "string"
   );
-  
+
   if (errorTypedFields.length > 0) {
     throw new httpError.BadRequest(
       `Field '${errorTypedFields.join(", ")}' should be of string type`
     );
   }
 
-  let {type, name } = req.body;
+  let { type, name } = req.body;
 
   if (type !== "DEBIT" && type !== "CREDIT") {
     throw new httpError.BadRequest(
@@ -41,17 +40,19 @@ async function validateParams(req, res, next) {
     );
   }
   
-  const getCategory = await getCategoryByName({name});
-  
+  const regexName = new RegExp(`\\b${name}\\b`, "i");
+
+  const getCategory = await getCategoryByName({ name: { $regex: regexName } });
+
   if (getCategory) {
-    throw new httpError.BadRequest(`Category '${name}' already exists.`)
-  } 
-  
+    throw new httpError.BadRequest(`Category '${name}' already exists.`);
+  }
+
   next();
 }
 
 const missingParamsValidator = paramsValidator.createParamValidator(
-  ["name", "color", "type"],
+  ["name", "type"],
   paramsValidator.PARAM_KEY.BODY
 );
 
@@ -60,5 +61,5 @@ module.exports = buildApiHandler([
   checkAdminRights,
   missingParamsValidator,
   validateParams,
-  controller
+  controller,
 ]);
