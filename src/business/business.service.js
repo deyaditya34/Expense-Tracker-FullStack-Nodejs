@@ -37,18 +37,60 @@ async function getBusinessBalance(dateTo, dateFrom) {
       {
         $group: {
           _id: null,
-          totalCashInflow: {$sum: "$cashInflow"},
-          totalCashOutflow: {$sum: "cashOutflow"},
-          totalBankInflow: {$sum: "bankInflow"},
-          totalBankOutflow: {$sum: "$bankOutflow"}
-        }
-      }, {
+          totalCashInflow: { $sum: "$cashInflow" },
+          totalCashOutflow: { $sum: "cashOutflow" },
+          totalBankInflow: { $sum: "bankInflow" },
+          totalBankOutflow: { $sum: "$bankOutflow" },
+        },
+      },
+      {
         $project: {
           _id: 0,
-          totalCashBalance: {$subtract: ["$totalCashInflow", "$totalCashOutflow"]},
-          totalBankBalance: {$subtract: ["$totalBankInflow", "$totalBankOutflow"]}
-        }
-      }
+          totalCashBalance: {
+            $subtract: ["$totalCashInflow", "$totalCashOutflow"],
+          },
+          totalBankBalance: {
+            $subtract: ["$totalBankInflow", "$totalBankOutflow"],
+          },
+        },
+      },
+    ])
+    .toArray();
+}
+
+async function getBusinessProfit(dateTo, dateFrom) {
+  return database
+    .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
+    .aggregate([
+      {
+        $match: {
+          date: {
+            $gte: new Date(dateFrom),
+            $lte: new Date(dateTo),
+          },
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalCredit: {
+            $sum: {
+              $cond: [{ $eq: ["$type", "credit"] }, "$amount", 0],
+            },
+          },
+          totalDebit: {
+            $sum: {
+              $cond: [{ $eq: ["$type", "debit"] }, "$amount", 0],
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          profit: { $subtract: ["$totalDebit", "$totalCredit"] },
+        },
+      },
     ]).toArray();
 }
 
@@ -57,4 +99,4 @@ eventBridge.addListener(
   registerTransaction
 );
 
-module.exports = { getBusiness, registerTransaction, getBusinessBalance };
+module.exports = { getBusiness, registerTransaction, getBusinessBalance, getBusinessProfit };
