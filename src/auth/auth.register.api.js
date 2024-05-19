@@ -16,8 +16,6 @@ async function controller(req, res) {
   });
 }
 
-
-
 const missingParamsValidator = paramsValidator.createParamValidator(
   ["username", "password"],
   paramsValidator.PARAM_KEY.BODY

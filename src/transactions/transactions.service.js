@@ -3,7 +3,6 @@ const config = require("../config");
 const database = require("../services/database.service");
 
 function createTransaction(transactionDetails) {
-  console.log("transactionDetails", transactionDetails);
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .insertOne(transactionDetails);
@@ -19,12 +18,16 @@ function getAllTransactions(pageNo, pageSize) {
 }
 
 function getTransaction(transactionId) {
+  if (!ObjectId.isValid(transactionId)) {
+    return false;
+  }
+
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .findOne({ _id: new ObjectId(transactionId) });
 }
 
-function searchTransaction(transactionDetails, username, pageNo, pageSize) {
+function searchTransaction(transactionDetails, pageNo, pageSize, username) {
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .find(transactionDetails, { username: { $eq: username } })
@@ -33,9 +36,20 @@ function searchTransaction(transactionDetails, username, pageNo, pageSize) {
     .toArray();
 }
 
+function deleteTransaction(id) {
+  if (!ObjectId.isValid(id)) {
+    return false;
+  }
+
+  return database
+    .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
+    .deleteOne({ _id: new ObjectId(id) });
+}
+
 module.exports = {
   createTransaction,
   getAllTransactions,
   getTransaction,
   searchTransaction,
+  deleteTransaction
 };

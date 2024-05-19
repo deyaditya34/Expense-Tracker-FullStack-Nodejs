@@ -1,4 +1,4 @@
-const config = require("../config")
+const config = require("../config");
 const database = require("../services/database.service");
 const { ObjectId } = require("mongodb");
 
@@ -33,12 +33,20 @@ function getCategoryByName(categoryName) {
 }
 
 function getCategory(id) {
+  if (!ObjectId.isValid(id)) {
+    return false;
+  }
+  
   return database
     .getCollection(config.COLLECTION_NAMES_CATEGORIES)
-    .findOne({ _id: new ObjectId(id) })
+    .findOne({ _id: new ObjectId(id) });
 }
 
 function deleteCategory(id) {
+  if (!ObjectId.isValid(id)) {
+    return false;
+  }
+
   return database
     .getCollection(config.COLLECTION_NAMES_CATEGORIES)
     .deleteOne({ _id: { $in: [new ObjectId(id)] } });
@@ -50,5 +58,5 @@ module.exports = {
   searchCategory,
   getCategory,
   deleteCategory,
-  getCategoryByName, 
+  getCategoryByName,
 };

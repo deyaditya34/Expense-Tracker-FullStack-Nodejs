@@ -34,9 +34,9 @@ async function validateParams(req, res, next) {
 
   let { type, name } = req.body;
 
-  if (type !== "DEBIT" && type !== "CREDIT") {
+  if (type !== "debit" && type !== "credit") {
     throw new httpError.BadRequest(
-      `Field 'type' should be either 'DEBIT' or 'CREDIT'`
+      `Field 'type' should be either 'debit' or 'credit'`
     );
   }
   

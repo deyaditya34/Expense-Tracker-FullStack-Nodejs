@@ -5,7 +5,9 @@ const { searchTransaction } = require("./transactions.service");
 const buildApiHandler = require("../api-utils/build-api-handler");
 
 async function controller(req, res) {
-  const { type, amount, categoryName, pageNo, pageSize } = req.query;
+  const { user } = req.body;
+  const { type, amount, dateTo, dateFrom, categoryName, pageNo, pageSize } =
+    req.query;
 
   let searchTransactionParams = {};
 
@@ -21,10 +23,24 @@ async function controller(req, res) {
     searchTransactionParams["category.name"] = categoryName;
   }
 
+  if (dateTo && !dateFrom) {
+    searchTransactionParams["date"] = { $lte: new Date(dateTo) };
+  }
+  if (!dateTo && dateFrom) {
+    searchTransactionParams["date"] = { $gte: new Date(dateFrom) };
+  }
+  if (dateTo && dateFrom) {
+    searchTransactionParams["date"] = {
+      $gte: new Date(dateFrom),
+      $lte: new Date(dateTo),
+    };
+  }
+  
   const result = await searchTransaction(
     searchTransactionParams,
     pageNo,
-    pageSize
+    pageSize,
+    user.username
   );
 
   res.json({
@@ -34,7 +50,7 @@ async function controller(req, res) {
 }
 
 function validateParams(req, res, next) {
-  let { type, amount, categoryName } = req.query;
+  let { type, amount, dateFrom, dateTo, categoryName } = req.query;
 
   if (amount) {
     let amountParseInt = parseInt(amount);
@@ -48,9 +64,9 @@ function validateParams(req, res, next) {
   }
 
   if (type) {
-    if (type !== "DEBIT" && type !== "CREDIT") {
+    if (type !== "debit" && type !== "credit") {
       throw new httpError.BadRequest(
-        "Field 'type' should be either 'DEBIT' or 'CREDIT'"
+        "Field 'type' should be either 'debit' or 'credit'"
       );
     }
   }
@@ -59,7 +75,33 @@ function validateParams(req, res, next) {
     if (typeof categoryName !== "string") {
       throw new httpError.BadRequest(
         `Field categoryName -'${categoryName}' should be 'string' type.`
-      )
+      );
+    }
+  }
+
+  if (dateFrom) {
+    if (typeof dateFrom !== "string") {
+      throw new httpError.BadRequest(
+        "Field 'dateFrom' should be 'string' type"
+      );
+    }
+
+    if (!new Date(dateFrom).valueOf() > 0) {
+      throw new httpError.BadRequest(
+        `invalid 'dateFrom' - '${dateFrom}. 'Date' should be either in format 'year-month-day' or 'month-day-year'`
+      );
+    }
+  }
+
+  if (dateTo) {
+    if (typeof dateTo !== "string") {
+      throw new httpError.BadRequest("Field 'dateTo' should be 'string' type");
+    }
+
+    if (!new Date(dateTo).valueOf() > 0) {
+      throw new httpError.BadRequest(
+        `invalid 'dateFrom' - '${dateTo}. 'Date' should be either in format 'year-month-day' or 'month-day-year'`
+      );
     }
   }
 

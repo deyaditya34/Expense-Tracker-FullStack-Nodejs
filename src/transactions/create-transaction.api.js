@@ -6,27 +6,26 @@ const { createTransaction } = require("./transactions.service");
 const paramValidator = require("../middlewares/params-validator");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const { getCategory } = require("../categories/categories.service");
-
+const { ObjectId } = require("mongodb");
 
 async function controller(req, res) {
-  const { type, amount, category, date, user } = req.body;
+  const { user } = req.body;
+
+  const transactionDetails = await transactionBuilder(req.body);
 
   const result = await createTransaction({
-    type,
-    amount,
-    category,
-    date,
+    ...transactionDetails,
     createdAt: new Date(),
-    createdBy: user,
+    createdBy: user.username,
   });
 
-  eventBridge.emit(config.EVENT_NAMES_TRANSACTIONS_CREATED, type, amount);
+  eventBridge.emit(config.EVENT_NAMES_TRANSACTIONS_CREATED, transactionDetails.type, transactionDetails.amount);
 
   res.json({
     success: result.acknowledged,
     data: {
       transaction: {
-        _id: result.insertedId
+        _id: result.insertedId,
       },
     },
   });
@@ -35,10 +34,45 @@ async function controller(req, res) {
 async function validateParams(req, res, next) {
   const { type, amount, date, categoryId } = req.body;
 
+  const transactionOptionalNumberParams = [
+    "cashInflow",
+    "cashOutflow",
+    "bankInflow",
+    "bankOutflow",
+  ];
+
+  const transactionOptionalStringParams = ["status", "notes"];
+
+  transactionOptionalNumberParams.forEach((param) => {
+    if (Reflect.has(req.body, param)) {
+      if (typeof req.body[param] !== "number") {
+        throw new httpError.BadRequest(
+          `Field '${param}' should be 'number' type only`
+        );
+      }
+    }
+  });
+
+  transactionOptionalStringParams.forEach((param) => {
+    if (Reflect.has(req.body, param)) {
+      if (typeof req.body[param] !== "string") {
+        throw new httpError.BadRequest(
+          `Field '${param}' should be 'string' type only`
+        );
+      } else if (param === "status") {
+        if (req.body[param] !== "complete" || req.body[param] !== "pending") {
+          throw new httpError.BadRequest(
+            `Field '${param}' should be either "pending" or "complete"`
+          );
+        }
+      }
+    }
+  });
+
   if (typeof type === "string") {
-    if (type !== "DEBIT" && type !== "CREDIT") {
+    if (type !== "debit" && type !== "credit") {
       throw new httpError.BadRequest(
-        "Field 'type' shoould be either 'DEBIT' or 'CREDIT'"
+        "Field 'type' shoould be either 'debit' or 'credit'"
       );
     }
   } else {
@@ -54,15 +88,9 @@ async function validateParams(req, res, next) {
   const transactionCategoryValidator = await getCategory(categoryId);
   if (transactionCategoryValidator.length === 0) {
     throw new httpError.BadRequest("Field 'categoryId' is invalid");
-  } else {
-    if (transactionCategoryValidator[0].type !== type) {
-      throw new httpError.BadRequest(
-        "'Category Type' retrieved from the 'categoryId' does not match with the requested 'type'"
-      );
-    }
-    console.log("transactionCategoryValidator", transactionCategoryValidator);
-    Reflect.set(req.body, "category", transactionCategoryValidator);
   }
+
+  Reflect.set(req.body, "category", transactionCategoryValidator.name);
 
   if (date) {
     if (typeof date !== "string") {
@@ -77,6 +105,45 @@ async function validateParams(req, res, next) {
       );
     }
   }
+}
+
+async function transactionBuilder(transactionDetails = {}) {
+  const result = {};
+
+  const transactionParams = [
+    "type",
+    "amount",
+    "date",
+    "categoryId",
+    "cashInflow",
+    "cashOutflow",
+    "bankInflow",
+    "bankOutflow",
+    "status",
+    "notes",
+  ];
+
+  for (const param of transactionParams) {
+    if (Reflect.has(transactionDetails, param)) {
+      if (param === "type" || param === "status" || param === "notes") {
+        result[param] = transactionDetails[param]
+      } else if (param === "date") {
+        result[param] =  new Date(transactionDetails[param]);
+      } else if (param === "categoryId") {
+        result[param] =  new ObjectId(transactionDetails[param]);
+      } else if (
+        param === "amount" ||
+        param === "cashInflow" ||
+        param === "cashOutflow" ||
+        param === "bankInflow" ||
+        param === "bankOutflow"
+      ) {
+        result[param] = Number(transactionDetails[param]);
+      }
+    }
+  }
+  console.log("result -", result);
+  return result;
 }
 
 const missingParamsValidator = paramValidator.createParamValidator(
