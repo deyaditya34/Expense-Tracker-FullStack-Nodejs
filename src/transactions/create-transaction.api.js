@@ -1,4 +1,5 @@
 const httpError = require("http-errors");
+
 const eventBridge = require("../events/event.service");
 const config = require("../config");
 const userResolver = require("../middlewares/user-resolver");
@@ -32,7 +33,7 @@ async function controller(req, res) {
 }
 
 async function validateParams(req, res, next) {
-  const { type, amount, date, categoryId } = req.body;
+  const { amount, date, categoryId } = req.body;
 
   const transactionOptionalNumberParams = [
     "cashInflow",
@@ -68,16 +69,6 @@ async function validateParams(req, res, next) {
       }
     }
   });
-
-  if (typeof type === "string") {
-    if (type !== "debit" && type !== "credit") {
-      throw new httpError.BadRequest(
-        "Field 'type' shoould be either 'debit' or 'credit'"
-      );
-    }
-  } else {
-    throw new httpError.BadRequest("Field 'type' should be 'string' type only");
-  }
 
   if (typeof amount !== "number") {
     throw new httpError.BadRequest(
@@ -130,7 +121,9 @@ async function transactionBuilder(transactionDetails = {}) {
       } else if (param === "date") {
         result[param] =  new Date(transactionDetails[param]);
       } else if (param === "categoryId") {
-        result[param] =  new ObjectId(transactionDetails[param]);
+        const categoryDetails = await getCategory(transactionDetails[param]);
+        result["type"] = categoryDetails.type;
+        result["categoryId"] = new ObjectId(transactionDetails[param])
       } else if (
         param === "amount" ||
         param === "cashInflow" ||
@@ -142,12 +135,11 @@ async function transactionBuilder(transactionDetails = {}) {
       }
     }
   }
-  console.log("result -", result);
   return result;
 }
 
 const missingParamsValidator = paramValidator.createParamValidator(
-  ["type", "amount", "categoryId", "date"],
+  ["amount", "categoryId", "date"],
   paramValidator.PARAM_KEY.BODY
 );
 
