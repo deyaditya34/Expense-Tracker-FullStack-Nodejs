@@ -4,15 +4,18 @@ const paramsValidator = require("../middlewares/params-validator");
 
 async function controller(req, res) {
   const { username, password } = req.body;
-
+  console.log("username -", username);
   const token = await authService.login(username, password);
+
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+  });
 
   res.json({
     success: true,
-    data: {
-      username,
-      token,
-    },
+    data: "login successful",
   });
 }
 
@@ -21,7 +24,4 @@ const missingParamsValidator = paramsValidator.createParamValidator(
   paramsValidator.PARAM_KEY.BODY
 );
 
-module.exports = buildApiHandler([
-  missingParamsValidator,
-  controller
-]);
+module.exports = buildApiHandler([missingParamsValidator, controller]);

@@ -6,6 +6,7 @@ async function controller(req, res) {
   let result = await getBusiness();
 
   res.json({
+    success: true,
     message: `Details about the business`,
     data: result, 
   })

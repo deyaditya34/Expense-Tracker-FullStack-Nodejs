@@ -9,6 +9,8 @@ async function controller(req, res) {
   const { type, amount, dateTo, dateFrom, categoryName, pageNo, pageSize } =
     req.query;
 
+  console.log("req.query -", req.query);
+
   let searchTransactionParams = {};
 
   if (type) {

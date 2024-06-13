@@ -40,6 +40,7 @@ async function validateParams(req, res, next) {
     "cashOutflow",
     "bankInflow",
     "bankOutflow",
+    "paymentDue"
   ];
 
   const transactionOptionalStringParams = ["status", "notes"];
@@ -61,7 +62,7 @@ async function validateParams(req, res, next) {
           `Field '${param}' should be 'string' type only`
         );
       } else if (param === "status") {
-        if (req.body[param] !== "complete" || req.body[param] !== "pending") {
+        if (req.body[param] !== "complete" && req.body[param] !== "pending") {
           throw new httpError.BadRequest(
             `Field '${param}' should be either "pending" or "complete"`
           );
@@ -110,6 +111,7 @@ async function transactionBuilder(transactionDetails = {}) {
     "cashOutflow",
     "bankInflow",
     "bankOutflow",
+    "paymentDue",
     "status",
     "notes",
   ];
@@ -129,7 +131,8 @@ async function transactionBuilder(transactionDetails = {}) {
         param === "cashInflow" ||
         param === "cashOutflow" ||
         param === "bankInflow" ||
-        param === "bankOutflow"
+        param === "bankOutflow" ||
+        param === "paymentDue"
       ) {
         result[param] = Number(transactionDetails[param]);
       }

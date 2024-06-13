@@ -6,11 +6,19 @@ const paramsValidator = require("../middlewares/params-validator");
 const businessService = require("./business.service");
 
 async function controller(req, res) {
-    const {dateTo, dateFrom} = req.query;
+  const { dateTo, dateFrom } = req.query;
+  
+  console.log("req.query -", req.query);
+  
+  const businessBalance = await businessService.getBusinessBalance(
+    dateTo,
+    dateFrom
+  );
 
-    const businessBalance = await businessService.getBusinessBalance(dateTo, dateFrom);
-
-    res.json(businessBalance)
+  res.json({
+    success: true,
+    data: businessBalance,
+  });
 }
 
 const missingParamsValidator = paramsValidator.createParamValidator(

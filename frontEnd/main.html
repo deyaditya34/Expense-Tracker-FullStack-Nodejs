@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+    <title>Home</title>
+    <link rel="icon" type="image/x-icon" href="./c02aae5931cc43c4b8af9ec441e7b29f.png">
+</head>
+<style>
+    * {
+        margin: 0rem;
+        padding: 0px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        background-color: aliceblue;
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        width: 99.5%;
+    }
+
+    .main-heading {
+        display: flex;
+        border: 5px solid rgb(71, 100, 147);
+        background-color: rgb(41, 118, 177);
+    }
+
+    .heading {
+        width: 92%;
+        text-align: center;
+        /* padding-left: 400px; */
+        box-sizing: border-box;
+        background-color: rgb(41, 118, 177)
+    }
+
+    .nav {
+        display: flex;
+        width: 8%;
+        box-sizing: border-box;
+        justify-content: flex-end;
+        background-color: rgb(41, 118, 177);
+    }
+
+    #logout {
+        margin: 0.6rem;
+        display: flex;
+    }
+
+    #logoutButton {
+        font-size: 1.5rem;
+        font-weight: bolder;
+        padding: 0.5rem 0.6rem;
+        border-radius: 0.15rem;
+        background-color: rgb(10, 132, 146);
+        color: white;
+        border: 3px solid white;
+    }
+
+    .body-container {
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
+        box-sizing: border-box;
+        width: 100%;
+        justify-content: center;
+        margin: 0.15rem 0 0.15rem .15rem;
+
+    }
+
+    .sub-cont {
+        height: 80vh;
+        border: 1px solid black;
+        box-sizing: border-box;
+        margin: 0 0.5rem 0 0;
+
+    }
+
+    .sub-cont:last-child {
+        margin-right: 0;
+    }
+
+    .transaction-view {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        box-sizing: border-box;
+        padding: 0;
+        gap: 0;
+    }
+
+    .tr-view-child {
+        border: 1px solid rgb(0, 0, 0);
+    }
+
+    .pending-transactions {
+        margin: 0.15rem 0 1rem 0;
+        text-align: center;
+    }
+
+    .form-field {
+        display: flex;
+        margin-top: 1rem;
+        padding: 0 1rem;
+    }
+
+    .form-field>input,
+    .form-field>select,
+    .form-field>textarea {
+        width: 70%;
+    }
+
+    .form-field>label {
+        width: 30%;
+    }
+
+    .form-field-submit {
+        text-align: center;
+        margin: 1rem 0 0.5rem 0;
+    }
+
+    .submit-button {
+        padding: 0.15rem 0.5rem;
+    }
+
+    .record-tr-form {
+        border: 1px solid black;
+        background-color: aqua;
+    }
+
+    .record-transaction {
+        border: none;
+    }
+
+    .business-view {
+        border: none;
+    }
+
+    .business-balance {
+        border: 1px solid black;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .form-field {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .business-balance-date-from {
+        width: 50%;
+        text-align: center;
+    }
+
+    .business-balance-date-from>label {
+        width: 30%;
+    }
+
+    .business-balance-date-from>input {
+        width: 70%;
+    }
+
+    .business-balance-date-to {
+        width: 50%;
+        text-align: center;
+    }
+
+    .business-balance-date-to>label {
+        width: 30%;
+    }
+
+    .business-balance-date-to>input {
+        width: 70%;
+    }
+
+    .balance {
+        text-align: center;
+        width: 50%;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .balance-label,
+    .balance-value {
+        width: 100%;
+        margin: 0 0 1rem 0;
+    }
+
+    .balance-value {
+        background-color: rgb(184, 180, 180);
+        border: 1px solid black;
+        text-align: center;
+        vertical-align: middle;
+        height: 1.5rem;
+        width: 4rem;
+        margin: auto;
+    }
+
+    .business-profit {
+        border: 1px solid rgb(0, 0, 0);
+        margin-bottom: 1rem;
+    }
+
+    .business-profit-profit-cont {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+
+    .profit {
+        justify-content: center;
+        margin: auto;
+    }
+
+    .pending-transactions {
+        border: 1px solid black;
+        margin-bottom: 1rem;
+    }
+
+    .pending-tr-cont {
+        margin-bottom: 1rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .pending-tr-cont-1 {
+        display: flex;
+        width: 100%;
+        margin: 0 0 1.5rem 1rem;
+    }
+
+    .pending-tr-cont-2 {
+        margin-bottom: 1rem;
+    }
+
+    .pending-cont-date-value,
+    .pending-cont-payment-due-value {
+        font-size: 10px;
+        font-weight: bolder;
+    }
+
+    .pending-cont-payment-due-value,
+    .pending-cont-date-value {
+        background-color: rgb(184, 180, 180);
+        border: 1px solid black;
+        height: 1.5rem;
+        width: 4rem;
+        margin: auto;
+    }
+
+    .pending-tr-cont-2 {
+        display: flex;
+        width: 100%;
+    }
+
+    .pending-cont-notes-value {
+        background-color: rgb(184, 180, 180);
+        border: 1px solid black;
+        height: 3rem;
+        width: 15rem;
+        margin: auto;
+    }
+
+    .pending-pagination {
+        margin: 2rem 0 1rem 0;
+    }
+
+    .pending-tr-cont {
+        overflow-y: scroll;
+        height: 30vh;
+    }
+
+    .income-heading,
+    .expense-heading {
+        display: flex;
+        margin-bottom: 1rem;
+        justify-content: space-between;
+    }
+
+    .income-heading>label,
+    .income-heading>input,
+    .income-heading>h2 {
+        margin-right: 1rem;
+    }
+
+    .expense-heading>label,
+    .expense-heading>input,
+    .expense-heading>h2 {
+        margin-right: 1rem;
+    }
+
+    .income-tr-cont,
+    .expense-tr-cont {
+        overflow-y: scroll;
+        height: 70vh;
+    }
+
+    .income-tr-cont1,
+    .income-tr-cont2,
+    .expense-tr-cont1,
+    .expense-tr-cont2 {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.3rem;
+    }
+
+
+    .income-tr-cont3,
+    .expense-tr-cont3 {
+        display: flex;
+        max-width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .cont3-1 {
+        display: flex;
+        width: 50%;
+        justify-content: space-around;
+    }
+
+    .cont3-2 {
+        display: flex;
+        width: 50%;
+        justify-content: center;
+    }
+
+    .inc-category-val,
+    .inc-amount-val,
+    .inc-cash-inflow-val,
+    .inc-cash-outflow-val,
+    .inc-bank-inflow-val,
+    .inc-bank-outflow-val,
+    .inc-status-val,
+    .exp-category-val,
+    .exp-amount-val,
+    .exp-cash-inflow-val,
+    .exp-cash-outflow-val,
+    .exp-bank-inflow-val,
+    .exp-bank-outflow-val,
+    .exp-status-val {
+        background-color: rgb(184, 180, 180);
+        border: 1px solid black;
+        height: 1.5rem;
+        width: 6rem;
+        margin: auto;
+        text-align: center;
+    }
+
+    .pagination-income-tr,
+    .pagination-expense-tr {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<body>
+    <div class="main-container">
+        <div class="main-heading">
+            <div class="heading">
+                <h1 style="font-family:copperplate; background-color: rgb(41, 118, 177); color: aliceblue;">Welcome to
+                    ONLINE HUB crm portal</h1>
+            </div>
+            <div class="nav">
+                <div id="logout">
+                    <button type="button" id="logoutButton" onclick="logoutUser(event)">Log Out</button>
+                </div>
+            </div>
+        </div>
+        <div class="body-container">
+            <section class="sub-cont record-transaction">
+                <div class="record-tr-form">
+                    <h2 class="form-heading" style="text-align: center; margin: top 0.15rem;">Record a transaction</h2>
+                    <form onsubmit="recordTransaction(event)">
+                        <div class="form-field">
+                            <label for="type">Type</label>
+                            <select id="type" name="type" required>
+                                <option value="income" selected>Income</option>
+                                <option value="expense">Expense</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="category">Category</label>
+                            <select id="category" name="category" required></select>
+                        </div>
+                        <div class="form-field">
+                            <label for="cashInflow">Cash Inflow</label>
+                            <input type="text" name="cashInflow" id="cashInflow" pattern="\d*">
+                        </div>
+                        <div class="form-field">
+                            <label for="cashOutflow">Cash Outflow</label>
+                            <input type="text" name="cashOutflow" id="cashOutflow" pattern="\d*">
+                        </div>
+                        <div class="form-field">
+                            <label for="bankInflow">Bank Inflow</label>
+                            <input type="text" name="bankInflow" id="bankInflow" pattern="\d*">
+                        </div>
+                        <div class="form-field">
+                            <label for="bankOutflow">Bank Outflow</label>
+                            <input type="text" name="bankOutflow" id="bankOutflow" pattern="\d*">
+                        </div>
+                        <div class="form-field">
+                            <label for="amount">Amount</label>
+                            <input type="text" name="amount" id="amount" required pattern="\d*">
+                        </div>
+                        <div class="form-field">
+                            <label for="status">status</label>
+                            <select id="status" name="status" required>
+                                <option value="pending">Pending</option>
+                                <option value="complete" selected>Complete</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="notes">Notes</label>
+                            <textarea type="text" id="notes" name="notes"></textarea>
+                        </div>
+                        <div class="form-field">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" required>
+                        </div>
+                        <div class="form-field">
+                            <label for="paymentDue">Payment Due</label>
+                            <input type="text" id="paymentDue" name="paymentDue" pattern="\d*">
+                        </div>
+                        <div class="form-field-submit">
+                            <input type="submit" id="record-tr-form-submit" class="submit-button" value="SUBMIT">
+                        </div>
+                    </form>
+                </div>
+
+            </section>
+
+            <section class="sub-cont transaction-view">
+                <div class="income tr-view-child">
+                    <div class="income-heading">
+                        <h4 style="margin-right: .5rem;">Income Transactions</h4>
+                        <form onsubmit="getIncomeTransactions(event)">
+                            <label for="dateFrom-inc-tr">From</label>
+                            <input type="date" id="dateFrom-inc-tr" name="dateFrom-inc-tr" required>
+                            <label for="dateTo-inc-tr">To</label>
+                            <input type="date" id="dateTo-inc-tr" name="dateTo-inc-tr" required>
+                            <input type="submit" id="income-tr-submit" value="SUBMIT">
+                        </form>
+                    </div>
+                    <div class="income-tr-cont hidden">
+                        <div class="income-tr-cont1">
+                            <div class="category-label">Category</div>
+                            <div class="inc-category-val"></div>
+                            <div class="bank-outflow-label">Bank Outflow</div>
+                            <div class="inc-bank-outflow-val"></div>
+                            <div class="cash-inflow-label">Cash Inflow</div>
+                            <div class="inc-cash-inflow-val"></div>
+                        </div>
+                        <div class="income-tr-cont2">
+                            <div class="cash-outflow-label">Cash Outflow</div>
+                            <div class="inc-cash-outflow-val"></div>
+                            <div class="bank-inflow-label">Bank Inflow</div>
+                            <div class="inc-bank-inflow-val"></div>
+                            <div class="amount-label">Amount</div>
+                            <div class="inc-amount-val"></div>
+                        </div>
+                        <div class="income-tr-cont3">
+                            <div class="cont3-1">
+                                <div class="status-label">Status</div>
+                                <div class="inc-status-val"></div>
+                            </div>
+                            <div class="cont3-2">
+                                <div class="delete-cont">
+                                    <button type="button" id="inc-delete-button">DELETE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination-income-tr">
+                        <div class="pagination-inc-tr" id="pagination-inc-tr" data-page="1">
+                            <button type="button" id="prev-inc-tr" name="prev"
+                                style="margin-right: .5rem;">PREV</button>
+                            <button type="button" id="next-inc-tr" name="next" style="margin-left: .5rem;">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="expense tr-view-child">
+                    <div class="expense-heading">
+                        <h4 style="margin-right: .5rem;">Expense Transactions</h4>
+                        <form onsubmit="getExpenseTransactions(event)">
+                            <label for="dateFrom">From</label>
+                            <input type="date" id="dateFrom-exp-tr" name="dateFrom" required>
+                            <label for="dateTo">To</label>
+                            <input type="date" id="dateTo-exp-tr" name="dateTo" required>
+                            <input type="submit" id="expense-tr-submit" value="SUBMIT">
+                        </form>
+                    </div>
+                    <div class="expense-tr-cont hidden">
+                        <div class="expense-tr-cont1">
+                            <div class="category-label">Category</div>
+                            <div class="exp-category-val"></div>
+                            <div class="bank-outflow-label">Bank Outflow</div>
+                            <div class="exp-bank-outflow-val"></div>
+                            <div class="cash-inflow-label">Cash Inflow</div>
+                            <div class="exp-cash-inflow-val"></div>
+                        </div>
+                        <div class="expense-tr-cont2">
+                            <div class="cash-outflow-label">Cash Outflow</div>
+                            <div class="exp-cash-outflow-val"></div>
+                            <div class="bank-inflow-label">Bank Inflow</div>
+                            <div class="exp-bank-inflow-val"></div>
+                            <div class="amount-label">Amount</div>
+                            <div class="exp-amount-val"></div>
+                        </div>
+                        <div class="expense-tr-cont3">
+                            <div class="cont3-1">
+                                <div class="status-label">Status</div>
+                                <div class="exp-status-val"></div>
+                            </div>
+                            <div class="cont3-2">
+                                <div class="delete-cont">
+                                    <button type="button" id="exp-delete-button">DELETE</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination-expense-tr">
+                        <div class="pagination-exp-tr" id="pagination-exp-tr" data-page="1">
+                            <button type="button" id="prev-exp-tr" name="prev-exp-tr"
+                                style="margin-right: .5rem;">PREV</button>
+                            <button type="button" id="next-exp-tr" name="next-exp-tr"
+                                style="margin-left: .5rem;">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sub-cont business-view">
+
+                <div class="business-balance">
+                    <h2 class="form-heading" style="margin-bottom: 1rem;">Business Balance</h2>
+                    <form onsubmit="getBusinessBalance(event)">
+                        <div class="form-field">
+
+                            <div class="business-balance-date-from">
+                                <label for="dateFrom">From</label>
+                                <input type="date" id="dateFrom-bus-bal" name="dateTo" required>
+                            </div>
+
+                            <div class="business-balance-date-to">
+                                <label for="dateTo">To</label>
+                                <input type="date" id="dateTo-bus-bal" name="dateTo" required>
+                            </div>
+                        </div>
+
+                        <div class="form-field-submit"
+                            style="margin-bottom: 1rem; display: flex; justify-content: center;">
+                            <input type="submit" id="business-balance-submit" class="submit-button" value="SUBMIT">
+                        </div>
+
+                        <div class="business-balance-cash-bank-container" style="margin-bottom: 1rem; display: flex;">
+
+                            <div class="balance">
+                                <div class="balance-label">Cash Balance</div>
+                                <div class="balance-value" id="cash-balance-bus-bal"></div>
+                            </div>
+
+                            <div class="balance">
+                                <div class="balance-label">Bank Balance</div>
+                                <div class="balance-value" id="bank-balance-bus-bal"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="business-profit">
+                    <h2 class="form-heading" style="margin-bottom: 1rem; text-align: center;">Business Profit</h2>
+
+                    <form onsubmit="getBusinessProfit(event)">
+                        <div class="form-field">
+                            <div class="business-balance-date-from">
+                                <label for="dateFrom">From</label>
+                                <input type="date" id="dateFrom-bus-profit" name="dateTo" required>
+                            </div>
+
+                            <div class="business-balance-date-to">
+                                <label for="dateTo">To</label>
+                                <input type="date" id="dateTo-bus-profit" name="dateTo" required>
+                            </div>
+                        </div>
+
+                        <div class="form-field-submit"
+                            style="margin-bottom: 1rem; display: flex; justify-content: center;">
+                            <input type="submit" id="business-balance-submit" class="submit-button" value="SUBMIT">
+                        </div>
+
+                        <div class="business-profit-profit-cont">
+                            <div class="profit">
+                                <div class="balance-label">Cash Balance</div>
+                                <div class="balance-value" id="bank-balance-bus-profit"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="pending-transactions">
+                    <h2 class="form-heading">Pending Transactions</h2>
+                    <form onsubmit="getPendingTransactions(event)" class="pending-tr-form">
+                        <div class="form-field">
+                            <div class="business-balance-date-from">
+                                <label for="dateFrom">From</label>
+                                <input type="date" id="dateFrom-pending-tr" name="dateTo" required>
+                            </div>
+
+                            <div class="business-balance-date-to">
+                                <label for="dateTo">To</label>
+                                <input type="date" id="dateTo-pending-tr" name="dateTo" required>
+                            </div>
+                        </div>
+
+                        <div class="form-field-submit"
+                            style="margin-bottom: 1rem; display: flex; justify-content: center;">
+                            <input type="submit" id="business-balance-submit" class="submit-button" value="SUBMIT">
+                        </div>
+                    </form>
+                    <div class="pending-tr-cont hidden">
+                        <div class="pending-tr-cont-1">
+                            <div class="pending-cont-date-label">Date</div>
+                            <div class="pending-cont-date-value" id="pending-cont-date-val"></div>
+                            <div class="pending-cont-payment-due-label">Payment Due</div>
+                            <div class="pending-cont-payment-due-value" id="pending-cont-payment-due-val"></div>
+                        </div>
+                        <div class="pending-tr-cont-2">
+                            <div class="pending-cont-notes-label">Notes</div>
+                            <div class="pending-cont-notes-value"></div>
+                            <div class="pending-cont-tr-delete">
+                                <button type="button" id="pending-tr-delete">DELETE</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pending-pagination">
+                        <div class="pagination" id="pagination" data-page="1">
+                            <button type="button" id="prev-pending-tr" name="prev"
+                                style="margin-right: .5rem;">PREV</button>
+                            <button type="button" id="next" name="next-pending-tr"
+                                style="margin-left: .5rem;">NEXT</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        async function checkAuth() {
+            try {
+                const response = await fetch("https://localhost:3090/auth/check-token", {
+                    method: "GET",
+                    credentials: "include"
+                })
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    console.log("token invalid or not found, redirecting to login page");
+                    window.location.href = "index.html"
+                } else {
+                    console.log("user authenticated")
+                }
+            } catch (err) {
+                console.log("error checkin token:", err);
+                window.location.href = "index.html"
+            }
+        }
+        window.onload = checkAuth;
+
+        async function logoutUser(event) {
+            event.preventDefault();
+
+            try {
+                const response = await fetch("https://localhost:3090/auth/logout", {
+                    method: "POST",
+                    credentials: "include"
+                })
+                const data = await response.json();
+
+                console.log("response is -", data)
+                if (data.success === false) {
+                    alert(data.error)
+                } else {
+                    alert(data.data)
+                    window.location.href = "index.html"
+                }
+            } catch (err) {
+                console.log("The error is -", err)
+            }
+        }
+
+        document.getElementById("type").addEventListener("change", async function () {
+            const typeElement = document.getElementById("type");
+            const type = typeElement.value;
+
+            const categorySelect = document.getElementById("category");
+            categorySelect.innerHTML = "";
+
+            let reqType = "";
+
+            if (type === "income") {
+                reqType = "debit"
+            } else {
+                reqType = "credit"
+            }
+
+            try {
+                const response = await fetch(`https://localhost:3090/categories?type=${reqType}`, {
+                    method: "GET",
+                    credentials: "include",
+                })
+
+                const data = await response.json();
+
+                if (data && data.data) {
+                    data.data.forEach(category => {
+                        const option = document.createElement("option");
+                        option.value = category._id;
+                        option.textContent = category.name;
+                        categorySelect.appendChild(option);
+                    })
+                } else {
+                    const option = document.createElement("option");
+                    option.value = "";
+                    option.textContent = "NA";
+                    categorySelect.appendChild(option)
+                }
+            } catch (err) {
+                console.log("error while fetching categories from income -", err);
+            }
+        })
+
+        document.getElementById("type").dispatchEvent(new Event("change"))
+
+        async function recordTransaction(event) {
+            event.preventDefault();
+
+            const recordTrParams = {};
+
+            const typeElement = document.getElementById("type");
+
+            let type;
+            if (typeElement.value === "income") {
+                type = "debit"
+            } else {
+                type = "credit"
+            }
+
+            const categoryId = document.getElementById("category").value;
+            const cashInflow = document.getElementById("cashInflow").value;
+            const cashOutflow = document.getElementById("cashOutflow").value;
+            const bankInflow = document.getElementById("bankInflow").value;
+            const bankOutflow = document.getElementById("bankOutflow").value;
+            const amount = document.getElementById("amount").value;
+            const status = document.getElementById("status").value;
+            const notes = document.getElementById("notes").value;
+            const date = document.getElementById("date").value;
+            const paymentDue = document.getElementById("paymentDue").value;
+
+            Reflect.set(recordTrParams, "type", type);
+            Reflect.set(recordTrParams, "categoryId", categoryId);
+            Reflect.set(recordTrParams, "amount", Number(amount));
+            Reflect.set(recordTrParams, "date", date);
+
+            if (cashInflow) {
+                Reflect.set(recordTrParams, "cashInflow", Number(cashInflow));
+            }
+            if (cashOutflow) {
+                Reflect.set(recordTrParams, "cashOutflow", Number(cashOutflow));
+            }
+            if (bankInflow) {
+                Reflect.set(recordTrParams, "bankInflow", Number(bankInflow));
+            }
+            if (bankOutflow) {
+                Reflect.set(recordTrParams, "bankOutflow", Number(bankOutflow));
+            }
+            if (status === "pending") {
+                Reflect.set(recordTrParams, "status", status);
+            }
+            if (notes.length > 0) {
+                Reflect.set(recordTrParams, "notes", notes);
+            }
+            if (paymentDue) {
+                Reflect.set(recordTrParams, "paymentDue", Number(paymentDue))
+            }
+
+            try {
+
+                const response = await fetch("https://localhost:3090/transactions/", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify(recordTrParams),
+                })
+
+                const data = await response.json();
+
+                if (data.success === true) {
+                    alert("transaction created.");
+                    getIncomeTransactions();
+                    getExpenseTransactions();
+                } else {
+                    alert(`error occured in creating transaction - ${data.error}`)
+                }
+            } catch (err) {
+                console.log("error while fetching create transaction api -", err)
+            }
+        }
+
+        async function getBusinessBalance(event) {
+            event.preventDefault();
+
+            const dateTo = document.getElementById("dateTo-bus-bal").value;
+            const dateFrom = document.getElementById("dateFrom-bus-bal").value;
+
+            try {
+                const response = await fetch(`https://localhost:3090/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include"
+                })
+
+                const data = await response.json();
+                console.log("response -", data);
+                if (data.success === true) {
+                    document.getElementById("cash-balance-bus-bal").innerHTML = data.data[0].totalCashBalance;
+                    document.getElementById("bank-balance-bus-bal").innerHTML = data.data[0].totalBankBalance;
+                } else {
+                    alert(`error in calculating balance - ${data.error}`)
+                }
+
+            } catch (err) {
+                console.log("error while fetching business balance -", err)
+            }
+        }
+
+        async function getBusinessProfit(event) {
+            event.preventDefault();
+
+            const dateTo = document.getElementById("dateTo-bus-profit").value;
+            const dateFrom = document.getElementById("dateFrom-bus-profit").value;
+
+            try {
+                const response = await fetch(`https://localhost:3090/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                })
+
+                const data = await response.json();
+
+                console.log("response -", data)
+
+                if (data.success && data.data.length > 0) {
+                    document.getElementById("bank-balance-bus-profit").innerHTML = data.data[0].profit;
+                } else {
+                    alert("error while calculating profit.")
+                }
+            } catch (err) {
+                console.log("error while fetching business profit -", err);
+            }
+        }
+
+        async function getPendingTransactions(event) {
+            if (event) event.preventDefault();
+
+            let dateTo = document.getElementById("dateTo-pending-tr").value;
+            let dateFrom = document.getElementById("dateFrom-pending-tr").value;
+            const pageSize = 10;
+            const currentPage = parseInt(document.getElementById("pagination").getAttribute("data-page"));
+
+            if (!dateTo) {
+                dateTo = getCurrentDate()
+            }
+
+            if (!dateFrom) {
+                dateFrom = getCurrentDate()
+            }
+
+            try {
+                const response = await fetch(`https://localhost:3090/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include"
+                })
+
+                const data = await response.json();
+
+                const parentContainer = document.querySelector(".pending-tr-cont");
+                parentContainer.innerHTML = "";
+
+                if (data.data.length > 0) {
+                    parentContainer.classList.remove("hidden");
+
+                    data.data.forEach((transaction) => {
+                        const trContainer1 = document.createElement("div");
+                        const trContainer2 = document.createElement("div");
+
+                        trContainer1.className = "pending-tr-cont-1";
+                        trContainer2.className = "pending-tr-cont-2";
+
+                        const dateLabelElement = document.createElement("div");
+                        dateLabelElement.className = "pending-cont-date-label";
+                        dateLabelElement.innerHTML = "Date";
+
+                        const dateValElement = document.createElement("div");
+                        dateValElement.className = "pending-cont-date-value";
+                        dateValElement.id = "pending-cont-date-val";
+                        dateValElement.textContent = new Date(transaction.date).toLocaleDateString();
+
+                        const paymentDueLabelElement = document.createElement("div");
+                        paymentDueLabelElement.className = "pending-cont-payment-due-label";
+                        paymentDueLabelElement.innerHTML = "Payment Due";
+
+                        const paymentDueValElement = document.createElement("div");
+                        paymentDueValElement.className = "pending-cont-payment-due-value";
+                        paymentDueValElement.id = "pending-cont-payment-due-val";
+                        paymentDueValElement.innerText = transaction.paymentDue;
+
+                        trContainer1.appendChild(dateLabelElement);
+                        trContainer1.appendChild(dateValElement);
+                        trContainer1.appendChild(paymentDueLabelElement);
+                        trContainer1.appendChild(paymentDueValElement);
+
+                        const notesLabelElement = document.createElement("div");
+                        notesLabelElement.className = "pending-cont-notes-label";
+                        notesLabelElement.innerHTML = "Notes";
+
+                        const notesValElement = document.createElement("div");
+                        notesValElement.className = "pending-cont-notes-value";
+
+                        notesValElement.textContent = transaction.notes;
+
+                        const deleteContElem = document.createElement("div");
+                        deleteContElem.className = "pending-cont-tr-delete";
+
+                        const deleteButton = document.createElement("button");
+                        deleteButton.id = "pending-tr-delete";
+                        deleteButton.innerHTML = "DELETE";
+                        deleteButton.setAttribute("_id", transaction._id);
+                        deleteButton.onclick = () => deleteTransaction(deleteButton.getAttribute("_id"))
+
+                        deleteContElem.appendChild(deleteButton);
+                        trContainer2.appendChild(notesLabelElement);
+                        trContainer2.appendChild(notesValElement);
+                        trContainer2.appendChild(deleteContElem);
+
+                        parentContainer.appendChild(trContainer1);
+                        parentContainer.appendChild(trContainer2);
+                    })
+                } else {
+                    parentContainer.classList.add("hidden");
+                }
+
+            } catch (err) {
+                console.log("error while fetching pending transactions -", err);
+            }
+        }
+
+        async function deleteTransaction(transactionId) {
+            const confirmation = confirm("Are you sure you want to delete this transaction?");
+            if (!confirmation) {
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://localhost:3090/transactions/${transactionId}`, {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include"
+                })
+
+                const data = await response.json();
+
+                alert(data.message);
+
+                await getPendingTransactions();
+                await getIncomeTransactions();
+                await getExpenseTransactions();
+            } catch (err) {
+                console.log("error while deleting transaction -", err)
+            }
+        }
+
+        async function getIncomeTransactions(event) {
+            if (event) event.preventDefault();
+
+            const type = "debit";
+            let dateTo = document.getElementById("dateTo-inc-tr").value;
+            let dateFrom = document.getElementById("dateFrom-inc-tr").value;
+            const pageSize = 10;
+            const currentPage = parseInt(document.getElementById("pagination-inc-tr").getAttribute("data-page"));
+
+
+            if (dateTo.length === 0) {
+                dateTo = getCurrentDate()
+            }
+
+            if (dateFrom.length === 0) {
+                dateFrom = getCurrentDate()
+            }
+
+            try {
+                const response = await fetch(`https://localhost:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include"
+                })
+
+                const data = await response.json();
+
+                console.log('response from income transactions -', data)
+
+                const parentContainer = document.querySelector(".income-tr-cont");
+                parentContainer.innerHTML = "";
+
+                if (data.data.length > 0) {
+                    parentContainer.classList.remove("hidden");
+                    // document.querySelector(".pagination-inc-tr").classList.remove("hidden");
+
+                    for (const transaction of data.data) {
+                        const response = await fetch(`https://localhost:3090/categories/${transaction.categoryId}`, {
+                            method: "GET",
+                            headers: { "Content-Type": "application/json" },
+                            credentials: "include"
+                        })
+
+                        const data = await response.json();
+                        const categoryName = data.data.name;
+
+                        if (!transaction.bankInflow) {
+                            transaction.bankInflow = 0;
+                        }
+
+                        if (!transaction.bankOutflow) {
+                            transaction.bankOutflow = 0;
+                        }
+
+                        if (!transaction.cashInflow) {
+                            transaction.cashInflow = 0;
+                        }
+
+                        if (!transaction.cashOutflow) {
+                            transaction.cashOutflow = 0;
+                        }
+
+                        if (!transaction.status) {
+                            transaction.status = "complete"
+                        }
+
+                        const trContainer1 = document.createElement("div");
+                        const trContainer2 = document.createElement("div");
+                        const trContainer3 = document.createElement("div");
+
+                        trContainer1.className = "income-tr-cont1";
+                        trContainer2.className = "income-tr-cont2";
+                        trContainer3.className = "income-tr-cont3";
+
+                        const categoryLabelElement = document.createElement("div");
+                        categoryLabelElement.className = "category-label";
+                        categoryLabelElement.innerHTML = "Category";
+
+                        const categoryValElement = document.createElement("div");
+                        categoryValElement.className = "inc-category-val";
+                        categoryValElement.textContent = categoryName;
+
+                        const bankOutflowLabelElement = document.createElement("div");
+                        bankOutflowLabelElement.className = "bank-outflow-label";
+                        bankOutflowLabelElement.innerHTML = "Bank Outflow";
+
+                        const bankOutflowValElement = document.createElement("div");
+                        bankOutflowValElement.className = "inc-bank-outflow-val";
+                        bankOutflowValElement.textContent = transaction.bankOutflow;
+
+                        const cashInflowLabelElement = document.createElement("div");
+                        cashInflowLabelElement.className = "cash-inflow-label";
+                        cashInflowLabelElement.innerHTML = "Cash Inflow";
+
+                        const cashInflowValElement = document.createElement("div");
+                        cashInflowValElement.className = "inc-cash-inflow-val";
+                        cashInflowValElement.textContent = transaction.cashInflow;
+
+                        trContainer1.appendChild(categoryLabelElement);
+                        trContainer1.appendChild(categoryValElement);
+                        trContainer1.appendChild(bankOutflowLabelElement);
+                        trContainer1.appendChild(bankOutflowValElement);
+                        trContainer1.appendChild(cashInflowLabelElement);
+                        trContainer1.appendChild(cashInflowValElement);
+
+                        const cashOutflowLabelElement = document.createElement("div");
+                        cashOutflowLabelElement.className = "cash-outflow-label";
+                        cashOutflowLabelElement.innerHTML = "Cash Outflow";
+
+                        const cashOutflowValElement = document.createElement("div");
+                        cashOutflowValElement.className = "inc-cash-outflow-val";
+                        cashOutflowValElement.textContent = transaction.cashOutflow;
+
+                        const bankInflowLabelElement = document.createElement("div");
+                        bankInflowLabelElement.className = "bank-inflow-label";
+                        bankInflowLabelElement.innerHTML = "Bank Inflow";
+
+                        const bankInflowValElement = document.createElement("div");
+                        bankInflowValElement.className = "inc-bank-inflow-val";
+                        bankInflowValElement.textContent = transaction.bankInflow;
+
+                        const amountLabelElement = document.createElement("div");
+                        amountLabelElement.className = "amount-label";
+                        amountLabelElement.innerHTML = "Amount";
+
+                        const amountValElement = document.createElement("div");
+                        amountValElement.className = "inc-amount-val";
+                        amountValElement.textContent = transaction.amount;
+
+                        trContainer2.appendChild(cashOutflowLabelElement);
+                        trContainer2.appendChild(cashOutflowValElement);
+                        trContainer2.appendChild(bankInflowLabelElement);
+                        trContainer2.appendChild(bankInflowValElement);
+                        trContainer2.appendChild(amountLabelElement);
+                        trContainer2.appendChild(amountValElement);
+
+                        const insideContainer1 = document.createElement("div");
+                        insideContainer1.className = "cont3-1";
+
+                        const statusLabelElement = document.createElement("div");
+                        statusLabelElement.className = "status-label";
+                        statusLabelElement.innerHTML = "Status";
+
+                        const statusValElement = document.createElement("div");
+                        statusValElement.className = "inc-status-val";
+                        statusValElement.textContent = transaction.status;
+
+                        insideContainer1.appendChild(statusLabelElement);
+                        insideContainer1.appendChild(statusValElement);
+
+                        const insideContainer2 = document.createElement("div");
+                        insideContainer2.className = "const3-2";
+
+                        const deleteContElement = document.createElement("div");
+                        deleteContElement.className = "delete-cont";
+
+                        const deleteButton = document.createElement("button");
+                        deleteButton.id = "inc-delete-button";
+                        deleteButton.innerHTML = "DELETE";
+                        deleteButton.setAttribute("_id", transaction._id);
+                        deleteButton.onclick = () => deleteTransaction(deleteButton.getAttribute("_id"));
+
+                        deleteContElement.appendChild(deleteButton);
+
+                        insideContainer2.appendChild(deleteContElement);
+
+                        trContainer3.appendChild(insideContainer1);
+                        trContainer3.appendChild(insideContainer2);
+
+                        parentContainer.appendChild(trContainer1);
+                        parentContainer.appendChild(trContainer2);
+                        parentContainer.appendChild(trContainer3);
+                    }
+                } else {
+                    parentContainer.classList.add("hidden");
+                    // document.querySelector(".pagination-inc-tr").classList.add("hidden");
+                }
+            } catch (err) {
+                console.log('error in fetching income transactions -', err)
+            }
+        }
+
+        async function getExpenseTransactions(event) {
+            if (event) event.preventDefault();
+
+            const type = "credit";
+            let dateTo = document.getElementById("dateTo-exp-tr").value;
+            let dateFrom = document.getElementById("dateFrom-exp-tr").value;
+            const pageSize = 10;
+            const currentPage = parseInt(document.getElementById("pagination-exp-tr").getAttribute("data-page"));
+
+            if (dateFrom.length === 0) {
+                dateFrom = getCurrentDate()
+            }
+
+            if (dateTo.length === 0) {
+                dataFrom = getCurrentDate()
+            }
+
+            console.log("dateTo -", dateTo, "dateFrom -", dateFrom);
+
+            try {
+                const response = await fetch(`https://localhost:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include"
+                })
+
+                const data = await response.json();
+
+                console.log('response from expense transactions -', data)
+
+                const parentContainer = document.querySelector(".expense-tr-cont");
+                parentContainer.innerHTML = "";
+
+                if (data.data.length > 0) {
+
+                    for (const transaction of data.data) {
+                        parentContainer.classList.remove("hidden");
+                        // document.querySelector(".pagination-exp-tr").classList.remove("hidden");
+
+                        const response = await fetch(`https://localhost:3090/categories/${transaction.categoryId}`, {
+                            method: "GET",
+                            headers: { "Content-Type": "application/json" },
+                            credentials: "include"
+                        })
+
+                        const data = await response.json();
+                        const categoryName = data.data.name;
+
+                        if (!transaction.bankInflow) {
+                            transaction.bankInflow = 0;
+                        }
+
+                        if (!transaction.bankOutflow) {
+                            transaction.bankOutflow = 0;
+                        }
+
+                        if (!transaction.cashInflow) {
+                            transaction.cashInflow = 0;
+                        }
+
+                        if (!transaction.cashOutflow) {
+                            transaction.cashOutflow = 0;
+                        }
+
+                        if (!transaction.status) {
+                            transaction.status = "complete"
+                        }
+
+                        const trContainer1 = document.createElement("div");
+                        const trContainer2 = document.createElement("div");
+                        const trContainer3 = document.createElement("div");
+
+                        trContainer1.className = "expense-tr-cont1";
+                        trContainer2.className = "expense-tr-cont2";
+                        trContainer3.className = "expense-tr-cont3";
+
+                        const categoryLabelElement = document.createElement("div");
+                        categoryLabelElement.className = "category-label";
+                        categoryLabelElement.innerHTML = "Category";
+
+                        const categoryValElement = document.createElement("div");
+                        categoryValElement.className = "exp-category-val";
+                        categoryValElement.textContent = categoryName;
+
+                        const bankOutflowLabelElement = document.createElement("div");
+                        bankOutflowLabelElement.className = "bank-outflow-label";
+                        bankOutflowLabelElement.innerHTML = "Bank Outflow";
+
+                        const bankOutflowValElement = document.createElement("div");
+                        bankOutflowValElement.className = "exp-bank-outflow-val";
+                        bankOutflowValElement.textContent = transaction.bankOutflow;
+
+                        const cashInflowLabelElement = document.createElement("div");
+                        cashInflowLabelElement.className = "cash-inflow-label";
+                        cashInflowLabelElement.innerHTML = "Cash Inflow";
+
+                        const cashInflowValElement = document.createElement("div");
+                        cashInflowValElement.className = "exp-cash-inflow-val";
+                        cashInflowValElement.textContent = transaction.cashInflow;
+
+                        trContainer1.appendChild(categoryLabelElement);
+                        trContainer1.appendChild(categoryValElement);
+                        trContainer1.appendChild(bankOutflowLabelElement);
+                        trContainer1.appendChild(bankOutflowValElement);
+                        trContainer1.appendChild(cashInflowLabelElement);
+                        trContainer1.appendChild(cashInflowValElement);
+
+                        const cashOutflowLabelElement = document.createElement("div");
+                        cashOutflowLabelElement.className = "cash-outflow-label";
+                        cashOutflowLabelElement.innerHTML = "Cash Outflow";
+
+                        const cashOutflowValElement = document.createElement("div");
+                        cashOutflowValElement.className = "exp-cash-outflow-val";
+                        cashOutflowValElement.textContent = transaction.cashOutflow;
+
+                        const bankInflowLabelElement = document.createElement("div");
+                        bankInflowLabelElement.className = "bank-inflow-label";
+                        bankInflowLabelElement.innerHTML = "Bank Inflow";
+
+                        const bankInflowValElement = document.createElement("div");
+                        bankInflowValElement.className = "exp-bank-inflow-val";
+                        bankInflowValElement.textContent = transaction.bankInflow;
+
+                        const amountLabelElement = document.createElement("div");
+                        amountLabelElement.className = "amount-label";
+                        amountLabelElement.innerHTML = "Amount";
+
+                        const amountValElement = document.createElement("div");
+                        amountValElement.className = "exp-amount-val";
+                        amountValElement.textContent = transaction.amount;
+
+                        trContainer2.appendChild(cashOutflowLabelElement);
+                        trContainer2.appendChild(cashOutflowValElement);
+                        trContainer2.appendChild(bankInflowLabelElement);
+                        trContainer2.appendChild(bankInflowValElement);
+                        trContainer2.appendChild(amountLabelElement);
+                        trContainer2.appendChild(amountValElement);
+
+                        const insideContainer1 = document.createElement("div");
+                        insideContainer1.className = "cont3-1";
+
+                        const statusLabelElement = document.createElement("div");
+                        statusLabelElement.className = "status-label";
+                        statusLabelElement.innerHTML = "Status";
+
+                        const statusValElement = document.createElement("div");
+                        statusValElement.className = "exp-status-val";
+                        statusValElement.textContent = transaction.status;
+
+                        insideContainer1.appendChild(statusLabelElement);
+                        insideContainer1.appendChild(statusValElement);
+
+                        const insideContainer2 = document.createElement("div");
+                        insideContainer2.className = "const3-2";
+
+                        const deleteContElement = document.createElement("div");
+                        deleteContElement.className = "delete-cont";
+
+                        const deleteButton = document.createElement("button");
+                        deleteButton.id = "exp-delete-button";
+                        deleteButton.innerHTML = "DELETE";
+                        deleteButton.setAttribute("_id", transaction._id);
+                        deleteButton.onclick = () => deleteTransaction(deleteButton.getAttribute("_id"));
+
+                        deleteContElement.appendChild(deleteButton);
+
+                        insideContainer2.appendChild(deleteContElement);
+
+                        trContainer3.appendChild(insideContainer1);
+                        trContainer3.appendChild(insideContainer2);
+
+                        parentContainer.appendChild(trContainer1);
+                        parentContainer.appendChild(trContainer2);
+                        parentContainer.appendChild(trContainer3);
+                    }
+                } else {
+                    parentContainer.classList.add("hidden");
+                    // document.querySelector(".pagination-exp-tr").classList.add("hidden");
+                }
+            } catch (err) {
+                console.log('error in fetching expense transactions -', err)
+            }
+        }
+
+        function getCurrentDate() {
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        function updateIncomeTrPageNumber(increment) {
+            const paginationElement = document.getElementById("pagination-inc-tr");
+            let currentPage = parseInt(paginationElement.getAttribute("data-page"));
+            currentPage += increment;
+
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
+
+            paginationElement.setAttribute("data-page", currentPage);
+        }
+
+        document.getElementById("prev-inc-tr").addEventListener("click", () => {
+            updateIncomeTrPageNumber(-1);
+            getIncomeTransactions()
+        })
+
+        document.getElementById("next-inc-tr").addEventListener("click", () => {
+            updateIncomeTrPageNumber(1);
+            getIncomeTransactions()
+        })
+
+        function updateExpenseTrPageNumber(increment) {
+            const paginationElement = document.getElementById("pagination-exp-tr");
+            let currentPage = parseInt(paginationElement.getAttribute("data-page"));
+            currentPage += increment;
+
+            if (currentPage < 1) {
+                currentPage = 1;
+            }
+
+            paginationElement.setAttribute("data-page", currentPage);
+        }
+
+        document.getElementById("prev-exp-tr").addEventListener("click", () => {
+            updateExpenseTrPageNumber(-1);
+            getExpenseTransactions()
+        })
+
+        document.getElementById("next-exp-tr").addEventListener("click", () => {
+            updateExpenseTrPageNumber(1);
+            getExpenseTransactions()
+        })
+
+        function updatePendingTrPageNumber(increment) {
+            const paginationElement = document.getElementById("pagination");
+            const currentPage = parseInt(paginationElement.getAttribute("data-page"));
+            currentPage += increment;
+
+            if (currentPage < 1) {
+                currentPage = 1
+            }
+
+            paginationElement.setAttribute("data-page", currentPage);
+        }
+
+        document.getElementById("prev-pending-tr").addEventListener("click", () => {
+            updatePendingTrPageNumber(-1);
+            getPendingTransactions()
+        })
+
+        document.getElementById("next-pending-tr").addEventListener("click", () => {
+            updatePendingTrPageNumber(1);
+            getPendingTransactions();
+        })
+    </script>
+</body>
+
+</html>

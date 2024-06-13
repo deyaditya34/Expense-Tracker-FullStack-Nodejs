@@ -7,14 +7,14 @@ const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
   const { name, type, pageNo, pageSize } = req.query;
-
+  
   let searchCategoryParams = {};
   
   if (name) {
     searchCategoryParams.name = name;
   }
 
-  if (type) {
+    if (type) {
     searchCategoryParams.type = type;
   }
 

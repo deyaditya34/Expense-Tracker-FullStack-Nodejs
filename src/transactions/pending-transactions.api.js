@@ -1,21 +1,28 @@
 const httpError = require("http-errors");
 
 const buildApiHandler = require("../api-utils/build-api-handler");
-const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const businessService = require("./business.service");
+const pagination = require("../middlewares/pagination");
+const paramsValidator = require("../middlewares/params-validator");
+const transactionService = require("./transactions.service");
 
 async function controller(req, res) {
-  const { dateTo, dateFrom } = req.query;
+  const { dateTo, dateFrom, pageNo, pageSize } = req.query;
 
-  const businessProfit = await businessService.getBusinessProfit(
-    dateTo,
-    dateFrom
+  const pendingTransactionParams = {
+    date: { $gte: new Date(dateFrom), $lte: new Date(dateTo) },
+    status: "pending",
+  };
+
+  const pendingTransactions = await transactionService.searchPendingTransaction(
+    pendingTransactionParams,
+    pageNo,
+    pageSize
   );
 
   res.json({
-    success: true,
-    data: businessProfit,
+    message: "Transactions found",
+    data: pendingTransactions,
   });
 }
 
@@ -53,6 +60,7 @@ function validateParams(req, res, next) {
 module.exports = buildApiHandler([
   userResolver,
   missingParamsValidator,
+  pagination,
   validateParams,
   controller,
 ]);

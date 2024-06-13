@@ -27,13 +27,23 @@ function getTransaction(transactionId) {
     .findOne({ _id: new ObjectId(transactionId) });
 }
 
-function searchTransaction(transactionDetails, pageNo, pageSize, username) {
+function searchTransaction(transactionDetails, pageNo, pageSize) {
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
-    .find(transactionDetails, { username: { $eq: username } })
+    .find(transactionDetails)
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
     .toArray();
+}
+
+function searchPendingTransaction(transactionDetails, pageNo, pageSize) {
+  return database
+    .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
+    .find(transactionDetails)
+    .project({date: 1, paymentDue: 1, notes: 1})
+    .skip((pageNo - 1) * pageSize)
+    .limit(pageSize)
+    .toArray()
 }
 
 function deleteTransaction(id) {
@@ -51,5 +61,6 @@ module.exports = {
   getAllTransactions,
   getTransaction,
   searchTransaction,
-  deleteTransaction
+  deleteTransaction,
+  searchPendingTransaction
 };

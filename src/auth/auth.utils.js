@@ -9,8 +9,8 @@ function validateUsername(req, res, next) {
     throw new httpError.BadRequest("Username and Password should be text only");
   }
 
-  if (username.length < 8) {
-    throw new httpError.BadRequest("Username must be atleast 8 characters");
+  if (username.length < 4) {
+    throw new httpError.BadRequest("Username must be atleast 4 characters");
   }
 
   next();

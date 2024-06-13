@@ -11,6 +11,7 @@ async function controller(req, res) {
 
   if (!existingTransaction) {
     res.json({
+      success: false,
       message: `No transaction found to delete for the id - '${id}'`,
     });
   } else {

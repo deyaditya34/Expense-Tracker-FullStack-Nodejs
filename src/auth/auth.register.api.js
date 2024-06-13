@@ -7,12 +7,12 @@ const {validateUsername} = require("./auth.utils");
 
 async function controller(req, res) {
   const { username, password } = req.body;
-
+  
   await authService.register(username, password);
 
   res.json({
     success: true,
-    data: username,
+    data: "user registered successfully",
   });
 }
 
@@ -22,8 +22,6 @@ const missingParamsValidator = paramsValidator.createParamValidator(
 );
 
 module.exports = buildApiHandler([
-  userResolver,
-  checkAdminRights,
   missingParamsValidator,
   validateUsername,
   controller

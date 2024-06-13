@@ -1,6 +1,10 @@
 const express = require("express");
-const config = require("./config");
+const https = require("https");
+const fs = require("fs");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
 
+const config = require("./config");
 const database = require("./services/database.service");
 const authRouter = require("./auth/auth.api.router");
 const transactionRouter = require("./transactions/transactions.api.router");
@@ -19,6 +23,16 @@ async function start() {
 
   const server = new express();
   server.use(express.json());
+
+  server.use(
+    cors({
+      credentials: true,
+      origin: "http://127.0.0.1:5501",
+    })
+  );
+
+  server.use(cookieParser());
+
   server.use(requestLogger);
 
   server.use("/transactions", transactionRouter);
@@ -29,10 +43,13 @@ async function start() {
   server.use(notFoundHandler);
   server.use(errrorHandler);
 
-  server.listen(config.APP_PORT, () => {
+  const key = fs.readFileSync("../../../key.pem");
+  const cert = fs.readFileSync("../../../cert.pem");
+
+  https.createServer({ key, cert }, server).listen(config.APP_PORT, () => {
     console.log(
       "[init]: expense-tracker application running on",
-     config.APP_PORT
+      config.APP_PORT
     );
   });
 }
