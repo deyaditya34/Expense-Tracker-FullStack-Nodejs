@@ -14,6 +14,8 @@ async function controller(req, res) {
 
   const transactionDetails = await transactionBuilder(req.body);
 
+  console.log("transactionDetails -", transactionDetails);
+
   const result = await createTransaction({
     ...transactionDetails,
     createdAt: new Date(),
@@ -121,7 +123,20 @@ async function transactionBuilder(transactionDetails = {}) {
       if (param === "type" || param === "status" || param === "notes") {
         result[param] = transactionDetails[param]
       } else if (param === "date") {
-        result[param] =  new Date(transactionDetails[param]);
+        const providedDate = new Date(transactionDetails[param]);
+        const currentTime = new Date();
+
+        // Set provided date to current time while keeping the date part
+        providedDate.setHours(currentTime.getHours());
+        providedDate.setMinutes(currentTime.getMinutes());
+        providedDate.setSeconds(currentTime.getSeconds());
+        providedDate.setMilliseconds(currentTime.getMilliseconds());
+
+        // Adjust the date-time to local time zone offset
+        const offset = currentTime.getTimezoneOffset() * 60000;
+        const localDate = new Date(providedDate.getTime() - offset);
+
+        result[param] = localDate.toISOString().slice(0, -1);
       } else if (param === "categoryId") {
         const categoryDetails = await getCategory(transactionDetails[param]);
         result["type"] = categoryDetails.type;

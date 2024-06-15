@@ -25,19 +25,29 @@ async function controller(req, res) {
     searchTransactionParams["category.name"] = categoryName;
   }
 
+  const adjustToUTC = (dateStr, endOfDay = false) => {
+    const date = new Date(dateStr);
+    if (endOfDay) {
+      date.setUTCHours(23, 59, 59, 999);
+    } else {
+      date.setUTCHours(0, 0, 0, 0);
+    }
+    return date.toISOString();
+  };
+
+  // Correctly handling dateFrom and dateTo
   if (dateTo && !dateFrom) {
-    searchTransactionParams["date"] = { $lte: new Date(dateTo) };
-  }
-  if (!dateTo && dateFrom) {
-    searchTransactionParams["date"] = { $gte: new Date(dateFrom) };
-  }
-  if (dateTo && dateFrom) {
-    searchTransactionParams["date"] = {
-      $gte: new Date(dateFrom),
-      $lte: new Date(dateTo),
+    searchTransactionParams.date = { $lte: adjustToUTC(dateTo, true) };
+  } else if (!dateTo && dateFrom) {
+    searchTransactionParams.date = { $gte: adjustToUTC(dateFrom) };
+  } else if (dateTo && dateFrom) {
+    searchTransactionParams.date = {
+      $gte: adjustToUTC(dateFrom),
+      $lte: adjustToUTC(dateTo, true),
     };
   }
-  
+
+  console.log("search transaction params -", searchTransactionParams)
   const result = await searchTransaction(
     searchTransactionParams,
     pageNo,

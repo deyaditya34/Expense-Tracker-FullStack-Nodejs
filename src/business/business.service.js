@@ -2,6 +2,17 @@ const config = require("../config");
 const database = require("../services/database.service");
 const eventBridge = require("../events/event.service");
 
+const adjustToUTC = (dateStr, endOfDay = false) => {
+  const date = new Date(dateStr);
+  if (endOfDay) {
+    date.setUTCHours(23, 59, 59, 999);
+  } else {
+    date.setUTCHours(0, 0, 0, 0);
+  }
+  return date.toISOString();
+};
+
+
 function getBusiness() {
   return database
     .getCollection(config.COLLECTION_NAMES_BUSINESS)
@@ -23,14 +34,14 @@ async function registerTransaction(type, amount) {
 }
 
 async function getBusinessBalance(dateTo, dateFrom) {
-  return database
+  const results = await database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .aggregate([
       {
         $match: {
           date: {
-            $gte: new Date(dateFrom),
-            $lte: new Date(dateTo),
+            $gte: adjustToUTC(dateFrom),
+            $lte: adjustToUTC(dateTo, true),
           },
         },
       },
@@ -38,8 +49,8 @@ async function getBusinessBalance(dateTo, dateFrom) {
         $group: {
           _id: null,
           totalCashInflow: { $sum: "$cashInflow" },
-          totalCashOutflow: { $sum: "cashOutflow" },
-          totalBankInflow: { $sum: "bankInflow" },
+          totalCashOutflow: { $sum: "$cashOutflow" },
+          totalBankInflow: { $sum: "$bankInflow" },
           totalBankOutflow: { $sum: "$bankOutflow" },
         },
       },
@@ -56,17 +67,26 @@ async function getBusinessBalance(dateTo, dateFrom) {
       },
     ])
     .toArray();
+
+  if (!results.length) {
+    return {
+      totalCashBalance: 0,
+      totalBankBalance: 0,
+    };
+  }
+
+  return results[0];
 }
 
 async function getBusinessProfit(dateTo, dateFrom) {
-  return database
+  const results = await database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .aggregate([
       {
         $match: {
           date: {
-            $gte: new Date(dateFrom),
-            $lte: new Date(dateTo),
+            $gte: adjustToUTC(dateFrom),
+            $lte: adjustToUTC(dateTo, true),
           },
         },
       },
@@ -91,7 +111,16 @@ async function getBusinessProfit(dateTo, dateFrom) {
           profit: { $subtract: ["$totalDebit", "$totalCredit"] },
         },
       },
-    ]).toArray();
+    ])
+    .toArray();
+
+  if (!results.length) {
+    return {
+      profit: 0,
+    };
+  }
+
+  return results[0];
 }
 
 eventBridge.addListener(

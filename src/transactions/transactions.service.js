@@ -31,6 +31,7 @@ function searchTransaction(transactionDetails, pageNo, pageSize) {
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .find(transactionDetails)
+    .sort({date: -1})
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
     .toArray();
@@ -40,6 +41,7 @@ function searchPendingTransaction(transactionDetails, pageNo, pageSize) {
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .find(transactionDetails)
+    .sort({date: -1})
     .project({date: 1, paymentDue: 1, notes: 1})
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)

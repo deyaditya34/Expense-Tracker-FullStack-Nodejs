@@ -8,11 +8,22 @@ const businessService = require("./business.service");
 async function controller(req, res) {
   const { dateTo, dateFrom } = req.query;
   
-  console.log("req.query -", req.query);
-  
+  const adjustToUTC = (dateStr, endOfDay = false) => {
+    const date = new Date(dateStr);
+    if (endOfDay) {
+      date.setUTCHours(23, 59, 59, 999);
+    } else {
+      date.setUTCHours(0, 0, 0, 0);
+    }
+    return date.toISOString();
+  };
+
+  const adjustedDateFrom = adjustToUTC(dateFrom);
+  const adjustedDateTo = adjustToUTC(dateTo, true);
+
   const businessBalance = await businessService.getBusinessBalance(
-    dateTo,
-    dateFrom
+    adjustedDateFrom,
+    adjustedDateTo
   );
 
   res.json({
