@@ -119,6 +119,7 @@
         color: rgb(59, 27, 27);
         border-radius: 10px;
         font-weight: bolder;
+        font-size: 20px;
     }
 
     .form-field>textarea {
@@ -579,13 +580,20 @@
         background-color: #EF9C66;
         color: #3a587c;
     }
+
+    .create-category {
+        border: 5px solid #3F72AF;
+        margin-bottom: 1rem;
+    }
 </style>
 
 <body>
     <div class="main-container">
         <div class="main-heading">
             <div class="heading">
-                <h1 style="font-family:copperplate; background-color: rgb(41, 118, 177); color: aliceblue; font-size: 50px;">Welcome to
+                <h1
+                    style="font-family:copperplate; background-color: rgb(41, 118, 177); color: aliceblue; font-size: 50px;">
+                    Welcome to
                     ONLINE HUB crm portal</h1>
             </div>
             <div class="nav">
@@ -654,7 +662,6 @@
                         </div>
                     </form>
                 </div>
-
             </section>
 
             <section class="sub-cont transaction-view">
@@ -873,6 +880,26 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="create-category">
+                    <h2 class="form-heading" style="margin-bottom: 1rem; text-align: center;">Create Category</h2>
+                    <form id="create-category-form" onsubmit="createCategory(event)">
+                        <div class="form-field">
+                            <label for="type-label">Type</label>
+                            <select id="type-label" name="type-label" required>
+                                <option value="debit">Income</option>
+                                <option value="credit">Expense</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="category-name-label">Category Name</label>
+                            <input type="text" id="category-name-label" name="category-name-label">
+                        </div>
+                        <div class="form-field-submit">
+                            <input type="submit" id="category-create-submit" class="submit-button" value="SUBMIT">
+                        </div>
+                    </form>
+                </div>
             </section>
         </div>
     </div>
@@ -1044,6 +1071,14 @@
                     await getBusinessBalance();
                     await getBusinessProfit();
                     await getPendingTransactions();
+
+                    document.getElementById("cashInflow").value = "";
+                    document.getElementById("cashOutflow").value = "";
+                    document.getElementById("bankInflow").value = "";
+                    document.getElementById("bankOutflow").value = "";
+                    document.getElementById("amount").value = "";
+                    document.getElementById("notes").value = "";
+                    document.getElementById("paymentDue").value = "";
                 } else {
                     alert(`error occured in creating transaction - ${data.error}`)
                 }
@@ -1682,6 +1717,33 @@
             updatePendingTrPageNumber(1);
             getPendingTransactions();
         })
+
+        async function createCategory(event) {
+            if (event) event.preventDefault();
+
+            const type = document.getElementById("type-label").value;
+            const name = document.getElementById("category-name-label").value;
+
+            try {
+                const response = await fetch(`https://localhost:3090/categories/`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ type, name })
+                })
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('category created.');
+                    document.getElementById("type").dispatchEvent(new Event("change"));
+                } else {
+                    alert('error while creating the category. Please try again')
+                }
+            } catch (err) {
+                console.log("error while creating category -", err);
+            }
+        }
     </script>
 </body>
 

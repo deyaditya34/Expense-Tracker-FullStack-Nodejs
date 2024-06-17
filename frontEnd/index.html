@@ -105,6 +105,8 @@
                         const data = await response.json();
                         if (data.success === true) {
                             alert(data.data)
+                            document.getElementById("username").value = "";
+                            document.getElementById("password").value = "";
                         } else {
                             alert(data.error)
                         }

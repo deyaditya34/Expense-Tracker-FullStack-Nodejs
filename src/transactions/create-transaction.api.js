@@ -131,7 +131,6 @@ async function transactionBuilder(transactionDetails = {}) {
         providedDate.setMinutes(currentTime.getMinutes());
         providedDate.setSeconds(currentTime.getSeconds());
         providedDate.setMilliseconds(currentTime.getMilliseconds());
-
         // Adjust the date-time to local time zone offset
         const offset = currentTime.getTimezoneOffset() * 60000;
         const localDate = new Date(providedDate.getTime() - offset);
