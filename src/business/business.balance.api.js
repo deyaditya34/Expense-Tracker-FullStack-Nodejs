@@ -22,8 +22,8 @@ async function controller(req, res) {
   const adjustedDateTo = adjustToUTC(dateTo, true);
 
   const businessBalance = await businessService.getBusinessBalance(
-    adjustedDateFrom,
-    adjustedDateTo
+    adjustedDateTo,
+    adjustedDateFrom
   );
 
   res.json({
