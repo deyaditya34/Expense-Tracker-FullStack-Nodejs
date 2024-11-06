@@ -5,9 +5,10 @@ const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
   let {pageNo, pageSize} = req.query;
+  const {user} = req.body;
 
-  let result = await getAllCategories(pageNo, pageSize);
-  console.log(result);
+  let result = await getAllCategories(pageNo, pageSize, user.username);
+  
   if (!result) {
     res.json({
       message: "No categories stored in the application to display"

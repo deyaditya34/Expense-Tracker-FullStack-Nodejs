@@ -3,13 +3,15 @@ const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
 const paramsValidator = require("../middlewares/params-validator");
 const userResolver = require("../middlewares/user-resolver");
-const { createCategory, getCategoryByName } = require("./categories.service");
-const checkAdminRights = require("../middlewares/check-admin-rights");
+const {
+  createCategory,
+  getCategoryByNameAndType,
+} = require("./categories.service");
 
 async function controller(req, res) {
-  let { name, type } = req.body;
+  let { name, type, user } = req.body;
 
-  const result = await createCategory({ name, type });
+  const result = await createCategory({ name, type, user: user.username });
 
   res.json({
     success: result.acknowledged,
@@ -22,6 +24,8 @@ async function controller(req, res) {
 }
 
 async function validateParams(req, res, next) {
+  const { user } = req.body;
+
   const errorTypedFields = ["name", "type"].filter(
     (field) => typeof Reflect.get(req.body, field) !== "string"
   );
@@ -39,10 +43,16 @@ async function validateParams(req, res, next) {
       `Field 'type' should be either 'debit' or 'credit'`
     );
   }
-  
+
   const regexName = new RegExp(`\\b${name}\\b`, "i");
 
-  const getCategory = await getCategoryByName({ name: { $regex: regexName } });
+  const getCategory = await getCategoryByNameAndType(
+    {
+      name: { $regex: regexName },
+      type: type,
+    },
+    user.username
+  );
 
   if (getCategory) {
     throw new httpError.BadRequest(`Category '${name}' already exists.`);

@@ -4,8 +4,9 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 
 async function controller(req, res) {
   const { id } = req.params;
+  const {user} = req.body;
 
-  const result = await getTransaction(id);
+  const result = await getTransaction(id, user.username);
 
   if (!result) {
     res.json({

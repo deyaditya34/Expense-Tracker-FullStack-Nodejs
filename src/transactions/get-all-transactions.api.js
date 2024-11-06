@@ -3,11 +3,11 @@ const pagination = require("../middlewares/pagination");
 const userResolver = require("../middlewares/user-resolver");
 const { getAllTransactions } = require("./transactions.service");
 
-
 async function controller(req, res) {
   const { pageNo, pageSize } = req.query;
-  
-  const result = await getAllTransactions(pageNo, pageSize);
+  const { user } = req.body;
+
+  const result = await getAllTransactions(user.username, pageNo, pageSize);
 
   if (result.length === 0) {
     res.json({

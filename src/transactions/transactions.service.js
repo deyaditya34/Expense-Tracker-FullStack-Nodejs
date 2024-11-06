@@ -8,54 +8,60 @@ function createTransaction(transactionDetails) {
     .insertOne(transactionDetails);
 }
 
-function getAllTransactions(pageNo, pageSize) {
+function getAllTransactions(username, pageNo, pageSize) {
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
-    .find({})
+    .find({ createdBy: { $eq: username } })
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
     .toArray();
 }
 
-function getTransaction(transactionId) {
+function getTransaction(transactionId, username) {
   if (!ObjectId.isValid(transactionId)) {
     return false;
   }
 
-  return database
-    .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
-    .findOne({ _id: new ObjectId(transactionId) });
+  return database.getCollection(config.COLLECTION_NAMES_TRANSACTIONS).findOne({
+    _id: new ObjectId(transactionId),
+    createdBy: { $eq: username },
+  });
 }
 
-function searchTransaction(transactionDetails, pageNo, pageSize) {
+function searchTransaction(transactionDetails, username, pageNo, pageSize) {
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
-    .find(transactionDetails)
-    .sort({date: -1})
+    .find({ ...transactionDetails, createdBy: { $eq: username } })
+    .sort({ date: -1 })
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
     .toArray();
 }
 
-function searchPendingTransaction(transactionDetails, pageNo, pageSize) {
+function searchPendingTransaction(
+  transactionDetails,
+  username,
+  pageNo,
+  pageSize
+) {
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
-    .find(transactionDetails)
-    .sort({date: -1})
-    .project({date: 1, paymentDue: 1, notes: 1})
+    .find({ ...transactionDetails, createdBy: { $eq: username } })
+    .sort({ date: -1 })
+    .project({ date: 1, paymentDue: 1, notes: 1 })
     .skip((pageNo - 1) * pageSize)
     .limit(pageSize)
-    .toArray()
+    .toArray();
 }
 
-function deleteTransaction(id) {
+function deleteTransaction(id, username) {
   if (!ObjectId.isValid(id)) {
     return false;
   }
 
   return database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
-    .deleteOne({ _id: new ObjectId(id) });
+    .deleteOne({ _id: new ObjectId(id), createdBy: { $eq: username } });
 }
 
 module.exports = {
@@ -64,5 +70,5 @@ module.exports = {
   getTransaction,
   searchTransaction,
   deleteTransaction,
-  searchPendingTransaction
+  searchPendingTransaction,
 };

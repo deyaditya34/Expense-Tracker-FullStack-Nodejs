@@ -6,8 +6,9 @@ const config = require("../config");
 
 async function controller(req, res) {
   const { id } = req.params;
+  const {user} = req.body;
 
-  const existingTransaction = await transactionService.getTransaction(id);
+  const existingTransaction = await transactionService.getTransaction(id, user.username);
 
   if (!existingTransaction) {
     res.json({
@@ -21,14 +22,14 @@ async function controller(req, res) {
     } else {
       existingTransaction.type = "debit"
     }
-    console.log("existingTransaction -", existingTransaction)
+    
     eventBridge.emit(
       config.EVENT_NAMES_TRANSACTIONS_CREATED,
       existingTransaction.type,
       existingTransaction.amount
     );
 
-    await transactionService.deleteTransaction(id);
+    await transactionService.deleteTransaction(id, user.username);
 
     res.json({
         success: true,

@@ -1,163 +1,165 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" , initial-scale="1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" , initial-scale="1.0" />
     <title>Home</title>
-    <link rel="icon" type="image/x-icon" href="./c02aae5931cc43c4b8af9ec441e7b29f.png">
-</head>
-<style>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="./c02aae5931cc43c4b8af9ec441e7b29f.png"
+    />
+  </head>
+  <style>
     * {
-        margin: 0rem;
-        padding: 0px;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        background-color: #ffffff;
-        color: #000000;
+      margin: 0rem;
+      padding: 0px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+      background-color: #ffffff;
+      color: #000000;
     }
 
     .main-container {
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        width: 99.5%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      width: 99.5%;
     }
 
     .main-heading {
-        display: flex;
-        border: 5px solid #3F72AF;
-        background-color: rgb(13, 46, 71);
+      display: flex;
+      border: 5px solid #3f72af;
+      background-color: rgb(13, 46, 71);
     }
 
     .heading {
-        width: 92%;
-        text-align: center;
-        box-sizing: border-box;
-        background-color: #3F72AF;
-
+      width: 92%;
+      text-align: center;
+      box-sizing: border-box;
+      background-color: #3f72af;
     }
 
     .nav {
-        display: flex;
-        width: 8%;
-        box-sizing: border-box;
-        justify-content: flex-end;
-        background-color: rgb(41, 118, 177);
+      display: flex;
+      width: 8%;
+      box-sizing: border-box;
+      justify-content: flex-end;
+      background-color: rgb(41, 118, 177);
     }
 
     #logout {
-        margin: 0.6rem;
-        display: flex;
+      margin: 0.6rem;
+      display: flex;
     }
 
     #logoutButton {
-        font-size: 1.3rem;
-        font-weight: bolder;
-        padding: 0.3rem 0.5rem;
-        border-radius: 10px;
-        background-color: #3a587c;
-        color: white;
-        border: 3px solid #EF9C66;
+      font-size: 1.3rem;
+      font-weight: bolder;
+      padding: 0.3rem 0.5rem;
+      border-radius: 10px;
+      background-color: #3a587c;
+      color: white;
+      border: 3px solid #ef9c66;
     }
 
     #logoutButton:hover {
-        border: 3px solid #3F72AF;
-        background-color: #EF9C66;
-        color: #3a587c;
+      border: 3px solid #3f72af;
+      background-color: #ef9c66;
+      color: #3a587c;
     }
 
     .body-container {
-        display: grid;
-        grid-template-columns: 20% 60% 20%;
-        box-sizing: border-box;
-        width: 100%;
-        justify-content: center;
-        margin: 0.15rem 0 0.15rem .15rem;
-
+      display: grid;
+      grid-template-columns: 20% 60% 20%;
+      box-sizing: border-box;
+      width: 100%;
+      justify-content: center;
+      margin: 0.15rem 0 0.15rem 0.15rem;
     }
 
     .sub-cont {
-        height: 80vh;
-        border: 5px solid #3F72AF;
-        box-sizing: border-box;
-        margin: 0 0.5rem 0 0;
-
+      height: 80vh;
+      border: 5px solid #3f72af;
+      box-sizing: border-box;
+      margin: 0 0.5rem 0 0;
     }
 
     .sub-cont:last-child {
-        margin-right: 0;
+      margin-right: 0;
     }
 
     .transaction-view {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        box-sizing: border-box;
-        padding: 0;
-        gap: 0;
+      display: grid;
+      grid-template-columns: 50% 50%;
+      box-sizing: border-box;
+      padding: 0;
+      gap: 0;
     }
 
     .tr-view-child {
-        border: 5px solid #3F72AF
+      border: 5px solid #3f72af;
     }
 
     .pending-transactions {
-        margin: 0.15rem 0 1rem 0;
-        text-align: center;
+      margin: 0.15rem 0 1rem 0;
+      text-align: center;
     }
 
     .form-field {
-        display: flex;
-        margin-top: 1rem;
-        padding: 0 1rem;
+      display: flex;
+      margin-top: 1rem;
+      padding: 0 1rem;
     }
 
-    .form-field>input,
-    .form-field>select,
-    .form-field>textarea {
-        width: 70%;
-        background-color: #7AB2B2;
-        color: rgb(59, 27, 27);
-        border-radius: 10px;
-        font-weight: bolder;
-        font-size: 20px;
+    .form-field > input,
+    .form-field > select,
+    .form-field > textarea {
+      width: 70%;
+      background-color: #7ab2b2;
+      color: rgb(59, 27, 27);
+      border-radius: 10px;
+      font-weight: bolder;
+      font-size: 20px;
     }
 
-    .form-field>textarea {
-        height: 50px;
+    .form-field > textarea {
+      height: 50px;
     }
 
-    .form-field>input:hover,
-    .form-field>select:hover,
-    .form-field>textarea:hover {
-        background-color: #DBE2EF;
+    .form-field > input:hover,
+    .form-field > select:hover,
+    .form-field > textarea:hover {
+      background-color: #dbe2ef;
     }
 
-    .form-field>label {
-        width: 30%;
-        font-weight: bolder;
+    .form-field > label {
+      width: 30%;
+      font-weight: bolder;
     }
 
     .form-field-submit {
-        text-align: center;
-        margin: 1rem 0 0.5rem 0;
+      text-align: center;
+      margin: 1rem 0 0.5rem 0;
     }
 
     .submit-button {
-        padding: 0.15rem 0.5rem;
+      padding: 0.15rem 0.5rem;
     }
 
     .record-tr-form {
-        border: 5px solid #3F72AF;
+      border: 5px solid #3f72af;
     }
 
     .submit-button,
     #income-tr-submit,
     #expense-tr-submit {
-        color: white;
-        background-color: #3F72AF;
-        border-radius: 10px;
-        font-weight: bolder;
-        border: 4px solid #EF9C66;
+      color: white;
+      background-color: #3f72af;
+      border-radius: 10px;
+      font-weight: bolder;
+      border: 4px solid #ef9c66;
     }
 
     #income-tr-submit,
@@ -165,331 +167,329 @@
     #business-balance-submit,
     #business-profit-submit,
     #business-pending-submit {
-        padding: 2px 5px;
+      padding: 2px 5px;
     }
 
     .submit-button:hover,
     #income-tr-submit:hover,
     #expense-tr-submit:hover {
-        border: 5px solid #3F72AF;
-        background-color: #EF9C66;
-        color: #3a587c;
+      border: 5px solid #3f72af;
+      background-color: #ef9c66;
+      color: #3a587c;
     }
 
     .record-transaction {
-        border: none;
+      border: none;
     }
 
     .business-view {
-        border: none;
+      border: none;
     }
 
     .business-balance {
-        border: 5px solid #3F72AF;
-        margin-bottom: 1rem;
-        text-align: center;
+      border: 5px solid #3f72af;
+      margin-bottom: 1rem;
+      text-align: center;
     }
 
     .form-field {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
     }
 
     .business-balance-date-from {
-        width: 50%;
-        text-align: center;
+      width: 50%;
+      text-align: center;
     }
 
-    .business-balance-date-from>label {
-        width: 30%;
-        font-weight: bolder;
+    .business-balance-date-from > label {
+      width: 30%;
+      font-weight: bolder;
     }
 
-    .business-balance-date-from>input {
-        width: 70%;
-        font-weight: bolder;
+    .business-balance-date-from > input {
+      width: 70%;
+      font-weight: bolder;
     }
 
     .business-balance-date-to {
-        width: 50%;
-        text-align: center;
+      width: 50%;
+      text-align: center;
     }
 
-    .business-balance-date-to>label {
-        width: 30%;
-        font-weight: bolder;
+    .business-balance-date-to > label {
+      width: 30%;
+      font-weight: bolder;
     }
 
-    .business-balance-date-to>input {
-        width: 70%;
-        font-weight: bolder;
+    .business-balance-date-to > input {
+      width: 70%;
+      font-weight: bolder;
     }
 
     .balance {
-        text-align: center;
-        width: 50%;
-        justify-content: center;
-        margin: auto;
+      text-align: center;
+      width: 50%;
+      justify-content: center;
+      margin: auto;
     }
 
     .balance-label,
     .balance-value {
-        width: 100%;
-        margin: 0 0 .3rem 0;
-        font-weight: bolder;
+      width: 100%;
+      margin: 0 0 0.3rem 0;
+      font-weight: bolder;
     }
 
     #dateFrom-bus-bal,
     #dateTo-bus-bal {
-        background-color: #7AB2B2;
-        color: rgb(59, 27, 27);
-        border-radius: 10px;
+      background-color: #7ab2b2;
+      color: rgb(59, 27, 27);
+      border-radius: 10px;
     }
 
     #dateFrom-bus-bal:hover,
     #dateTo-bus-bal:hover {
-        background-color: #DBE2EF;
+      background-color: #dbe2ef;
     }
 
     .balance-value {
-        background-color: rgb(213, 222, 212);
-        border: 4px solid rgb(36, 100, 76);
-        border-radius: 10px;
-        text-align: center;
-        vertical-align: middle;
-        height: 1.5rem;
-        width: 4rem;
-        margin: auto;
-        color: rgb(9, 66, 112);
+      background-color: rgb(213, 222, 212);
+      border: 4px solid rgb(36, 100, 76);
+      border-radius: 10px;
+      text-align: center;
+      vertical-align: middle;
+      height: 1.5rem;
+      width: 4rem;
+      margin: auto;
+      color: rgb(9, 66, 112);
     }
 
     .bus-profit-label {
-        display: flex;
-        justify-content: center;
+      display: flex;
+      justify-content: center;
     }
 
-
     .business-profit {
-        border: 5px solid #3F72AF;
-        margin-bottom: 1rem;
+      border: 5px solid #3f72af;
+      margin-bottom: 1rem;
     }
 
     .business-profit-profit-cont {
-        display: flex;
-        margin-bottom: 1rem;
+      display: flex;
+      margin-bottom: 1rem;
     }
 
     #dateFrom-bus-profit,
     #dateTo-bus-profit {
-        background-color: #7AB2B2;
-        color: rgb(59, 27, 27);
-        border-radius: 10px;
+      background-color: #7ab2b2;
+      color: rgb(59, 27, 27);
+      border-radius: 10px;
     }
 
     #dateFrom-bus-profit:hover,
     #dateTo-bus-profit:hover {
-        background-color: #DBE2EF;
+      background-color: #dbe2ef;
     }
 
     .profit {
-        justify-content: center;
-        margin: auto;
+      justify-content: center;
+      margin: auto;
     }
 
     .pending-transactions {
-        border: 5px solid #3F72AF;
-        margin-bottom: 1rem;
+      border: 5px solid #3f72af;
+      margin-bottom: 1rem;
     }
 
     #dateFrom-pending-tr,
     #dateTo-pending-tr {
-        background-color: #7AB2B2;
-        color: rgb(59, 27, 27);
-        border-radius: 10px;
+      background-color: #7ab2b2;
+      color: rgb(59, 27, 27);
+      border-radius: 10px;
     }
 
     #dateFrom-pending-tr:hover,
     #dateTo-pending-tr:hover {
-        background-color: #DBE2EF;
+      background-color: #dbe2ef;
     }
 
     .pending-tr-cont {
-        margin-bottom: 1rem;
+      margin-bottom: 1rem;
     }
 
     .hidden {
-        display: none;
+      display: none;
     }
 
     .pending-tr-cont-1 {
-        display: flex;
-        width: 100%;
-        margin: 0 0 1.5rem 1rem;
+      display: flex;
+      width: 100%;
+      margin: 0 0 1.5rem 1rem;
     }
 
     .pending-tr-cont-2 {
-        margin-bottom: 1rem;
-        display: flex;
-        width: 100%;
+      margin-bottom: 1rem;
+      display: flex;
+      width: 100%;
     }
 
     .pending-cont-date-value,
     .pending-cont-payment-due-value {
-        font-size: 10px;
-        font-weight: bolder;
+      font-size: 10px;
+      font-weight: bolder;
     }
 
     .pending-cont-payment-due-value,
     .pending-cont-date-value {
-        border: 3px solid rgb(0, 0, 0);
-        width: 6rem;
-        height: 1.5rem;
-        text-align: center;
-        font-size: 13px;
-        font-weight: bolder;
-        background-color: rgb(248, 240, 219);
-        border-radius: 10px;
-        color: rgb(0, 0, 0);
-        margin: auto;
+      border: 3px solid rgb(0, 0, 0);
+      width: 6rem;
+      height: 1.5rem;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bolder;
+      background-color: rgb(248, 240, 219);
+      border-radius: 10px;
+      color: rgb(0, 0, 0);
+      margin: auto;
     }
 
     .pending-cont-notes-value {
-        border: 3px solid rgb(0, 0, 0);
-        width: 15rem;
-        height: 3rem;
-        text-align: center;
-        font-size: 13px;
-        font-weight: bolder;
-        background-color: rgb(248, 240, 219);
-        border-radius: 10px;
-        color: rgb(0, 0, 0);
-        margin: auto;
+      border: 3px solid rgb(0, 0, 0);
+      width: 15rem;
+      height: 3rem;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bolder;
+      background-color: rgb(248, 240, 219);
+      border-radius: 10px;
+      color: rgb(0, 0, 0);
+      margin: auto;
     }
 
     .pending-cont-date-label,
     .pending-cont-payment-due-label,
     .pending-cont-notes-label {
-        font-weight: bolder;
+      font-weight: bolder;
     }
 
     .pending-pagination {
-        margin: 2rem 0 1rem 0;
+      margin: 2rem 0 1rem 0;
     }
 
     .pending-tr-cont {
-        overflow-y: scroll;
-        height: 30vh;
+      overflow-y: scroll;
+      height: 30vh;
     }
 
     .income-heading,
     .expense-heading {
-        display: flex;
-        margin-bottom: 1rem;
-        justify-content: space-between;
-        margin-top: 1px;
-        margin-right: 1px;
-        margin-left: 1px;
+      display: flex;
+      margin-bottom: 1rem;
+      justify-content: space-between;
+      margin-top: 1px;
+      margin-right: 1px;
+      margin-left: 1px;
     }
 
-    .income-heading>label,
-    .income-heading>input {
-        margin-right: 1rem;
-        font-weight: bolder;
+    .income-heading > label,
+    .income-heading > input {
+      margin-right: 1rem;
+      font-weight: bolder;
     }
 
-    .income-tr-form>input,
-    .income-tr-form>label,
-    .expense-tr-form>input,
-    .expense-tr-form>label {
-        font-weight: bolder;
+    .income-tr-form > input,
+    .income-tr-form > label,
+    .expense-tr-form > input,
+    .expense-tr-form > label {
+      font-weight: bolder;
     }
 
     #dateTo-inc-tr,
     #dateFrom-inc-tr {
-        background-color: #7AB2B2;
-        color: rgb(59, 27, 27);
-        border-radius: 10px;
+      background-color: #7ab2b2;
+      color: rgb(59, 27, 27);
+      border-radius: 10px;
     }
 
     #dateTo-inc-tr:hover,
     #dateFrom-inc-tr:hover {
-        background-color: #DBE2EF;
+      background-color: #dbe2ef;
     }
 
     #dateTo-exp-tr,
     #dateFrom-exp-tr {
-        background-color: #7AB2B2;
-        color: rgb(59, 27, 27);
-        border-radius: 10px;
+      background-color: #7ab2b2;
+      color: rgb(59, 27, 27);
+      border-radius: 10px;
     }
 
     #dateTo-exp-tr:hover,
     #dateFrom-exp-tr:hover {
-        background-color: #DBE2EF;
+      background-color: #dbe2ef;
     }
 
     .inc-label {
-        font-weight: bolder;
+      font-weight: bolder;
     }
 
     .exp-label {
-        font-weight: bolder;
+      font-weight: bolder;
     }
 
     #inc-delete-button,
     #exp-delete-button,
     #pending-tr-delete {
-        color: rgb(255, 255, 255);
-        font-weight: bolder;
-        background-color: rgb(224, 58, 58);
-        border-radius: 10px;
-        padding: 2px 6px;
-        font-size: 15px;
-
+      color: rgb(255, 255, 255);
+      font-weight: bolder;
+      background-color: rgb(224, 58, 58);
+      border-radius: 10px;
+      padding: 2px 6px;
+      font-size: 15px;
     }
 
     #inc-delete-button:hover,
     #exp-delete-button:hover,
     #pending-tr-delete:hover {
-        border: 5px solid rgb(228, 206, 12);
-        background-color: rgb(255, 0, 0);
-        color: white;
-        font-weight: bolder;
+      border: 5px solid rgb(228, 206, 12);
+      background-color: rgb(255, 0, 0);
+      color: white;
+      font-weight: bolder;
     }
 
     .income-tr-cont,
     .expense-tr-cont {
-        overflow-y: scroll;
-        height: 70vh;
+      overflow-y: scroll;
+      height: 70vh;
     }
 
     .income-tr-cont1,
     .income-tr-cont2,
     .expense-tr-cont1,
     .expense-tr-cont2 {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.3rem;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.3rem;
     }
 
     .income-tr-cont3,
     .expense-tr-cont3 {
-        display: flex;
-        max-width: 100%;
-        margin-bottom: 2rem;
+      display: flex;
+      max-width: 100%;
+      margin-bottom: 2rem;
     }
 
     .cont3-1 {
-        display: flex;
-        width: 50%;
-        justify-content: space-around;
+      display: flex;
+      width: 50%;
+      justify-content: space-around;
     }
 
     .cont3-2 {
-        display: flex;
-        width: 50%;
-        justify-content: center;
+      display: flex;
+      width: 50%;
+      justify-content: center;
     }
 
     .inc-category-val,
@@ -499,15 +499,15 @@
     .inc-bank-inflow-val,
     .inc-bank-outflow-val,
     .inc-status-val {
-        border: 3px solid rgb(0, 0, 0);
-        width: 6rem;
-        height: 1.5rem;
-        text-align: center;
-        font-size: 13px;
-        font-weight: bolder;
-        background-color: rgb(215, 240, 215);
-        border-radius: 10px;
-        color: rgb(0, 0, 0);
+      border: 3px solid rgb(0, 0, 0);
+      width: 6rem;
+      height: 1.5rem;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bolder;
+      background-color: rgb(215, 240, 215);
+      border-radius: 10px;
+      color: rgb(0, 0, 0);
     }
 
     .inc-category-val:hover,
@@ -517,8 +517,8 @@
     .inc-bank-inflow-val:hover,
     .inc-bank-outflow-val:hover,
     .inc-status-val:hover {
-        background-color: rgb(10, 64, 10);
-        color: white;
+      background-color: rgb(10, 64, 10);
+      color: white;
     }
 
     .exp-category-val,
@@ -528,15 +528,15 @@
     .exp-bank-inflow-val,
     .exp-bank-outflow-val,
     .exp-status-val {
-        border: 3px solid rgb(0, 0, 0);
-        width: 6rem;
-        height: 1.5rem;
-        text-align: center;
-        font-size: 13px;
-        font-weight: bolder;
-        background-color: rgb(248, 240, 219);
-        border-radius: 10px;
-        color: rgb(0, 0, 0);
+      border: 3px solid rgb(0, 0, 0);
+      width: 6rem;
+      height: 1.5rem;
+      text-align: center;
+      font-size: 13px;
+      font-weight: bolder;
+      background-color: rgb(248, 240, 219);
+      border-radius: 10px;
+      color: rgb(0, 0, 0);
     }
 
     .exp-category-val:hover,
@@ -546,14 +546,14 @@
     .exp-bank-inflow-val:hover,
     .exp-bank-outflow-val:hover,
     .exp-status-val:hover {
-        background-color: rgb(149, 118, 22);
-        color: white;
+      background-color: rgb(149, 118, 22);
+      color: white;
     }
 
     .pagination-income-tr,
     .pagination-expense-tr {
-        display: flex;
-        justify-content: center;
+      display: flex;
+      justify-content: center;
     }
 
     #prev-inc-tr,
@@ -562,12 +562,12 @@
     #next-exp-tr,
     #next-pending-tr,
     #prev-pending-tr {
-        color: white;
-        background-color: #3F72AF;
-        border-radius: 10px;
-        font-weight: bolder;
-        border: 4px solid #EF9C66;
-        padding: 3px 7px;
+      color: white;
+      background-color: #3f72af;
+      border-radius: 10px;
+      font-weight: bolder;
+      border: 4px solid #ef9c66;
+      padding: 3px 7px;
     }
 
     #prev-inc-tr:hover,
@@ -576,1175 +576,1455 @@
     #next-exp-tr:hover,
     #next-pending-tr:hover,
     #prev-pending-tr:hover {
-        border: 5px solid #3F72AF;
-        background-color: #EF9C66;
-        color: #3a587c;
+      border: 5px solid #3f72af;
+      background-color: #ef9c66;
+      color: #3a587c;
     }
 
     .create-category {
-        border: 5px solid #3F72AF;
-        margin-bottom: 1rem;
+      border: 5px solid #3f72af;
+      margin-bottom: 1rem;
     }
-</style>
+  </style>
 
-<body>
+  <body>
     <div class="main-container">
-        <div class="main-heading">
-            <div class="heading">
-                <h1
-                    style="font-family:copperplate; background-color: rgb(41, 118, 177); color: aliceblue; font-size: 50px;">
-                    Welcome to
-                    ONLINE HUB crm portal</h1>
-            </div>
-            <div class="nav">
-                <div id="logout">
-                    <button type="button" id="logoutButton" onclick="logoutUser(event)">Log Out</button>
-                </div>
-            </div>
+      <div class="main-heading">
+        <div class="heading">
+          <h1
+            style="
+              font-family: copperplate;
+              background-color: rgb(41, 118, 177);
+              color: aliceblue;
+              font-size: 50px;
+            "
+          >
+            Welcome to ONLINE HUB crm portal
+          </h1>
         </div>
-        <div class="body-container">
-            <section class="sub-cont record-transaction">
-                <div class="record-tr-form">
-                    <h2 class="form-heading" style="text-align: center; margin: top 0.15rem;">Record a transaction</h2>
-                    <form onsubmit="recordTransaction(event)" class="record-form">
-                        <div class="form-field">
-                            <label for="type">Type</label>
-                            <select id="type" name="type" required>
-                                <option value="income" selected>Income</option>
-                                <option value="expense">Expense</option>
-                            </select>
-                        </div>
-                        <div class="form-field">
-                            <label for="category">Category</label>
-                            <select id="category" name="category" required></select>
-                        </div>
-                        <div class="form-field">
-                            <label for="cashInflow">Cash Inflow</label>
-                            <input type="text" name="cashInflow" id="cashInflow" pattern="\d*">
-                        </div>
-                        <div class="form-field">
-                            <label for="cashOutflow">Cash Outflow</label>
-                            <input type="text" name="cashOutflow" id="cashOutflow" pattern="\d*">
-                        </div>
-                        <div class="form-field">
-                            <label for="bankInflow">Bank Inflow</label>
-                            <input type="text" name="bankInflow" id="bankInflow" pattern="\d*">
-                        </div>
-                        <div class="form-field">
-                            <label for="bankOutflow">Bank Outflow</label>
-                            <input type="text" name="bankOutflow" id="bankOutflow" pattern="\d*">
-                        </div>
-                        <div class="form-field">
-                            <label for="amount">Amount</label>
-                            <input type="text" name="amount" id="amount" required pattern="\d*">
-                        </div>
-                        <div class="form-field">
-                            <label for="status">status</label>
-                            <select id="status" name="status" required>
-                                <option value="pending">Pending</option>
-                                <option value="complete" selected>Complete</option>
-                            </select>
-                        </div>
-                        <div class="form-field">
-                            <label for="notes">Notes</label>
-                            <textarea type="text" id="notes" name="notes"></textarea>
-                        </div>
-                        <div class="form-field">
-                            <label for="date">Date</label>
-                            <input type="date" id="date" name="date" required>
-                        </div>
-                        <div class="form-field">
-                            <label for="paymentDue">Payment Due</label>
-                            <input type="text" id="paymentDue" name="paymentDue" pattern="\d*">
-                        </div>
-                        <div class="form-field-submit">
-                            <input type="submit" id="record-tr-form-submit" class="submit-button" value="SUBMIT">
-                        </div>
-                    </form>
-                </div>
-            </section>
-
-            <section class="sub-cont transaction-view">
-                <div class="income tr-view-child">
-                    <div class="income-heading">
-                        <h4 style="margin-right: .5rem;">Income Transactions</h4>
-                        <form onsubmit="getIncomeTransactions(event)">
-                            <div class="income-tr-form">
-                                <label for="dateFrom-inc-tr">From</label>
-                                <input type="date" id="dateFrom-inc-tr" name="dateFrom-inc-tr" required>
-                                <label for="dateTo-inc-tr">To</label>
-                                <input type="date" id="dateTo-inc-tr" name="dateTo-inc-tr" required>
-                                <input type="submit" id="income-tr-submit" value="SUBMIT">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="income-tr-cont hidden">
-                        <div class="income-tr-cont1">
-                            <div class="category-label inc-label">Category</div>
-                            <div class="inc-category-val"></div>
-                            <div class="bank-outflow-label inc-label">Bank Outflow</div>
-                            <div class="inc-bank-outflow-val"></div>
-                            <div class="cash-inflow-label inc-label">Cash Inflow</div>
-                            <div class="inc-cash-inflow-val"></div>
-                        </div>
-                        <div class="income-tr-cont2">
-                            <div class="cash-outflow-label inc-label">Cash Outflow</div>
-                            <div class="inc-cash-outflow-val"></div>
-                            <div class="bank-inflow-label inc-label">Bank Inflow</div>
-                            <div class="inc-bank-inflow-val"></div>
-                            <div class="amount-label inc-label">Amount</div>
-                            <div class="inc-amount-val"></div>
-                        </div>
-                        <div class="income-tr-cont3">
-                            <div class="cont3-1">
-                                <div class="status-label inc-label">Status</div>
-                                <div class="inc-status-val"></div>
-                            </div>
-                            <div class="cont3-2">
-                                <div class="delete-cont">
-                                    <button type="button" id="inc-delete-button">DELETE</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pagination-income-tr">
-                        <div class="pagination-inc-tr" id="pagination-inc-tr" data-page="1">
-                            <button type="button" id="prev-inc-tr" name="prev"
-                                style="margin-right: .5rem;">PREV</button>
-                            <button type="button" id="next-inc-tr" name="next" style="margin-left: .5rem;">NEXT</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="expense tr-view-child">
-                    <div class="expense-heading">
-                        <h4 style="margin-right: .5rem;">Expense Transactions</h4>
-                        <form onsubmit="getExpenseTransactions(event)">
-                            <div class="expense-tr-form">
-                                <label for="dateFrom">From</label>
-                                <input type="date" id="dateFrom-exp-tr" name="dateFrom" required>
-                                <label for="dateTo">To</label>
-                                <input type="date" id="dateTo-exp-tr" name="dateTo" required>
-                                <input type="submit" id="expense-tr-submit" value="SUBMIT">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="expense-tr-cont hidden">
-                        <div class="expense-tr-cont1">
-                            <div class="category-label exp-label">Category</div>
-                            <div class="exp-category-val"></div>
-                            <div class="bank-outflow-label exp-label">Bank Outflow</div>
-                            <div class="exp-bank-outflow-val"></div>
-                            <div class="cash-inflow-label exp-label">Cash Inflow</div>
-                            <div class="exp-cash-inflow-val"></div>
-                        </div>
-                        <div class="expense-tr-cont2">
-                            <div class="cash-outflow-label exp-label">Cash Outflow</div>
-                            <div class="exp-cash-outflow-val"></div>
-                            <div class="bank-inflow-label exp-label">Bank Inflow</div>
-                            <div class="exp-bank-inflow-val exp-label"></div>
-                            <div class="amount-label exp-label">Amount</div>
-                            <div class="exp-amount-val"></div>
-                        </div>
-                        <div class="expense-tr-cont3">
-                            <div class="cont3-1">
-                                <div class="status-label exp-label">Status</div>
-                                <div class="exp-status-val"></div>
-                            </div>
-                            <div class="cont3-2">
-                                <div class="delete-cont">
-                                    <button type="button" id="exp-delete-button">DELETE</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pagination-expense-tr">
-                        <div class="pagination-exp-tr" id="pagination-exp-tr" data-page="1">
-                            <button type="button" id="prev-exp-tr" name="prev-exp-tr"
-                                style="margin-right: .5rem;">PREV</button>
-                            <button type="button" id="next-exp-tr" name="next-exp-tr"
-                                style="margin-left: .5rem;">NEXT</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="sub-cont business-view">
-
-                <div class="business-balance">
-                    <h2 class="form-heading" style="margin-bottom: 1rem;">Business Balance</h2>
-                    <form onsubmit="getBusinessBalance(event)">
-                        <div class="form-field">
-
-                            <div class="business-balance-date-from">
-                                <label for="dateFrom">From</label>
-                                <input type="date" id="dateFrom-bus-bal" name="dateTo" required>
-                            </div>
-
-                            <div class="business-balance-date-to">
-                                <label for="dateTo">To</label>
-                                <input type="date" id="dateTo-bus-bal" name="dateTo" required>
-                            </div>
-                        </div>
-
-                        <div class="form-field-submit"
-                            style="margin-bottom: 1rem; display: flex; justify-content: center;">
-                            <input type="submit" id="business-balance-submit" class="submit-button" value="SUBMIT">
-                        </div>
-
-                        <div class="business-balance-cash-bank-container" style="margin-bottom: 1rem; display: flex;">
-
-                            <div class="balance">
-                                <div class="balance-label">CASH BALANCE</div>
-                                <div class="balance-value" id="cash-balance-bus-bal"></div>
-                            </div>
-
-                            <div class="balance">
-                                <div class="balance-label">BANK BALANCE</div>
-                                <div class="balance-value" id="bank-balance-bus-bal"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="business-profit">
-                    <h2 class="form-heading" style="margin-bottom: 1rem; text-align: center;">Business Profit</h2>
-
-                    <form onsubmit="getBusinessProfit(event)">
-                        <div class="form-field">
-                            <div class="business-balance-date-from">
-                                <label for="dateFrom">From</label>
-                                <input type="date" id="dateFrom-bus-profit" name="dateTo" required>
-                            </div>
-
-                            <div class="business-balance-date-to">
-                                <label for="dateTo">To</label>
-                                <input type="date" id="dateTo-bus-profit" name="dateTo" required>
-                            </div>
-                        </div>
-
-                        <div class="form-field-submit"
-                            style="margin-bottom: 1rem; display: flex; justify-content: center;">
-                            <input type="submit" id="business-profit-submit" class="submit-button" value="SUBMIT">
-                        </div>
-
-                        <div class="business-profit-profit-cont">
-                            <div class="profit">
-                                <div class="balance-label bus-profit-label">PROFIT</div>
-                                <div class="balance-value" id="bank-balance-bus-profit"></div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="pending-transactions">
-                    <h2 class="form-heading">Pending Transactions</h2>
-                    <form onsubmit="getPendingTransactions(event)" class="pending-tr-form">
-                        <div class="form-field">
-                            <div class="business-balance-date-from">
-                                <label for="dateFrom">From</label>
-                                <input type="date" id="dateFrom-pending-tr" name="dateTo" required>
-                            </div>
-
-                            <div class="business-balance-date-to">
-                                <label for="dateTo">To</label>
-                                <input type="date" id="dateTo-pending-tr" name="dateTo" required>
-                            </div>
-                        </div>
-
-                        <div class="form-field-submit"
-                            style="margin-bottom: 1rem; display: flex; justify-content: center;">
-                            <input type="submit" id="business-pending-submit" class="submit-button" value="SUBMIT">
-                        </div>
-                    </form>
-                    <div class="pending-tr-cont hidden">
-                        <div class="pending-tr-cont-1">
-                            <div class="pending-cont-date-label">Date</div>
-                            <div class="pending-cont-date-value" id="pending-cont-date-val"></div>
-                            <div class="pending-cont-payment-due-label">Payment Due</div>
-                            <div class="pending-cont-payment-due-value" id="pending-cont-payment-due-val"></div>
-                        </div>
-                        <div class="pending-tr-cont-2">
-                            <div class="pending-cont-notes-label">Notes</div>
-                            <div class="pending-cont-notes-value"></div>
-                            <div class="pending-cont-tr-delete">
-                                <button type="button" id="pending-tr-delete">DELETE</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="pending-pagination">
-                        <div class="pagination" id="pagination" data-page="1">
-                            <button type="button" id="prev-pending-tr" name="prev"
-                                style="margin-right: .5rem;">PREV</button>
-                            <button type="button" id="next-pending-tr" name="next-pending-tr"
-                                style="margin-left: .5rem;">NEXT</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="create-category">
-                    <h2 class="form-heading" style="margin-bottom: 1rem; text-align: center;">Create Category</h2>
-                    <form id="create-category-form" onsubmit="createCategory(event)">
-                        <div class="form-field">
-                            <label for="type-label">Type</label>
-                            <select id="type-label" name="type-label" required>
-                                <option value="debit">Income</option>
-                                <option value="credit">Expense</option>
-                            </select>
-                        </div>
-                        <div class="form-field">
-                            <label for="category-name-label">Category Name</label>
-                            <input type="text" id="category-name-label" name="category-name-label">
-                        </div>
-                        <div class="form-field-submit">
-                            <input type="submit" id="category-create-submit" class="submit-button" value="SUBMIT">
-                        </div>
-                    </form>
-                </div>
-            </section>
+        <div class="nav">
+          <div id="logout">
+            <button type="button" id="logoutButton" onclick="logoutUser(event)">
+              Log Out
+            </button>
+          </div>
         </div>
+      </div>
+      <div class="body-container">
+        <section class="sub-cont record-transaction">
+          <div class="record-tr-form">
+            <h2
+              class="form-heading"
+              style="text-align: center; margin: top 0.15rem"
+            >
+              Record a transaction
+            </h2>
+            <form onsubmit="recordTransaction(event)" class="record-form">
+              <div class="form-field">
+                <label for="type">Type</label>
+                <select id="type" name="type" required>
+                  <option value="income" selected>Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="category">Category</label>
+                <select id="category" name="category" required></select>
+              </div>
+              <div class="form-field">
+                <label for="cashInflow">Cash Inflow</label>
+                <input
+                  type="text"
+                  name="cashInflow"
+                  id="cashInflow"
+                  pattern="\d*"
+                />
+              </div>
+              <div class="form-field">
+                <label for="cashOutflow">Cash Outflow</label>
+                <input
+                  type="text"
+                  name="cashOutflow"
+                  id="cashOutflow"
+                  pattern="\d*"
+                />
+              </div>
+              <div class="form-field">
+                <label for="bankInflow">Bank Inflow</label>
+                <input
+                  type="text"
+                  name="bankInflow"
+                  id="bankInflow"
+                  pattern="\d*"
+                />
+              </div>
+              <div class="form-field">
+                <label for="bankOutflow">Bank Outflow</label>
+                <input
+                  type="text"
+                  name="bankOutflow"
+                  id="bankOutflow"
+                  pattern="\d*"
+                />
+              </div>
+              <div class="form-field">
+                <label for="amount">Amount</label>
+                <input
+                  type="text"
+                  name="amount"
+                  id="amount"
+                  required
+                  pattern="\d*"
+                />
+              </div>
+              <div class="form-field">
+                <label for="status">status</label>
+                <select id="status" name="status" required>
+                  <option value="pending">Pending</option>
+                  <option value="complete" selected>Complete</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="notes">Notes</label>
+                <textarea type="text" id="notes" name="notes"></textarea>
+              </div>
+              <div class="form-field">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" required />
+              </div>
+              <div class="form-field">
+                <label for="paymentDue">Payment Due</label>
+                <input
+                  type="text"
+                  id="paymentDue"
+                  name="paymentDue"
+                  pattern="\d*"
+                />
+              </div>
+              <div class="form-field-submit">
+                <input
+                  type="submit"
+                  id="record-tr-form-submit"
+                  class="submit-button"
+                  value="SUBMIT"
+                />
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="sub-cont transaction-view">
+          <div class="income tr-view-child">
+            <div class="income-heading">
+              <h4 style="margin-right: 0.5rem">Income Transactions</h4>
+              <form onsubmit="getIncomeTransactions(event)">
+                <div class="income-tr-form">
+                  <label for="dateFrom-inc-tr">From</label>
+                  <input
+                    type="date"
+                    id="dateFrom-inc-tr"
+                    name="dateFrom-inc-tr"
+                    required
+                  />
+                  <label for="dateTo-inc-tr">To</label>
+                  <input
+                    type="date"
+                    id="dateTo-inc-tr"
+                    name="dateTo-inc-tr"
+                    required
+                  />
+                  <input type="submit" id="income-tr-submit" value="SUBMIT" />
+                </div>
+              </form>
+            </div>
+            <div class="income-tr-cont hidden">
+              <div class="income-tr-cont1">
+                <div class="category-label inc-label">Category</div>
+                <div class="inc-category-val"></div>
+                <div class="bank-outflow-label inc-label">Bank Outflow</div>
+                <div class="inc-bank-outflow-val"></div>
+                <div class="cash-inflow-label inc-label">Cash Inflow</div>
+                <div class="inc-cash-inflow-val"></div>
+              </div>
+              <div class="income-tr-cont2">
+                <div class="cash-outflow-label inc-label">Cash Outflow</div>
+                <div class="inc-cash-outflow-val"></div>
+                <div class="bank-inflow-label inc-label">Bank Inflow</div>
+                <div class="inc-bank-inflow-val"></div>
+                <div class="amount-label inc-label">Amount</div>
+                <div class="inc-amount-val"></div>
+              </div>
+              <div class="income-tr-cont3">
+                <div class="cont3-1">
+                  <div class="status-label inc-label">Status</div>
+                  <div class="inc-status-val"></div>
+                </div>
+                <div class="cont3-2">
+                  <div class="delete-cont">
+                    <button type="button" id="inc-delete-button">DELETE</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pagination-income-tr">
+              <div
+                class="pagination-inc-tr"
+                id="pagination-inc-tr"
+                data-page="1"
+              >
+                <button
+                  type="button"
+                  id="prev-inc-tr"
+                  name="prev"
+                  style="margin-right: 0.5rem"
+                >
+                  PREV
+                </button>
+                <button
+                  type="button"
+                  id="next-inc-tr"
+                  name="next"
+                  style="margin-left: 0.5rem"
+                >
+                  NEXT
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="expense tr-view-child">
+            <div class="expense-heading">
+              <h4 style="margin-right: 0.5rem">Expense Transactions</h4>
+              <form onsubmit="getExpenseTransactions(event)">
+                <div class="expense-tr-form">
+                  <label for="dateFrom">From</label>
+                  <input
+                    type="date"
+                    id="dateFrom-exp-tr"
+                    name="dateFrom"
+                    required
+                  />
+                  <label for="dateTo">To</label>
+                  <input
+                    type="date"
+                    id="dateTo-exp-tr"
+                    name="dateTo"
+                    required
+                  />
+                  <input type="submit" id="expense-tr-submit" value="SUBMIT" />
+                </div>
+              </form>
+            </div>
+            <div class="expense-tr-cont hidden">
+              <div class="expense-tr-cont1">
+                <div class="category-label exp-label">Category</div>
+                <div class="exp-category-val"></div>
+                <div class="bank-outflow-label exp-label">Bank Outflow</div>
+                <div class="exp-bank-outflow-val"></div>
+                <div class="cash-inflow-label exp-label">Cash Inflow</div>
+                <div class="exp-cash-inflow-val"></div>
+              </div>
+              <div class="expense-tr-cont2">
+                <div class="cash-outflow-label exp-label">Cash Outflow</div>
+                <div class="exp-cash-outflow-val"></div>
+                <div class="bank-inflow-label exp-label">Bank Inflow</div>
+                <div class="exp-bank-inflow-val exp-label"></div>
+                <div class="amount-label exp-label">Amount</div>
+                <div class="exp-amount-val"></div>
+              </div>
+              <div class="expense-tr-cont3">
+                <div class="cont3-1">
+                  <div class="status-label exp-label">Status</div>
+                  <div class="exp-status-val"></div>
+                </div>
+                <div class="cont3-2">
+                  <div class="delete-cont">
+                    <button type="button" id="exp-delete-button">DELETE</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="pagination-expense-tr">
+              <div
+                class="pagination-exp-tr"
+                id="pagination-exp-tr"
+                data-page="1"
+              >
+                <button
+                  type="button"
+                  id="prev-exp-tr"
+                  name="prev-exp-tr"
+                  style="margin-right: 0.5rem"
+                >
+                  PREV
+                </button>
+                <button
+                  type="button"
+                  id="next-exp-tr"
+                  name="next-exp-tr"
+                  style="margin-left: 0.5rem"
+                >
+                  NEXT
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="sub-cont business-view">
+          <div class="business-balance">
+            <h2 class="form-heading" style="margin-bottom: 1rem">
+              Business Balance
+            </h2>
+            <form onsubmit="getBusinessBalance(event)">
+              <div class="form-field">
+                <div class="business-balance-date-from">
+                  <label for="dateFrom">From</label>
+                  <input
+                    type="date"
+                    id="dateFrom-bus-bal"
+                    name="dateTo"
+                    required
+                  />
+                </div>
+
+                <div class="business-balance-date-to">
+                  <label for="dateTo">To</label>
+                  <input
+                    type="date"
+                    id="dateTo-bus-bal"
+                    name="dateTo"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div
+                class="form-field-submit"
+                style="
+                  margin-bottom: 1rem;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                <input
+                  type="submit"
+                  id="business-balance-submit"
+                  class="submit-button"
+                  value="SUBMIT"
+                />
+              </div>
+
+              <div
+                class="business-balance-cash-bank-container"
+                style="margin-bottom: 1rem; display: flex"
+              >
+                <div class="balance">
+                  <div class="balance-label">CASH BALANCE</div>
+                  <div class="balance-value" id="cash-balance-bus-bal"></div>
+                </div>
+
+                <div class="balance">
+                  <div class="balance-label">BANK BALANCE</div>
+                  <div class="balance-value" id="bank-balance-bus-bal"></div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="business-profit">
+            <h2
+              class="form-heading"
+              style="margin-bottom: 1rem; text-align: center"
+            >
+              Business Profit
+            </h2>
+
+            <form onsubmit="getBusinessProfit(event)">
+              <div class="form-field">
+                <div class="business-balance-date-from">
+                  <label for="dateFrom">From</label>
+                  <input
+                    type="date"
+                    id="dateFrom-bus-profit"
+                    name="dateTo"
+                    required
+                  />
+                </div>
+
+                <div class="business-balance-date-to">
+                  <label for="dateTo">To</label>
+                  <input
+                    type="date"
+                    id="dateTo-bus-profit"
+                    name="dateTo"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div
+                class="form-field-submit"
+                style="
+                  margin-bottom: 1rem;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                <input
+                  type="submit"
+                  id="business-profit-submit"
+                  class="submit-button"
+                  value="SUBMIT"
+                />
+              </div>
+
+              <div class="business-profit-profit-cont">
+                <div class="profit">
+                  <div class="balance-label bus-profit-label">PROFIT</div>
+                  <div class="balance-value" id="bank-balance-bus-profit"></div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="pending-transactions">
+            <h2 class="form-heading">Pending Transactions</h2>
+            <form
+              onsubmit="getPendingTransactions(event)"
+              class="pending-tr-form"
+            >
+              <div class="form-field">
+                <div class="business-balance-date-from">
+                  <label for="dateFrom">From</label>
+                  <input
+                    type="date"
+                    id="dateFrom-pending-tr"
+                    name="dateTo"
+                    required
+                  />
+                </div>
+
+                <div class="business-balance-date-to">
+                  <label for="dateTo">To</label>
+                  <input
+                    type="date"
+                    id="dateTo-pending-tr"
+                    name="dateTo"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div
+                class="form-field-submit"
+                style="
+                  margin-bottom: 1rem;
+                  display: flex;
+                  justify-content: center;
+                "
+              >
+                <input
+                  type="submit"
+                  id="business-pending-submit"
+                  class="submit-button"
+                  value="SUBMIT"
+                />
+              </div>
+            </form>
+            <div class="pending-tr-cont hidden">
+              <div class="pending-tr-cont-1">
+                <div class="pending-cont-date-label">Date</div>
+                <div
+                  class="pending-cont-date-value"
+                  id="pending-cont-date-val"
+                ></div>
+                <div class="pending-cont-payment-due-label">Payment Due</div>
+                <div
+                  class="pending-cont-payment-due-value"
+                  id="pending-cont-payment-due-val"
+                ></div>
+              </div>
+              <div class="pending-tr-cont-2">
+                <div class="pending-cont-notes-label">Notes</div>
+                <div class="pending-cont-notes-value"></div>
+                <div class="pending-cont-tr-delete">
+                  <button type="button" id="pending-tr-delete">DELETE</button>
+                </div>
+              </div>
+            </div>
+            <div class="pending-pagination">
+              <div class="pagination" id="pagination" data-page="1">
+                <button
+                  type="button"
+                  id="prev-pending-tr"
+                  name="prev"
+                  style="margin-right: 0.5rem"
+                >
+                  PREV
+                </button>
+                <button
+                  type="button"
+                  id="next-pending-tr"
+                  name="next-pending-tr"
+                  style="margin-left: 0.5rem"
+                >
+                  NEXT
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="create-category">
+            <h2
+              class="form-heading"
+              style="margin-bottom: 1rem; text-align: center"
+            >
+              Create Category
+            </h2>
+            <form id="create-category-form" onsubmit="createCategory(event)">
+              <div class="form-field">
+                <label for="type-label">Type</label>
+                <select id="type-label" name="type-label" required>
+                  <option value="debit">Income</option>
+                  <option value="credit">Expense</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="category-name-label">Category Name</label>
+                <input
+                  type="text"
+                  id="category-name-label"
+                  name="category-name-label"
+                />
+              </div>
+              <div class="form-field-submit">
+                <input
+                  type="submit"
+                  id="category-create-submit"
+                  class="submit-button"
+                  value="SUBMIT"
+                />
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
     </div>
 
     <script>
-        async function checkAuth() {
-            try {
-                const response = await fetch("https://localhost:3090/auth/check-token", {
-                    method: "GET",
-                    credentials: "include"
-                })
-
-                const data = await response.json();
-
-                if (!data.success) {
-                    console.log("token invalid or not found, redirecting to login page");
-                    window.location.href = "index.html"
-                } else {
-                    console.log("user authenticated")
-                }
-            } catch (err) {
-                console.log("error checkin token:", err);
-                window.location.href = "index.html"
+      async function checkAuth() {
+        try {
+          const response = await fetch(
+            "https://127.0.0.1:3090/auth/check-token",
+            {
+              method: "GET",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              credentials: "include",
+              mode: "cors",
             }
+          );
+
+          const data = await response.json();
+
+          if (!data.success) {
+            console.log(
+              "token invalid or not found, redirecting to login page"
+            );
+            window.location.href = "index.html";
+          } else {
+            console.log("user authenticated");
+          }
+        } catch (err) {
+          console.log("error checkin token:", err);
+          window.location.href = "index.html";
         }
-        window.onload = checkAuth;
+      }
+      window.onload = checkAuth;
 
-        async function logoutUser(event) {
-            event.preventDefault();
+      async function logoutUser(event) {
+        event.preventDefault();
 
-            try {
-                const response = await fetch("https://localhost:3090/auth/logout", {
-                    method: "POST",
-                    credentials: "include"
-                })
-                const data = await response.json();
+        try {
+          const response = await fetch("https://127.0.0.1:3090/auth/logout", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            mode: "cors",
+          });
+          const data = await response.json();
 
-                console.log("response is -", data)
-                if (data.success === false) {
-                    alert(data.error)
-                } else {
-                    alert(data.data)
-                    window.location.href = "index.html"
-                }
-            } catch (err) {
-                console.log("The error is -", err)
-            }
+          console.log("response is -", data);
+          if (data.success === false) {
+            alert(data.error);
+          } else {
+            alert(data.data);
+            window.location.href = "index.html";
+          }
+        } catch (err) {
+          console.log("The error is -", err);
         }
+      }
 
-        document.getElementById("type").addEventListener("change", async function () {
-            const typeElement = document.getElementById("type");
-            const type = typeElement.value;
+      document
+        .getElementById("type")
+        .addEventListener("change", async function () {
+          const typeElement = document.getElementById("type");
+          const type = typeElement.value;
 
-            const categorySelect = document.getElementById("category");
-            categorySelect.innerHTML = "";
+          const categorySelect = document.getElementById("category");
+          categorySelect.innerHTML = "";
 
-            let reqType = "";
+          let reqType = "";
 
-            if (type === "income") {
-                reqType = "debit"
+          if (type === "income") {
+            reqType = "debit";
+          } else {
+            reqType = "credit";
+          }
+
+          try {
+            const response = await fetch(
+              `https://127.0.0.1:3090/categories?type=${reqType}`,
+              {
+                method: "GET",
+                credentials: "include",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                mode: "cors",
+              }
+            );
+
+            const data = await response.json();
+
+            if (data && data.data) {
+              data.data.forEach((category) => {
+                const option = document.createElement("option");
+                option.value = category._id;
+                option.textContent = category.name;
+                categorySelect.appendChild(option);
+              });
             } else {
-                reqType = "credit"
+              const option = document.createElement("option");
+              option.value = "";
+              option.textContent = "NA";
+              categorySelect.appendChild(option);
             }
+          } catch (err) {
+            console.log("error while fetching categories from income -", err);
+          }
+        });
 
-            try {
-                const response = await fetch(`https://localhost:3090/categories?type=${reqType}`, {
-                    method: "GET",
-                    credentials: "include",
-                })
+      document.getElementById("type").dispatchEvent(new Event("change"));
 
-                const data = await response.json();
+      async function recordTransaction(event) {
+        event.preventDefault();
 
-                if (data && data.data) {
-                    data.data.forEach(category => {
-                        const option = document.createElement("option");
-                        option.value = category._id;
-                        option.textContent = category.name;
-                        categorySelect.appendChild(option);
-                    })
-                } else {
-                    const option = document.createElement("option");
-                    option.value = "";
-                    option.textContent = "NA";
-                    categorySelect.appendChild(option)
+        const recordTrParams = {};
+
+        const typeElement = document.getElementById("type");
+
+        let type;
+        if (typeElement.value === "income") {
+          type = "debit";
+        } else {
+          type = "credit";
+        }
+
+        const categoryId = document.getElementById("category").value;
+        const cashInflow = document.getElementById("cashInflow").value;
+        const cashOutflow = document.getElementById("cashOutflow").value;
+        const bankInflow = document.getElementById("bankInflow").value;
+        const bankOutflow = document.getElementById("bankOutflow").value;
+        const amount = document.getElementById("amount").value;
+        const status = document.getElementById("status").value;
+        const notes = document.getElementById("notes").value;
+        const date = document.getElementById("date").value;
+        const paymentDue = document.getElementById("paymentDue").value;
+
+        Reflect.set(recordTrParams, "type", type);
+        Reflect.set(recordTrParams, "categoryId", categoryId);
+        Reflect.set(recordTrParams, "amount", Number(amount));
+        Reflect.set(recordTrParams, "date", date);
+
+        if (cashInflow) {
+          Reflect.set(recordTrParams, "cashInflow", Number(cashInflow));
+        } else {
+          Reflect.set(recordTrParams, "cashInflow", 0);
+        }
+        if (cashOutflow) {
+          Reflect.set(recordTrParams, "cashOutflow", Number(cashOutflow));
+        } else {
+          Reflect.set(recordTrParams, "cashOutflow", 0);
+        }
+        if (bankInflow) {
+          Reflect.set(recordTrParams, "bankInflow", Number(bankInflow));
+        } else {
+          Reflect.set(recordTrParams, "bankInflow", 0);
+        }
+        if (bankOutflow) {
+          Reflect.set(recordTrParams, "bankOutflow", Number(bankOutflow));
+        } else {
+          Reflect.set(recordTrParams, "bankOutflow", 0);
+        }
+        if (status === "pending") {
+          Reflect.set(recordTrParams, "status", status);
+        }
+        if (notes.length > 0) {
+          Reflect.set(recordTrParams, "notes", notes);
+        }
+        if (paymentDue) {
+          Reflect.set(recordTrParams, "paymentDue", Number(paymentDue));
+        } else {
+          Reflect.set(recordTrParams, "paymentDue", 0);
+        }
+
+        try {
+          const response = await fetch("https://127.0.0.1:3090/transactions/", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify(recordTrParams),
+            mode: "cors",
+          });
+
+          const data = await response.json();
+
+          if (data.success === true) {
+            await getIncomeTransactions();
+            await getExpenseTransactions();
+            await getBusinessBalance();
+            await getBusinessProfit();
+            await getPendingTransactions();
+
+            document.getElementById("cashInflow").value = "";
+            document.getElementById("cashOutflow").value = "";
+            document.getElementById("bankInflow").value = "";
+            document.getElementById("bankOutflow").value = "";
+            document.getElementById("amount").value = "";
+            document.getElementById("notes").value = "";
+            document.getElementById("paymentDue").value = "";
+          } else {
+            alert(`error occured in creating transaction - ${data.error}`);
+          }
+        } catch (err) {
+          console.log("error while fetching create transaction api -", err);
+        }
+      }
+
+      async function getBusinessBalance(event) {
+        if (event) event.preventDefault();
+
+        let dateTo = document.getElementById("dateTo-bus-bal").value;
+        let dateFrom = document.getElementById("dateFrom-bus-bal").value;
+
+        if (!dateTo) {
+          dateTo = getCurrentDate();
+        }
+
+        if (!dateFrom) {
+          dateFrom = getCurrentDate();
+        }
+
+        try {
+          const response = await fetch(
+            `https://127.0.0.1:3090/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              mode: "cors",
+            }
+          );
+
+          const data = await response.json();
+          console.log("response -", data);
+          if (data.success === true) {
+            document.getElementById("cash-balance-bus-bal").innerHTML =
+              data.data.totalCashBalance;
+            document.getElementById("bank-balance-bus-bal").innerHTML =
+              data.data.totalBankBalance;
+          } else {
+            alert(`error in calculating balance - ${data.error}`);
+          }
+        } catch (err) {
+          console.log("error while fetching business balance -", err);
+        }
+      }
+
+      async function getBusinessProfit(event) {
+        if (event) event.preventDefault();
+
+        let dateTo = document.getElementById("dateTo-bus-profit").value;
+        let dateFrom = document.getElementById("dateFrom-bus-profit").value;
+
+        if (!dateTo) {
+          dateTo = getCurrentDate();
+        }
+
+        if (!dateFrom) {
+          dateFrom = getCurrentDate();
+        }
+
+        try {
+          const response = await fetch(
+            `https://127.0.0.1:3090/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              mode: "cors",
+            }
+          );
+
+          const data = await response.json();
+
+          console.log("response -", data);
+
+          if (data.success) {
+            document.getElementById("bank-balance-bus-profit").innerHTML =
+              data.data.profit;
+          } else {
+            alert("error while calculating profit.");
+          }
+        } catch (err) {
+          console.log("error while fetching business profit -", err);
+        }
+      }
+
+      async function getPendingTransactions(event) {
+        if (event) event.preventDefault();
+
+        let dateTo = document.getElementById("dateTo-pending-tr").value;
+        let dateFrom = document.getElementById("dateFrom-pending-tr").value;
+        const pageSize = 10;
+        const currentPage = parseInt(
+          document.getElementById("pagination").getAttribute("data-page")
+        );
+
+        if (!dateTo) {
+          dateTo = getCurrentDate();
+        }
+
+        if (!dateFrom) {
+          dateFrom = getCurrentDate();
+        }
+
+        try {
+          const response = await fetch(
+            `https://127.0.0.1:3090/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              mode: "cors",
+            }
+          );
+
+          const data = await response.json();
+
+          const parentContainer = document.querySelector(".pending-tr-cont");
+          parentContainer.innerHTML = "";
+
+          if (data.data.length > 0) {
+            parentContainer.classList.remove("hidden");
+
+            data.data.forEach((transaction) => {
+              const trContainer1 = document.createElement("div");
+              const trContainer2 = document.createElement("div");
+
+              trContainer1.className = "pending-tr-cont-1";
+              trContainer2.className = "pending-tr-cont-2";
+
+              const dateLabelElement = document.createElement("div");
+              dateLabelElement.className = "pending-cont-date-label";
+              dateLabelElement.innerHTML = "Date";
+
+              const dateValElement = document.createElement("div");
+              dateValElement.className = "pending-cont-date-value";
+              dateValElement.id = "pending-cont-date-val";
+              dateValElement.textContent = new Date(
+                transaction.date
+              ).toLocaleDateString();
+
+              const paymentDueLabelElement = document.createElement("div");
+              paymentDueLabelElement.className =
+                "pending-cont-payment-due-label";
+              paymentDueLabelElement.innerHTML = "Payment Due";
+
+              const paymentDueValElement = document.createElement("div");
+              paymentDueValElement.className = "pending-cont-payment-due-value";
+              paymentDueValElement.id = "pending-cont-payment-due-val";
+              paymentDueValElement.innerText = transaction.paymentDue;
+
+              trContainer1.appendChild(dateLabelElement);
+              trContainer1.appendChild(dateValElement);
+              trContainer1.appendChild(paymentDueLabelElement);
+              trContainer1.appendChild(paymentDueValElement);
+
+              const notesLabelElement = document.createElement("div");
+              notesLabelElement.className = "pending-cont-notes-label";
+              notesLabelElement.innerHTML = "Notes";
+
+              const notesValElement = document.createElement("div");
+              notesValElement.className = "pending-cont-notes-value";
+
+              notesValElement.textContent = transaction.notes;
+
+              const deleteContElem = document.createElement("div");
+              deleteContElem.className = "pending-cont-tr-delete";
+
+              const deleteButton = document.createElement("button");
+              deleteButton.id = "pending-tr-delete";
+              deleteButton.innerHTML = "DELETE";
+              deleteButton.setAttribute("_id", transaction._id);
+              deleteButton.onclick = () =>
+                deleteTransaction(deleteButton.getAttribute("_id"));
+
+              deleteContElem.appendChild(deleteButton);
+              trContainer2.appendChild(notesLabelElement);
+              trContainer2.appendChild(notesValElement);
+              trContainer2.appendChild(deleteContElem);
+
+              parentContainer.appendChild(trContainer1);
+              parentContainer.appendChild(trContainer2);
+            });
+          } else {
+            parentContainer.classList.add("hidden");
+          }
+        } catch (err) {
+          console.log("error while fetching pending transactions -", err);
+        }
+      }
+
+      async function deleteTransaction(transactionId) {
+        const confirmation = confirm(
+          "Are you sure you want to delete this transaction?"
+        );
+        if (!confirmation) {
+          return;
+        }
+
+        try {
+          const response = await fetch(
+            `https://127.0.0.1:3090/transactions/${transactionId}`,
+            {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              mode: "cors",
+            }
+          );
+
+          const data = await response.json();
+
+          await getPendingTransactions();
+          await getIncomeTransactions();
+          await getExpenseTransactions();
+          await getBusinessBalance();
+          await getBusinessProfit();
+        } catch (err) {
+          console.log("error while deleting transaction -", err);
+        }
+      }
+
+      async function getIncomeTransactions(event) {
+        if (event) event.preventDefault();
+
+        const type = "debit";
+        let dateTo = document.getElementById("dateTo-inc-tr").value;
+        let dateFrom = document.getElementById("dateFrom-inc-tr").value;
+        const pageSize = 10;
+        const currentPage = parseInt(
+          document.getElementById("pagination-inc-tr").getAttribute("data-page")
+        );
+
+        if (dateTo.length === 0) {
+          dateTo = getCurrentDate();
+        }
+
+        if (dateFrom.length === 0) {
+          dateFrom = getCurrentDate();
+        }
+
+        try {
+          const response = await fetch(
+            `https://127.0.0.1:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              mode: "cors",
+            }
+          );
+
+          const data = await response.json();
+
+          console.log("response from income transactions -", data);
+
+          const parentContainer = document.querySelector(".income-tr-cont");
+          parentContainer.innerHTML = "";
+
+          if (data.data.length > 0) {
+            parentContainer.classList.remove("hidden");
+            // document.querySelector(".pagination-inc-tr").classList.remove("hidden");
+
+            for (const transaction of data.data) {
+              const response = await fetch(
+                `https://127.0.0.1:3090/categories/${transaction.categoryId}`,
+                {
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
+                  credentials: "include",
+                  mode: "cors",
                 }
-            } catch (err) {
-                console.log("error while fetching categories from income -", err);
+              );
+
+              const data = await response.json();
+              const categoryName = data.data.name;
+
+              if (!transaction.bankInflow) {
+                transaction.bankInflow = 0;
+              }
+
+              if (!transaction.bankOutflow) {
+                transaction.bankOutflow = 0;
+              }
+
+              if (!transaction.cashInflow) {
+                transaction.cashInflow = 0;
+              }
+
+              if (!transaction.cashOutflow) {
+                transaction.cashOutflow = 0;
+              }
+
+              if (!transaction.status) {
+                transaction.status = "complete";
+              }
+
+              const trContainer1 = document.createElement("div");
+              const trContainer2 = document.createElement("div");
+              const trContainer3 = document.createElement("div");
+
+              trContainer1.className = "income-tr-cont1";
+              trContainer2.className = "income-tr-cont2";
+              trContainer3.className = "income-tr-cont3";
+
+              const categoryLabelElement = document.createElement("div");
+              categoryLabelElement.className = "inc-label";
+              categoryLabelElement.innerHTML = "Category";
+
+              const categoryValElement = document.createElement("div");
+              categoryValElement.className = "inc-category-val";
+              categoryValElement.textContent = categoryName;
+
+              const bankOutflowLabelElement = document.createElement("div");
+              bankOutflowLabelElement.className = "inc-label";
+              bankOutflowLabelElement.innerHTML = "Bank Outflow";
+
+              const bankOutflowValElement = document.createElement("div");
+              bankOutflowValElement.className = "inc-bank-outflow-val";
+              bankOutflowValElement.textContent = transaction.bankOutflow;
+
+              const cashInflowLabelElement = document.createElement("div");
+              cashInflowLabelElement.className = "inc-label";
+              cashInflowLabelElement.innerHTML = "Cash Inflow";
+
+              const cashInflowValElement = document.createElement("div");
+              cashInflowValElement.className = "inc-cash-inflow-val";
+              cashInflowValElement.textContent = transaction.cashInflow;
+
+              trContainer1.appendChild(categoryLabelElement);
+              trContainer1.appendChild(categoryValElement);
+              trContainer1.appendChild(bankOutflowLabelElement);
+              trContainer1.appendChild(bankOutflowValElement);
+              trContainer1.appendChild(cashInflowLabelElement);
+              trContainer1.appendChild(cashInflowValElement);
+
+              const cashOutflowLabelElement = document.createElement("div");
+              cashOutflowLabelElement.className = "inc-label";
+              cashOutflowLabelElement.innerHTML = "Cash Outflow";
+
+              const cashOutflowValElement = document.createElement("div");
+              cashOutflowValElement.className = "inc-cash-outflow-val";
+              cashOutflowValElement.textContent = transaction.cashOutflow;
+
+              const bankInflowLabelElement = document.createElement("div");
+              bankInflowLabelElement.className = "inc-label";
+              bankInflowLabelElement.innerHTML = "Bank Inflow";
+
+              const bankInflowValElement = document.createElement("div");
+              bankInflowValElement.className = "inc-bank-inflow-val";
+              bankInflowValElement.textContent = transaction.bankInflow;
+
+              const amountLabelElement = document.createElement("div");
+              amountLabelElement.className = "inc-label";
+              amountLabelElement.innerHTML = "Amount";
+
+              const amountValElement = document.createElement("div");
+              amountValElement.className = "inc-amount-val";
+              amountValElement.textContent = transaction.amount;
+
+              trContainer2.appendChild(cashOutflowLabelElement);
+              trContainer2.appendChild(cashOutflowValElement);
+              trContainer2.appendChild(bankInflowLabelElement);
+              trContainer2.appendChild(bankInflowValElement);
+              trContainer2.appendChild(amountLabelElement);
+              trContainer2.appendChild(amountValElement);
+
+              const insideContainer1 = document.createElement("div");
+              insideContainer1.className = "cont3-1";
+
+              const statusLabelElement = document.createElement("div");
+              statusLabelElement.className = "inc-label";
+              statusLabelElement.innerHTML = "Status";
+
+              const statusValElement = document.createElement("div");
+              statusValElement.className = "inc-status-val";
+              statusValElement.textContent = transaction.status;
+
+              insideContainer1.appendChild(statusLabelElement);
+              insideContainer1.appendChild(statusValElement);
+
+              const insideContainer2 = document.createElement("div");
+              insideContainer2.className = "const3-2";
+
+              const deleteContElement = document.createElement("div");
+              deleteContElement.className = "delete-cont";
+
+              const deleteButton = document.createElement("button");
+              deleteButton.id = "inc-delete-button";
+              deleteButton.innerHTML = "DELETE";
+              deleteButton.setAttribute("_id", transaction._id);
+              deleteButton.onclick = () =>
+                deleteTransaction(deleteButton.getAttribute("_id"));
+
+              deleteContElement.appendChild(deleteButton);
+
+              insideContainer2.appendChild(deleteContElement);
+
+              trContainer3.appendChild(insideContainer1);
+              trContainer3.appendChild(insideContainer2);
+
+              parentContainer.appendChild(trContainer1);
+              parentContainer.appendChild(trContainer2);
+              parentContainer.appendChild(trContainer3);
             }
-        })
+          } else {
+            parentContainer.classList.add("hidden");
+            // document.querySelector(".pagination-inc-tr").classList.add("hidden");
+          }
+        } catch (err) {
+          console.log("error in fetching income transactions -", err);
+        }
+      }
 
-        document.getElementById("type").dispatchEvent(new Event("change"))
+      async function getExpenseTransactions(event) {
+        if (event) event.preventDefault();
 
-        async function recordTransaction(event) {
-            event.preventDefault();
+        const type = "credit";
+        let dateTo = document.getElementById("dateTo-exp-tr").value;
+        let dateFrom = document.getElementById("dateFrom-exp-tr").value;
+        const pageSize = 10;
+        const currentPage = parseInt(
+          document.getElementById("pagination-exp-tr").getAttribute("data-page")
+        );
 
-            const recordTrParams = {};
+        if (dateFrom.length === 0) {
+          dateFrom = getCurrentDate();
+        }
 
-            const typeElement = document.getElementById("type");
+        if (dateTo.length === 0) {
+          dataFrom = getCurrentDate();
+        }
 
-            let type;
-            if (typeElement.value === "income") {
-                type = "debit"
-            } else {
-                type = "credit"
+        console.log("dateTo -", dateTo, "dateFrom -", dateFrom);
+
+        try {
+          const response = await fetch(
+            `https://127.0.0.1:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
+            {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              mode: "cors",
             }
+          );
 
-            const categoryId = document.getElementById("category").value;
-            const cashInflow = document.getElementById("cashInflow").value;
-            const cashOutflow = document.getElementById("cashOutflow").value;
-            const bankInflow = document.getElementById("bankInflow").value;
-            const bankOutflow = document.getElementById("bankOutflow").value;
-            const amount = document.getElementById("amount").value;
-            const status = document.getElementById("status").value;
-            const notes = document.getElementById("notes").value;
-            const date = document.getElementById("date").value;
-            const paymentDue = document.getElementById("paymentDue").value;
+          const data = await response.json();
 
-            Reflect.set(recordTrParams, "type", type);
-            Reflect.set(recordTrParams, "categoryId", categoryId);
-            Reflect.set(recordTrParams, "amount", Number(amount));
-            Reflect.set(recordTrParams, "date", date);
+          const parentContainer = document.querySelector(".expense-tr-cont");
+          parentContainer.innerHTML = "";
 
-            if (cashInflow) {
-                Reflect.set(recordTrParams, "cashInflow", Number(cashInflow));
-            } else {
-                Reflect.set(recordTrParams, "cashInflow", 0);
-            }
-            if (cashOutflow) {
-                Reflect.set(recordTrParams, "cashOutflow", Number(cashOutflow));
-            } else {
-                Reflect.set(recordTrParams, "cashOutflow", 0);
-            }
-            if (bankInflow) {
-                Reflect.set(recordTrParams, "bankInflow", Number(bankInflow));
-            } else {
-                Reflect.set(recordTrParams, "bankInflow", 0)
-            }
-            if (bankOutflow) {
-                Reflect.set(recordTrParams, "bankOutflow", Number(bankOutflow));
-            } else {
-                Reflect.set(recordTrParams, "bankOutflow", 0);
-            }
-            if (status === "pending") {
-                Reflect.set(recordTrParams, "status", status);
-            }
-            if (notes.length > 0) {
-                Reflect.set(recordTrParams, "notes", notes);
-            }
-            if (paymentDue) {
-                Reflect.set(recordTrParams, "paymentDue", Number(paymentDue))
-            } else {
-                Reflect.set(recordTrParams, "paymentDue", 0);
-            }
+          if (data.data.length > 0) {
+            for (const transaction of data.data) {
+              parentContainer.classList.remove("hidden");
+              // document.querySelector(".pagination-exp-tr").classList.remove("hidden");
 
-            try {
-
-                const response = await fetch("https://localhost:3090/transactions/", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                    body: JSON.stringify(recordTrParams),
-                })
-
-                const data = await response.json();
-
-                if (data.success === true) {
-                    await getIncomeTransactions();
-                    await getExpenseTransactions();
-                    await getBusinessBalance();
-                    await getBusinessProfit();
-                    await getPendingTransactions();
-
-                    document.getElementById("cashInflow").value = "";
-                    document.getElementById("cashOutflow").value = "";
-                    document.getElementById("bankInflow").value = "";
-                    document.getElementById("bankOutflow").value = "";
-                    document.getElementById("amount").value = "";
-                    document.getElementById("notes").value = "";
-                    document.getElementById("paymentDue").value = "";
-                } else {
-                    alert(`error occured in creating transaction - ${data.error}`)
+              const response = await fetch(
+                `https://127.0.0.1:3090/categories/${transaction.categoryId}`,
+                {
+                  method: "GET",
+                  headers: { "Content-Type": "application/json" },
+                  credentials: "include",
+                  mode: "cors",
                 }
-            } catch (err) {
-                console.log("error while fetching create transaction api -", err)
+              );
+
+              const data = await response.json();
+              const categoryName = data.data.name;
+
+              if (!transaction.bankInflow) {
+                transaction.bankInflow = 0;
+              }
+
+              if (!transaction.bankOutflow) {
+                transaction.bankOutflow = 0;
+              }
+
+              if (!transaction.cashInflow) {
+                transaction.cashInflow = 0;
+              }
+
+              if (!transaction.cashOutflow) {
+                transaction.cashOutflow = 0;
+              }
+
+              if (!transaction.status) {
+                transaction.status = "complete";
+              }
+
+              const trContainer1 = document.createElement("div");
+              const trContainer2 = document.createElement("div");
+              const trContainer3 = document.createElement("div");
+
+              trContainer1.className = "expense-tr-cont1";
+              trContainer2.className = "expense-tr-cont2";
+              trContainer3.className = "expense-tr-cont3";
+
+              const categoryLabelElement = document.createElement("div");
+              categoryLabelElement.className = "exp-label";
+              categoryLabelElement.innerHTML = "Category";
+
+              const categoryValElement = document.createElement("div");
+              categoryValElement.className = "exp-category-val";
+              categoryValElement.textContent = categoryName;
+
+              const bankOutflowLabelElement = document.createElement("div");
+              bankOutflowLabelElement.className = "exp-label";
+              bankOutflowLabelElement.innerHTML = "Bank Outflow";
+
+              const bankOutflowValElement = document.createElement("div");
+              bankOutflowValElement.className = "exp-bank-outflow-val";
+              bankOutflowValElement.textContent = transaction.bankOutflow;
+
+              const cashInflowLabelElement = document.createElement("div");
+              cashInflowLabelElement.className = "exp-label";
+              cashInflowLabelElement.innerHTML = "Cash Inflow";
+
+              const cashInflowValElement = document.createElement("div");
+              cashInflowValElement.className = "exp-cash-inflow-val";
+              cashInflowValElement.textContent = transaction.cashInflow;
+
+              trContainer1.appendChild(categoryLabelElement);
+              trContainer1.appendChild(categoryValElement);
+              trContainer1.appendChild(bankOutflowLabelElement);
+              trContainer1.appendChild(bankOutflowValElement);
+              trContainer1.appendChild(cashInflowLabelElement);
+              trContainer1.appendChild(cashInflowValElement);
+
+              const cashOutflowLabelElement = document.createElement("div");
+              cashOutflowLabelElement.className = "exp-label";
+              cashOutflowLabelElement.innerHTML = "Cash Outflow";
+
+              const cashOutflowValElement = document.createElement("div");
+              cashOutflowValElement.className = "exp-cash-outflow-val";
+              cashOutflowValElement.textContent = transaction.cashOutflow;
+
+              const bankInflowLabelElement = document.createElement("div");
+              bankInflowLabelElement.className = "exp-label";
+              bankInflowLabelElement.innerHTML = "Bank Inflow";
+
+              const bankInflowValElement = document.createElement("div");
+              bankInflowValElement.className = "exp-bank-inflow-val";
+              bankInflowValElement.textContent = transaction.bankInflow;
+
+              const amountLabelElement = document.createElement("div");
+              amountLabelElement.className = "exp-label";
+              amountLabelElement.innerHTML = "Amount";
+
+              const amountValElement = document.createElement("div");
+              amountValElement.className = "exp-amount-val";
+              amountValElement.textContent = transaction.amount;
+
+              trContainer2.appendChild(cashOutflowLabelElement);
+              trContainer2.appendChild(cashOutflowValElement);
+              trContainer2.appendChild(bankInflowLabelElement);
+              trContainer2.appendChild(bankInflowValElement);
+              trContainer2.appendChild(amountLabelElement);
+              trContainer2.appendChild(amountValElement);
+
+              const insideContainer1 = document.createElement("div");
+              insideContainer1.className = "cont3-1";
+
+              const statusLabelElement = document.createElement("div");
+              statusLabelElement.className = "exp-label";
+              statusLabelElement.innerHTML = "Status";
+
+              const statusValElement = document.createElement("div");
+              statusValElement.className = "exp-status-val";
+              statusValElement.textContent = transaction.status;
+
+              insideContainer1.appendChild(statusLabelElement);
+              insideContainer1.appendChild(statusValElement);
+
+              const insideContainer2 = document.createElement("div");
+              insideContainer2.className = "const3-2";
+
+              const deleteContElement = document.createElement("div");
+              deleteContElement.className = "delete-cont";
+
+              const deleteButton = document.createElement("button");
+              deleteButton.id = "exp-delete-button";
+              deleteButton.innerHTML = "DELETE";
+              deleteButton.setAttribute("_id", transaction._id);
+              deleteButton.onclick = () =>
+                deleteTransaction(deleteButton.getAttribute("_id"));
+
+              deleteContElement.appendChild(deleteButton);
+
+              insideContainer2.appendChild(deleteContElement);
+
+              trContainer3.appendChild(insideContainer1);
+              trContainer3.appendChild(insideContainer2);
+
+              parentContainer.appendChild(trContainer1);
+              parentContainer.appendChild(trContainer2);
+              parentContainer.appendChild(trContainer3);
             }
+          } else {
+            parentContainer.classList.add("hidden");
+            // document.querySelector(".pagination-exp-tr").classList.add("hidden");
+          }
+        } catch (err) {
+          console.log("error in fetching expense transactions -", err);
+        }
+      }
+
+      function getCurrentDate() {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+      }
+
+      function updateIncomeTrPageNumber(increment) {
+        const paginationElement = document.getElementById("pagination-inc-tr");
+        let currentPage = parseInt(paginationElement.getAttribute("data-page"));
+        currentPage += increment;
+
+        if (currentPage < 1) {
+          currentPage = 1;
         }
 
-        async function getBusinessBalance(event) {
-            if (event) event.preventDefault();
+        paginationElement.setAttribute("data-page", currentPage);
+      }
 
-            let dateTo = document.getElementById("dateTo-bus-bal").value;
-            let dateFrom = document.getElementById("dateFrom-bus-bal").value;
+      document.getElementById("prev-inc-tr").addEventListener("click", () => {
+        updateIncomeTrPageNumber(-1);
+        getIncomeTransactions();
+      });
 
-            if (!dateTo) {
-                dateTo = getCurrentDate();
-            }
+      document.getElementById("next-inc-tr").addEventListener("click", () => {
+        updateIncomeTrPageNumber(1);
+        getIncomeTransactions();
+      });
 
-            if (!dateFrom) {
-                dateFrom = getCurrentDate();
-            }
+      function updateExpenseTrPageNumber(increment) {
+        const paginationElement = document.getElementById("pagination-exp-tr");
+        let currentPage = parseInt(paginationElement.getAttribute("data-page"));
+        currentPage += increment;
 
-            try {
-                const response = await fetch(`https://localhost:3090/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include"
-                })
-
-                const data = await response.json();
-                console.log("response -", data);
-                if (data.success === true) {
-                    document.getElementById("cash-balance-bus-bal").innerHTML = data.data.totalCashBalance;
-                    document.getElementById("bank-balance-bus-bal").innerHTML = data.data.totalBankBalance;
-                } else {
-                    alert(`error in calculating balance - ${data.error}`)
-                }
-
-            } catch (err) {
-                console.log("error while fetching business balance -", err)
-            }
+        if (currentPage < 1) {
+          currentPage = 1;
         }
 
-        async function getBusinessProfit(event) {
-            if (event) event.preventDefault();
+        paginationElement.setAttribute("data-page", currentPage);
+      }
 
-            let dateTo = document.getElementById("dateTo-bus-profit").value;
-            let dateFrom = document.getElementById("dateFrom-bus-profit").value;
+      document.getElementById("prev-exp-tr").addEventListener("click", () => {
+        updateExpenseTrPageNumber(-1);
+        getExpenseTransactions();
+      });
 
-            if (!dateTo) {
-                dateTo = getCurrentDate();
-            }
+      document.getElementById("next-exp-tr").addEventListener("click", () => {
+        updateExpenseTrPageNumber(1);
+        getExpenseTransactions();
+      });
 
-            if (!dateFrom) {
-                dateFrom = getCurrentDate();
-            }
+      function updatePendingTrPageNumber(increment) {
+        const paginationElement = document.getElementById("pagination");
+        const currentPage = parseInt(
+          paginationElement.getAttribute("data-page")
+        );
+        currentPage += increment;
 
-            try {
-                const response = await fetch(`https://localhost:3090/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                })
-
-                const data = await response.json();
-
-                console.log("response -", data)
-
-                if (data.success) {
-                    document.getElementById("bank-balance-bus-profit").innerHTML = data.data.profit;
-                } else {
-                    alert("error while calculating profit.")
-                }
-            } catch (err) {
-                console.log("error while fetching business profit -", err);
-            }
+        if (currentPage < 1) {
+          currentPage = 1;
         }
 
-        async function getPendingTransactions(event) {
-            if (event) event.preventDefault();
+        paginationElement.setAttribute("data-page", currentPage);
+      }
 
-            let dateTo = document.getElementById("dateTo-pending-tr").value;
-            let dateFrom = document.getElementById("dateFrom-pending-tr").value;
-            const pageSize = 10;
-            const currentPage = parseInt(document.getElementById("pagination").getAttribute("data-page"));
+      document
+        .getElementById("prev-pending-tr")
+        .addEventListener("click", () => {
+          updatePendingTrPageNumber(-1);
+          getPendingTransactions();
+        });
 
-            if (!dateTo) {
-                dateTo = getCurrentDate()
-            }
+      document
+        .getElementById("next-pending-tr")
+        .addEventListener("click", () => {
+          updatePendingTrPageNumber(1);
+          getPendingTransactions();
+        });
 
-            if (!dateFrom) {
-                dateFrom = getCurrentDate()
-            }
+      async function createCategory(event) {
+        if (event) event.preventDefault();
 
-            try {
-                const response = await fetch(`https://localhost:3090/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include"
-                })
+        const type = document.getElementById("type-label").value;
+        const name = document.getElementById("category-name-label").value;
 
-                const data = await response.json();
+        try {
+          const response = await fetch(`https://127.0.0.1:3090/categories/`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ type, name }),
+            mode: "cors",
+          });
 
-                const parentContainer = document.querySelector(".pending-tr-cont");
-                parentContainer.innerHTML = "";
+          const data = await response.json();
 
-                if (data.data.length > 0) {
-                    parentContainer.classList.remove("hidden");
-
-                    data.data.forEach((transaction) => {
-                        const trContainer1 = document.createElement("div");
-                        const trContainer2 = document.createElement("div");
-
-                        trContainer1.className = "pending-tr-cont-1";
-                        trContainer2.className = "pending-tr-cont-2";
-
-                        const dateLabelElement = document.createElement("div");
-                        dateLabelElement.className = "pending-cont-date-label";
-                        dateLabelElement.innerHTML = "Date";
-
-                        const dateValElement = document.createElement("div");
-                        dateValElement.className = "pending-cont-date-value";
-                        dateValElement.id = "pending-cont-date-val";
-                        dateValElement.textContent = new Date(transaction.date).toLocaleDateString();
-
-                        const paymentDueLabelElement = document.createElement("div");
-                        paymentDueLabelElement.className = "pending-cont-payment-due-label";
-                        paymentDueLabelElement.innerHTML = "Payment Due";
-
-                        const paymentDueValElement = document.createElement("div");
-                        paymentDueValElement.className = "pending-cont-payment-due-value";
-                        paymentDueValElement.id = "pending-cont-payment-due-val";
-                        paymentDueValElement.innerText = transaction.paymentDue;
-
-                        trContainer1.appendChild(dateLabelElement);
-                        trContainer1.appendChild(dateValElement);
-                        trContainer1.appendChild(paymentDueLabelElement);
-                        trContainer1.appendChild(paymentDueValElement);
-
-                        const notesLabelElement = document.createElement("div");
-                        notesLabelElement.className = "pending-cont-notes-label";
-                        notesLabelElement.innerHTML = "Notes";
-
-                        const notesValElement = document.createElement("div");
-                        notesValElement.className = "pending-cont-notes-value";
-
-                        notesValElement.textContent = transaction.notes;
-
-                        const deleteContElem = document.createElement("div");
-                        deleteContElem.className = "pending-cont-tr-delete";
-
-                        const deleteButton = document.createElement("button");
-                        deleteButton.id = "pending-tr-delete";
-                        deleteButton.innerHTML = "DELETE";
-                        deleteButton.setAttribute("_id", transaction._id);
-                        deleteButton.onclick = () => deleteTransaction(deleteButton.getAttribute("_id"))
-
-                        deleteContElem.appendChild(deleteButton);
-                        trContainer2.appendChild(notesLabelElement);
-                        trContainer2.appendChild(notesValElement);
-                        trContainer2.appendChild(deleteContElem);
-
-                        parentContainer.appendChild(trContainer1);
-                        parentContainer.appendChild(trContainer2);
-                    })
-                } else {
-                    parentContainer.classList.add("hidden");
-                }
-
-            } catch (err) {
-                console.log("error while fetching pending transactions -", err);
-            }
+          if (data.success) {
+            alert("category created.");
+            document.getElementById("type").dispatchEvent(new Event("change"));
+          } else {
+            alert(data.error);
+          }
+        } catch (err) {
+          console.log("error while creating category -", err);
         }
-
-        async function deleteTransaction(transactionId) {
-            const confirmation = confirm("Are you sure you want to delete this transaction?");
-            if (!confirmation) {
-                return;
-            }
-
-            try {
-                const response = await fetch(`https://localhost:3090/transactions/${transactionId}`, {
-                    method: "DELETE",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include"
-                })
-
-                const data = await response.json();
-
-                await getPendingTransactions();
-                await getIncomeTransactions();
-                await getExpenseTransactions();
-                await getBusinessBalance();
-                await getBusinessProfit();
-            } catch (err) {
-                console.log("error while deleting transaction -", err)
-            }
-        }
-
-        async function getIncomeTransactions(event) {
-            if (event) event.preventDefault();
-
-            const type = "debit";
-            let dateTo = document.getElementById("dateTo-inc-tr").value;
-            let dateFrom = document.getElementById("dateFrom-inc-tr").value;
-            const pageSize = 10;
-            const currentPage = parseInt(document.getElementById("pagination-inc-tr").getAttribute("data-page"));
-
-
-            if (dateTo.length === 0) {
-                dateTo = getCurrentDate()
-            }
-
-            if (dateFrom.length === 0) {
-                dateFrom = getCurrentDate()
-            }
-
-            try {
-                const response = await fetch(`https://localhost:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include"
-                })
-
-                const data = await response.json();
-
-                console.log('response from income transactions -', data)
-
-                const parentContainer = document.querySelector(".income-tr-cont");
-                parentContainer.innerHTML = "";
-
-                if (data.data.length > 0) {
-                    parentContainer.classList.remove("hidden");
-                    // document.querySelector(".pagination-inc-tr").classList.remove("hidden");
-
-                    for (const transaction of data.data) {
-                        const response = await fetch(`https://localhost:3090/categories/${transaction.categoryId}`, {
-                            method: "GET",
-                            headers: { "Content-Type": "application/json" },
-                            credentials: "include"
-                        })
-
-                        const data = await response.json();
-                        const categoryName = data.data.name;
-
-                        if (!transaction.bankInflow) {
-                            transaction.bankInflow = 0;
-                        }
-
-                        if (!transaction.bankOutflow) {
-                            transaction.bankOutflow = 0;
-                        }
-
-                        if (!transaction.cashInflow) {
-                            transaction.cashInflow = 0;
-                        }
-
-                        if (!transaction.cashOutflow) {
-                            transaction.cashOutflow = 0;
-                        }
-
-                        if (!transaction.status) {
-                            transaction.status = "complete"
-                        }
-
-                        const trContainer1 = document.createElement("div");
-                        const trContainer2 = document.createElement("div");
-                        const trContainer3 = document.createElement("div");
-
-                        trContainer1.className = "income-tr-cont1";
-                        trContainer2.className = "income-tr-cont2";
-                        trContainer3.className = "income-tr-cont3";
-
-                        const categoryLabelElement = document.createElement("div");
-                        categoryLabelElement.className = "inc-label";
-                        categoryLabelElement.innerHTML = "Category";
-
-                        const categoryValElement = document.createElement("div");
-                        categoryValElement.className = "inc-category-val";
-                        categoryValElement.textContent = categoryName;
-
-                        const bankOutflowLabelElement = document.createElement("div");
-                        bankOutflowLabelElement.className = "inc-label";
-                        bankOutflowLabelElement.innerHTML = "Bank Outflow";
-
-                        const bankOutflowValElement = document.createElement("div");
-                        bankOutflowValElement.className = "inc-bank-outflow-val";
-                        bankOutflowValElement.textContent = transaction.bankOutflow;
-
-                        const cashInflowLabelElement = document.createElement("div");
-                        cashInflowLabelElement.className = "inc-label";
-                        cashInflowLabelElement.innerHTML = "Cash Inflow";
-
-                        const cashInflowValElement = document.createElement("div");
-                        cashInflowValElement.className = "inc-cash-inflow-val";
-                        cashInflowValElement.textContent = transaction.cashInflow;
-
-                        trContainer1.appendChild(categoryLabelElement);
-                        trContainer1.appendChild(categoryValElement);
-                        trContainer1.appendChild(bankOutflowLabelElement);
-                        trContainer1.appendChild(bankOutflowValElement);
-                        trContainer1.appendChild(cashInflowLabelElement);
-                        trContainer1.appendChild(cashInflowValElement);
-
-                        const cashOutflowLabelElement = document.createElement("div");
-                        cashOutflowLabelElement.className = "inc-label";
-                        cashOutflowLabelElement.innerHTML = "Cash Outflow";
-
-                        const cashOutflowValElement = document.createElement("div");
-                        cashOutflowValElement.className = "inc-cash-outflow-val";
-                        cashOutflowValElement.textContent = transaction.cashOutflow;
-
-                        const bankInflowLabelElement = document.createElement("div");
-                        bankInflowLabelElement.className = "inc-label";
-                        bankInflowLabelElement.innerHTML = "Bank Inflow";
-
-                        const bankInflowValElement = document.createElement("div");
-                        bankInflowValElement.className = "inc-bank-inflow-val";
-                        bankInflowValElement.textContent = transaction.bankInflow;
-
-                        const amountLabelElement = document.createElement("div");
-                        amountLabelElement.className = "inc-label";
-                        amountLabelElement.innerHTML = "Amount";
-
-                        const amountValElement = document.createElement("div");
-                        amountValElement.className = "inc-amount-val";
-                        amountValElement.textContent = transaction.amount;
-
-                        trContainer2.appendChild(cashOutflowLabelElement);
-                        trContainer2.appendChild(cashOutflowValElement);
-                        trContainer2.appendChild(bankInflowLabelElement);
-                        trContainer2.appendChild(bankInflowValElement);
-                        trContainer2.appendChild(amountLabelElement);
-                        trContainer2.appendChild(amountValElement);
-
-                        const insideContainer1 = document.createElement("div");
-                        insideContainer1.className = "cont3-1";
-
-                        const statusLabelElement = document.createElement("div");
-                        statusLabelElement.className = "inc-label";
-                        statusLabelElement.innerHTML = "Status";
-
-                        const statusValElement = document.createElement("div");
-                        statusValElement.className = "inc-status-val";
-                        statusValElement.textContent = transaction.status;
-
-                        insideContainer1.appendChild(statusLabelElement);
-                        insideContainer1.appendChild(statusValElement);
-
-                        const insideContainer2 = document.createElement("div");
-                        insideContainer2.className = "const3-2";
-
-                        const deleteContElement = document.createElement("div");
-                        deleteContElement.className = "delete-cont";
-
-                        const deleteButton = document.createElement("button");
-                        deleteButton.id = "inc-delete-button";
-                        deleteButton.innerHTML = "DELETE";
-                        deleteButton.setAttribute("_id", transaction._id);
-                        deleteButton.onclick = () => deleteTransaction(deleteButton.getAttribute("_id"));
-
-                        deleteContElement.appendChild(deleteButton);
-
-                        insideContainer2.appendChild(deleteContElement);
-
-                        trContainer3.appendChild(insideContainer1);
-                        trContainer3.appendChild(insideContainer2);
-
-                        parentContainer.appendChild(trContainer1);
-                        parentContainer.appendChild(trContainer2);
-                        parentContainer.appendChild(trContainer3);
-                    }
-                } else {
-                    parentContainer.classList.add("hidden");
-                    // document.querySelector(".pagination-inc-tr").classList.add("hidden");
-                }
-            } catch (err) {
-                console.log('error in fetching income transactions -', err)
-            }
-        }
-
-        async function getExpenseTransactions(event) {
-            if (event) event.preventDefault();
-
-            const type = "credit";
-            let dateTo = document.getElementById("dateTo-exp-tr").value;
-            let dateFrom = document.getElementById("dateFrom-exp-tr").value;
-            const pageSize = 10;
-            const currentPage = parseInt(document.getElementById("pagination-exp-tr").getAttribute("data-page"));
-
-            if (dateFrom.length === 0) {
-                dateFrom = getCurrentDate()
-            }
-
-            if (dateTo.length === 0) {
-                dataFrom = getCurrentDate()
-            }
-
-            console.log("dateTo -", dateTo, "dateFrom -", dateFrom);
-
-            try {
-                const response = await fetch(`https://localhost:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`, {
-                    method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include"
-                })
-
-                const data = await response.json();
-
-                console.log('response from expense transactions -', data)
-
-                const parentContainer = document.querySelector(".expense-tr-cont");
-                parentContainer.innerHTML = "";
-
-                if (data.data.length > 0) {
-
-                    for (const transaction of data.data) {
-                        parentContainer.classList.remove("hidden");
-                        // document.querySelector(".pagination-exp-tr").classList.remove("hidden");
-
-                        const response = await fetch(`https://localhost:3090/categories/${transaction.categoryId}`, {
-                            method: "GET",
-                            headers: { "Content-Type": "application/json" },
-                            credentials: "include"
-                        })
-
-                        const data = await response.json();
-                        const categoryName = data.data.name;
-
-                        if (!transaction.bankInflow) {
-                            transaction.bankInflow = 0;
-                        }
-
-                        if (!transaction.bankOutflow) {
-                            transaction.bankOutflow = 0;
-                        }
-
-                        if (!transaction.cashInflow) {
-                            transaction.cashInflow = 0;
-                        }
-
-                        if (!transaction.cashOutflow) {
-                            transaction.cashOutflow = 0;
-                        }
-
-                        if (!transaction.status) {
-                            transaction.status = "complete"
-                        }
-
-                        const trContainer1 = document.createElement("div");
-                        const trContainer2 = document.createElement("div");
-                        const trContainer3 = document.createElement("div");
-
-                        trContainer1.className = "expense-tr-cont1";
-                        trContainer2.className = "expense-tr-cont2";
-                        trContainer3.className = "expense-tr-cont3";
-
-                        const categoryLabelElement = document.createElement("div");
-                        categoryLabelElement.className = "exp-label";
-                        categoryLabelElement.innerHTML = "Category";
-
-                        const categoryValElement = document.createElement("div");
-                        categoryValElement.className = "exp-category-val";
-                        categoryValElement.textContent = categoryName;
-
-                        const bankOutflowLabelElement = document.createElement("div");
-                        bankOutflowLabelElement.className = "exp-label";
-                        bankOutflowLabelElement.innerHTML = "Bank Outflow";
-
-                        const bankOutflowValElement = document.createElement("div");
-                        bankOutflowValElement.className = "exp-bank-outflow-val";
-                        bankOutflowValElement.textContent = transaction.bankOutflow;
-
-                        const cashInflowLabelElement = document.createElement("div");
-                        cashInflowLabelElement.className = "exp-label";
-                        cashInflowLabelElement.innerHTML = "Cash Inflow";
-
-                        const cashInflowValElement = document.createElement("div");
-                        cashInflowValElement.className = "exp-cash-inflow-val";
-                        cashInflowValElement.textContent = transaction.cashInflow;
-
-                        trContainer1.appendChild(categoryLabelElement);
-                        trContainer1.appendChild(categoryValElement);
-                        trContainer1.appendChild(bankOutflowLabelElement);
-                        trContainer1.appendChild(bankOutflowValElement);
-                        trContainer1.appendChild(cashInflowLabelElement);
-                        trContainer1.appendChild(cashInflowValElement);
-
-                        const cashOutflowLabelElement = document.createElement("div");
-                        cashOutflowLabelElement.className = "exp-label";
-                        cashOutflowLabelElement.innerHTML = "Cash Outflow";
-
-                        const cashOutflowValElement = document.createElement("div");
-                        cashOutflowValElement.className = "exp-cash-outflow-val";
-                        cashOutflowValElement.textContent = transaction.cashOutflow;
-
-                        const bankInflowLabelElement = document.createElement("div");
-                        bankInflowLabelElement.className = "exp-label";
-                        bankInflowLabelElement.innerHTML = "Bank Inflow";
-
-                        const bankInflowValElement = document.createElement("div");
-                        bankInflowValElement.className = "exp-bank-inflow-val";
-                        bankInflowValElement.textContent = transaction.bankInflow;
-
-                        const amountLabelElement = document.createElement("div");
-                        amountLabelElement.className = "exp-label";
-                        amountLabelElement.innerHTML = "Amount";
-
-                        const amountValElement = document.createElement("div");
-                        amountValElement.className = "exp-amount-val";
-                        amountValElement.textContent = transaction.amount;
-
-                        trContainer2.appendChild(cashOutflowLabelElement);
-                        trContainer2.appendChild(cashOutflowValElement);
-                        trContainer2.appendChild(bankInflowLabelElement);
-                        trContainer2.appendChild(bankInflowValElement);
-                        trContainer2.appendChild(amountLabelElement);
-                        trContainer2.appendChild(amountValElement);
-
-                        const insideContainer1 = document.createElement("div");
-                        insideContainer1.className = "cont3-1";
-
-                        const statusLabelElement = document.createElement("div");
-                        statusLabelElement.className = "exp-label";
-                        statusLabelElement.innerHTML = "Status";
-
-                        const statusValElement = document.createElement("div");
-                        statusValElement.className = "exp-status-val";
-                        statusValElement.textContent = transaction.status;
-
-                        insideContainer1.appendChild(statusLabelElement);
-                        insideContainer1.appendChild(statusValElement);
-
-                        const insideContainer2 = document.createElement("div");
-                        insideContainer2.className = "const3-2";
-
-                        const deleteContElement = document.createElement("div");
-                        deleteContElement.className = "delete-cont";
-
-                        const deleteButton = document.createElement("button");
-                        deleteButton.id = "exp-delete-button";
-                        deleteButton.innerHTML = "DELETE";
-                        deleteButton.setAttribute("_id", transaction._id);
-                        deleteButton.onclick = () => deleteTransaction(deleteButton.getAttribute("_id"));
-
-                        deleteContElement.appendChild(deleteButton);
-
-                        insideContainer2.appendChild(deleteContElement);
-
-                        trContainer3.appendChild(insideContainer1);
-                        trContainer3.appendChild(insideContainer2);
-
-                        parentContainer.appendChild(trContainer1);
-                        parentContainer.appendChild(trContainer2);
-                        parentContainer.appendChild(trContainer3);
-                    }
-                } else {
-                    parentContainer.classList.add("hidden");
-                    // document.querySelector(".pagination-exp-tr").classList.add("hidden");
-                }
-            } catch (err) {
-                console.log('error in fetching expense transactions -', err)
-            }
-        }
-
-        function getCurrentDate() {
-            const date = new Date();
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        function updateIncomeTrPageNumber(increment) {
-            const paginationElement = document.getElementById("pagination-inc-tr");
-            let currentPage = parseInt(paginationElement.getAttribute("data-page"));
-            currentPage += increment;
-
-            if (currentPage < 1) {
-                currentPage = 1;
-            }
-
-            paginationElement.setAttribute("data-page", currentPage);
-        }
-
-        document.getElementById("prev-inc-tr").addEventListener("click", () => {
-            updateIncomeTrPageNumber(-1);
-            getIncomeTransactions()
-        })
-
-        document.getElementById("next-inc-tr").addEventListener("click", () => {
-            updateIncomeTrPageNumber(1);
-            getIncomeTransactions()
-        })
-
-        function updateExpenseTrPageNumber(increment) {
-            const paginationElement = document.getElementById("pagination-exp-tr");
-            let currentPage = parseInt(paginationElement.getAttribute("data-page"));
-            currentPage += increment;
-
-            if (currentPage < 1) {
-                currentPage = 1;
-            }
-
-            paginationElement.setAttribute("data-page", currentPage);
-        }
-
-        document.getElementById("prev-exp-tr").addEventListener("click", () => {
-            updateExpenseTrPageNumber(-1);
-            getExpenseTransactions()
-        })
-
-        document.getElementById("next-exp-tr").addEventListener("click", () => {
-            updateExpenseTrPageNumber(1);
-            getExpenseTransactions()
-        })
-
-        function updatePendingTrPageNumber(increment) {
-            const paginationElement = document.getElementById("pagination");
-            const currentPage = parseInt(paginationElement.getAttribute("data-page"));
-            currentPage += increment;
-
-            if (currentPage < 1) {
-                currentPage = 1
-            }
-
-            paginationElement.setAttribute("data-page", currentPage);
-        }
-
-        document.getElementById("prev-pending-tr").addEventListener("click", () => {
-            updatePendingTrPageNumber(-1);
-            getPendingTransactions()
-        })
-
-        document.getElementById("next-pending-tr").addEventListener("click", () => {
-            updatePendingTrPageNumber(1);
-            getPendingTransactions();
-        })
-
-        async function createCategory(event) {
-            if (event) event.preventDefault();
-
-            const type = document.getElementById("type-label").value;
-            const name = document.getElementById("category-name-label").value;
-
-            try {
-                const response = await fetch(`https://localhost:3090/categories/`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                    body: JSON.stringify({ type, name })
-                })
-
-                const data = await response.json();
-
-                if (data.success) {
-                    alert('category created.');
-                    document.getElementById("type").dispatchEvent(new Event("change"));
-                } else {
-                    alert('error while creating the category. Please try again')
-                }
-            } catch (err) {
-                console.log("error while creating category -", err);
-            }
-        }
+      }
     </script>
-</body>
-
+  </body>
 </html>

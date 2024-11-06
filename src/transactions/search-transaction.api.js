@@ -9,8 +9,6 @@ async function controller(req, res) {
   const { type, amount, dateTo, dateFrom, categoryName, pageNo, pageSize } =
     req.query;
 
-  console.log("req.query -", req.query);
-
   let searchTransactionParams = {};
 
   if (type) {
@@ -47,12 +45,11 @@ async function controller(req, res) {
     };
   }
 
-  console.log("search transaction params -", searchTransactionParams)
   const result = await searchTransaction(
     searchTransactionParams,
+    user.username,
     pageNo,
-    pageSize,
-    user.username
+    pageSize
   );
 
   res.json({

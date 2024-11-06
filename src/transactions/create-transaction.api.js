@@ -12,9 +12,7 @@ const { ObjectId } = require("mongodb");
 async function controller(req, res) {
   const { user } = req.body;
 
-  const transactionDetails = await transactionBuilder(req.body);
-
-  console.log("transactionDetails -", transactionDetails);
+  const transactionDetails = await transactionBuilder(req.body, user.username);
 
   const result = await createTransaction({
     ...transactionDetails,
@@ -35,7 +33,7 @@ async function controller(req, res) {
 }
 
 async function validateParams(req, res, next) {
-  const { amount, date, categoryId } = req.body;
+  const { amount, date, categoryId, user } = req.body;
 
   const transactionOptionalNumberParams = [
     "cashInflow",
@@ -79,8 +77,8 @@ async function validateParams(req, res, next) {
     );
   }
 
-  const transactionCategoryValidator = await getCategory(categoryId);
-  if (transactionCategoryValidator.length === 0) {
+  const transactionCategoryValidator = await getCategory(categoryId, user.username);
+  if (!transactionCategoryValidator) {
     throw new httpError.BadRequest("Field 'categoryId' is invalid");
   }
 
@@ -101,7 +99,7 @@ async function validateParams(req, res, next) {
   }
 }
 
-async function transactionBuilder(transactionDetails = {}) {
+async function transactionBuilder(transactionDetails = {}, username) {
   const result = {};
 
   const transactionParams = [
@@ -137,7 +135,7 @@ async function transactionBuilder(transactionDetails = {}) {
 
         result[param] = localDate.toISOString().slice(0, -1);
       } else if (param === "categoryId") {
-        const categoryDetails = await getCategory(transactionDetails[param]);
+        const categoryDetails = await getCategory(transactionDetails[param], username);
         result["type"] = categoryDetails.type;
         result["categoryId"] = new ObjectId(transactionDetails[param])
       } else if (

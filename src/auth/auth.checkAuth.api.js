@@ -4,7 +4,7 @@ const authService = require("../auth/auth.service");
 
 async function controller(req, res) {
   const token = req.cookies.token;
-
+  
   if (!token) {
     throw new httpError.Forbidden("Access Denied");
   }

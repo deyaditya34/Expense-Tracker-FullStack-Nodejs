@@ -4,7 +4,9 @@ const buildApiHandler = require("../api-utils/build-api-handler");
 
 async function controller(req, res) {
   const {id}  = req.params;
-  const result = await getCategory(id);
+  const {user} = req.body;
+  
+  const result = await getCategory(id, user.username);
 
   if (!result) {
     res.json({

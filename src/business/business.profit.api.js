@@ -7,6 +7,7 @@ const businessService = require("./business.service");
 
 async function controller(req, res) {
   const { dateTo, dateFrom } = req.query;
+  const {user} = req.body;
 
   const adjustToUTC = (dateStr, endOfDay = false) => {
     const date = new Date(dateStr);
@@ -23,7 +24,8 @@ async function controller(req, res) {
 
   const businessProfit = await businessService.getBusinessProfit(
     adjustedDateTo,
-    adjustedDateFrom
+    adjustedDateFrom,
+    user.username
   );
 
   res.json({

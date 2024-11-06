@@ -7,7 +7,8 @@ const businessService = require("./business.service");
 
 async function controller(req, res) {
   const { dateTo, dateFrom } = req.query;
-  
+  const {user} = req.body;
+
   const adjustToUTC = (dateStr, endOfDay = false) => {
     const date = new Date(dateStr);
     if (endOfDay) {
@@ -23,7 +24,8 @@ async function controller(req, res) {
 
   const businessBalance = await businessService.getBusinessBalance(
     adjustedDateTo,
-    adjustedDateFrom
+    adjustedDateFrom,
+    user.username
   );
 
   res.json({

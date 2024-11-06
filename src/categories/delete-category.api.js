@@ -1,12 +1,12 @@
 const buildApiHandler = require("../api-utils/build-api-handler");
 const userResolver = require("../middlewares/user-resolver");
 const { deleteCategory } = require("./categories.service");
-const checkAdminRights = require("../middlewares/check-admin-rights");
 
 async function controller(req, res) {
   const { id } = req.params;
+  const { user } = req.body;
 
-  const result = await deleteCategory(id);
+  const result = await deleteCategory(id, user.username);
 
   if (!result) {
     res.json({
@@ -20,4 +20,4 @@ async function controller(req, res) {
   }
 }
 
-module.exports = buildApiHandler([userResolver, checkAdminRights, controller]);
+module.exports = buildApiHandler([userResolver, controller]);

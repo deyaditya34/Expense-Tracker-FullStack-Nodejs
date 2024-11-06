@@ -12,7 +12,6 @@ const adjustToUTC = (dateStr, endOfDay = false) => {
   return date.toISOString();
 };
 
-
 function getBusiness() {
   return database
     .getCollection(config.COLLECTION_NAMES_BUSINESS)
@@ -33,7 +32,7 @@ async function registerTransaction(type, amount) {
   return database.getCollection(config.COLLECTION_NAMES_BUSINESS).findOne({});
 }
 
-async function getBusinessBalance(dateTo, dateFrom) {
+async function getBusinessBalance(dateTo, dateFrom, username) {
   const results = await database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .aggregate([
@@ -43,6 +42,7 @@ async function getBusinessBalance(dateTo, dateFrom) {
             $gte: adjustToUTC(dateFrom),
             $lte: adjustToUTC(dateTo, true),
           },
+          createdBy: { $eq: username },
         },
       },
       {
@@ -78,7 +78,7 @@ async function getBusinessBalance(dateTo, dateFrom) {
   return results[0];
 }
 
-async function getBusinessProfit(dateTo, dateFrom) {
+async function getBusinessProfit(dateTo, dateFrom, username) {
   const results = await database
     .getCollection(config.COLLECTION_NAMES_TRANSACTIONS)
     .aggregate([
@@ -88,6 +88,7 @@ async function getBusinessProfit(dateTo, dateFrom) {
             $gte: adjustToUTC(dateFrom),
             $lte: adjustToUTC(dateTo, true),
           },
+          createdBy: { $eq: username },
         },
       },
       {
@@ -128,4 +129,9 @@ eventBridge.addListener(
   registerTransaction
 );
 
-module.exports = { getBusiness, registerTransaction, getBusinessBalance, getBusinessProfit };
+module.exports = {
+  getBusiness,
+  registerTransaction,
+  getBusinessBalance,
+  getBusinessProfit,
+};

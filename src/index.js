@@ -37,14 +37,13 @@ async function start() {
 
   server.use("/transactions", transactionRouter);
   server.use("/auth", authRouter);
-
   server.use("/categories", categoryRouter);
   server.use("/business", businessRouter);
   server.use(notFoundHandler);
   server.use(errrorHandler);
 
-  const key = fs.readFileSync("../../../key.pem");
-  const cert = fs.readFileSync("../../../cert.pem");
+  const key = fs.readFileSync(config.SSL_KEY);
+  const cert = fs.readFileSync(config.SSL_CERT);
 
   https.createServer({ key, cert }, server).listen(config.APP_PORT, () => {
     console.log(

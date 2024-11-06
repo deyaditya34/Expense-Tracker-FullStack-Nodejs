@@ -1,24 +1,30 @@
 const httpError = require("http-errors");
 
 const buildApiHandler = require("../api-utils/build-api-handler");
-const userResolver = require("../middlewares/user-resolver"); 
+const userResolver = require("../middlewares/user-resolver");
 const { searchCategory } = require("./categories.service");
 const pagination = require("../middlewares/pagination");
 
 async function controller(req, res) {
   const { name, type, pageNo, pageSize } = req.query;
-  
+  const { user } = req.body;
+
   let searchCategoryParams = {};
-  
+
   if (name) {
     searchCategoryParams.name = name;
   }
 
-    if (type) {
+  if (type) {
     searchCategoryParams.type = type;
   }
 
-  const result = await searchCategory(searchCategoryParams, pageNo, pageSize);
+  const result = await searchCategory(
+    searchCategoryParams,
+    user.username,
+    pageNo,
+    pageSize
+  );
 
   res.json({
     message: "Categories found",
