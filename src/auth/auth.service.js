@@ -18,7 +18,6 @@ async function register(username, password) {
   }
 
   const userDetails = buildUser(username, password);
-  console.log("userDetails", userDetails);
   await database.getCollection(config.COLLECTION_NAMES_USERS).insertOne(userDetails);
 }
 

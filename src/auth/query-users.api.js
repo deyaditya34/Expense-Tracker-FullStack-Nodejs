@@ -6,7 +6,6 @@ const paramsValidator = require("../middlewares/params-validator");
 
 async function controller(req, res) {
   const { query } = req.body;
-  console.log("parsedQuery", query);
 
   const result = await findUsers({ ...query, role: { $ne: "ADMIN" } });
 

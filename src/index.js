@@ -1,5 +1,4 @@
 const express = require("express");
-const https = require("https");
 const fs = require("fs");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -27,14 +26,14 @@ async function start() {
   server.use(
     cors({
       credentials: true,
-      origin: "http://127.0.0.1:5501",
+      origin: ["https://adityadey.com", "https://www.adityadey.com"],
     })
   );
 
   server.use(cookieParser());
 
   server.use(requestLogger);
-
+	
   server.use("/transactions", transactionRouter);
   server.use("/auth", authRouter);
   server.use("/categories", categoryRouter);
@@ -42,10 +41,9 @@ async function start() {
   server.use(notFoundHandler);
   server.use(errrorHandler);
 
-  const key = fs.readFileSync(config.SSL_KEY);
-  const cert = fs.readFileSync(config.SSL_CERT);
 
-  https.createServer({ key, cert }, server).listen(config.APP_PORT, () => {
+
+server.listen(config.APP_PORT, () => {
     console.log(
       "[init]: expense-tracker application running on",
       config.APP_PORT

@@ -8,7 +8,6 @@ async function controller(req, res) {
   const { user, username, password, newPassword } = req.body;
 
   const userDetails = await authService.retrieveUserDetails(user.username);
-  console.log("user -", userDetails);
 
   await authService.updatePassword(
     userDetails,

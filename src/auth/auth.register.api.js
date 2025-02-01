@@ -7,8 +7,8 @@ const {validateUsername} = require("./auth.utils");
 
 async function controller(req, res) {
   const { username, password } = req.body;
-  
-  await authService.register(username, password);
+ 
+await authService.register(username, password);
 
   res.json({
     success: true,
