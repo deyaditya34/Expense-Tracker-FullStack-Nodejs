@@ -1115,7 +1115,7 @@
       async function checkAuth() {
         try {
           const response = await fetch(
-            "https://127.0.0.1:3090/auth/check-token",
+            "/auth/check-token",
             {
               method: "GET",
               headers: {
@@ -1147,7 +1147,7 @@
         event.preventDefault();
 
         try {
-          const response = await fetch("https://127.0.0.1:3090/auth/logout", {
+          const response = await fetch("/auth/logout", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -1188,7 +1188,7 @@
 
           try {
             const response = await fetch(
-              `https://127.0.0.1:3090/categories?type=${reqType}`,
+              `/categories?type=${reqType}`,
               {
                 method: "GET",
                 credentials: "include",
@@ -1284,7 +1284,7 @@
         }
 
         try {
-          const response = await fetch("https://127.0.0.1:3090/transactions/", {
+          const response = await fetch("/transactions/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -1332,7 +1332,7 @@
 
         try {
           const response = await fetch(
-            `https://127.0.0.1:3090/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`,
+            `/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1372,7 +1372,7 @@
 
         try {
           const response = await fetch(
-            `https://127.0.0.1:3090/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`,
+            `/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1416,7 +1416,7 @@
 
         try {
           const response = await fetch(
-            `https://127.0.0.1:3090/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`,
+            `/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1511,7 +1511,7 @@
 
         try {
           const response = await fetch(
-            `https://127.0.0.1:3090/transactions/${transactionId}`,
+            `/transactions/${transactionId}`,
             {
               method: "DELETE",
               headers: { "Content-Type": "application/json" },
@@ -1553,7 +1553,7 @@
 
         try {
           const response = await fetch(
-            `https://127.0.0.1:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
+            `/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1575,7 +1575,7 @@
 
             for (const transaction of data.data) {
               const response = await fetch(
-                `https://127.0.0.1:3090/categories/${transaction.categoryId}`,
+                `/categories/${transaction.categoryId}`,
                 {
                   method: "GET",
                   headers: { "Content-Type": "application/json" },
@@ -1747,7 +1747,7 @@
 
         try {
           const response = await fetch(
-            `https://127.0.0.1:3090/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
+            `/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1767,7 +1767,7 @@
               // document.querySelector(".pagination-exp-tr").classList.remove("hidden");
 
               const response = await fetch(
-                `https://127.0.0.1:3090/categories/${transaction.categoryId}`,
+                `/categories/${transaction.categoryId}`,
                 {
                   method: "GET",
                   headers: { "Content-Type": "application/json" },
@@ -2003,7 +2003,7 @@
         const name = document.getElementById("category-name-label").value;
 
         try {
-          const response = await fetch(`https://127.0.0.1:3090/categories/`, {
+          const response = await fetch(`/categories/`, {
             method: "POST",
             credentials: "include",
             headers: {
