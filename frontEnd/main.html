@@ -1114,21 +1114,14 @@
     <script>
       async function checkAuth() {
         try {
-          const response = await fetch(
-<<<<<<< HEAD
-            "/auth/check-token",
-=======
-            "https://adityadey.com/auth/check-token",
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
-            {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-              mode: "cors",
-            }
-          );
+          const response = await fetch("/auth/check-token", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            mode: "cors",
+          });
 
           const data = await response.json();
 
@@ -1151,11 +1144,7 @@
         event.preventDefault();
 
         try {
-<<<<<<< HEAD
           const response = await fetch("/auth/logout", {
-=======
-          const response = await fetch("https://adityadey.com/auth/logout", {
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
             method: "POST",
             credentials: "include",
             headers: {
@@ -1195,21 +1184,14 @@
           }
 
           try {
-            const response = await fetch(
-<<<<<<< HEAD
-              `/categories?type=${reqType}`,
-=======
-              `https://adityadey.com/categories?type=${reqType}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
-              {
-                method: "GET",
-                credentials: "include",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                mode: "cors",
-              }
-            );
+            const response = await fetch(`/categories?type=${reqType}`, {
+              method: "GET",
+              credentials: "include",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              mode: "cors",
+            });
 
             const data = await response.json();
 
@@ -1296,11 +1278,7 @@
         }
 
         try {
-<<<<<<< HEAD
           const response = await fetch("/transactions/", {
-=======
-          const response = await fetch("https://adityadey.com/transactions/", {
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -1348,11 +1326,7 @@
 
         try {
           const response = await fetch(
-<<<<<<< HEAD
             `/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`,
-=======
-            `https://adityadey.com/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1392,11 +1366,7 @@
 
         try {
           const response = await fetch(
-<<<<<<< HEAD
             `/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`,
-=======
-            `https://adityadey.com/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1440,11 +1410,8 @@
 
         try {
           const response = await fetch(
-<<<<<<< HEAD
             `/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`,
-=======
-            `https://adityadey.com/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
+
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1539,11 +1506,8 @@
 
         try {
           const response = await fetch(
-<<<<<<< HEAD
             `/transactions/${transactionId}`,
-=======
-            `https://adityadey.com/transactions/${transactionId}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
+
             {
               method: "DELETE",
               headers: { "Content-Type": "application/json" },
@@ -1585,11 +1549,8 @@
 
         try {
           const response = await fetch(
-<<<<<<< HEAD
             `/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
-=======
-            `https://adityadey.com/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
+
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1611,11 +1572,8 @@
 
             for (const transaction of data.data) {
               const response = await fetch(
-<<<<<<< HEAD
                 `/categories/${transaction.categoryId}`,
-=======
-                `https://adityadey.com/categories/${transaction.categoryId}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
+
                 {
                   method: "GET",
                   headers: { "Content-Type": "application/json" },
@@ -1787,11 +1745,8 @@
 
         try {
           const response = await fetch(
-<<<<<<< HEAD
             `/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
-=======
-            `https://adityadey.com/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
+
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1811,11 +1766,7 @@
               // document.querySelector(".pagination-exp-tr").classList.remove("hidden");
 
               const response = await fetch(
-<<<<<<< HEAD
                 `/categories/${transaction.categoryId}`,
-=======
-                `https://adityadey.com/categories/${transaction.categoryId}`,
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
                 {
                   method: "GET",
                   headers: { "Content-Type": "application/json" },
@@ -2051,11 +2002,7 @@
         const name = document.getElementById("category-name-label").value;
 
         try {
-<<<<<<< HEAD
           const response = await fetch(`/categories/`, {
-=======
-          const response = await fetch(`https://adityadey.com/categories/`, {
->>>>>>> 11c480d92d267446e8622328ce9da256aadc2ecc
             method: "POST",
             credentials: "include",
             headers: {
