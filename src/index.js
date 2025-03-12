@@ -25,7 +25,7 @@ async function start() {
   server.use(
     cors({
       credentials: true,
-      origin: ["https://adityadey.com", "https://www.adityadey.com"],
+      origin: ["https://et.adityadey.com", "https://www.et.adityadey.com"],
     })
   );
 
