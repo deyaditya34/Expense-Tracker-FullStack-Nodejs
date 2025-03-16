@@ -33,10 +33,10 @@ async function start() {
 
   server.use(requestLogger);
 	
-  server.use("/transactions", transactionRouter);
-  server.use("/auth", authRouter);
-  server.use("/categories", categoryRouter);
-  server.use("/business", businessRouter);
+  server.use("/api/transactions", transactionRouter);
+  server.use("/api/auth", authRouter);
+  server.use("/api/categories", categoryRouter);
+  server.use("/api/business", businessRouter);
   server.use(notFoundHandler);
   server.use(errrorHandler);
 

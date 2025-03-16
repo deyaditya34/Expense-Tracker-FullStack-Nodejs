@@ -1114,7 +1114,7 @@
     <script>
       async function checkAuth() {
         try {
-          const response = await fetch("/auth/check-token", {
+          const response = await fetch("/api/auth/check-token", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -1144,7 +1144,7 @@
         event.preventDefault();
 
         try {
-          const response = await fetch("/auth/logout", {
+          const response = await fetch("/api/auth/logout", {
             method: "POST",
             credentials: "include",
             headers: {
@@ -1184,7 +1184,7 @@
           }
 
           try {
-            const response = await fetch(`/categories?type=${reqType}`, {
+            const response = await fetch(`/api/categories?type=${reqType}`, {
               method: "GET",
               credentials: "include",
               headers: {
@@ -1278,7 +1278,7 @@
         }
 
         try {
-          const response = await fetch("/transactions/", {
+          const response = await fetch("/api/transactions/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             credentials: "include",
@@ -1326,7 +1326,7 @@
 
         try {
           const response = await fetch(
-            `/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`,
+            `/api/business/balance?dateTo=${dateTo}&dateFrom=${dateFrom}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1366,7 +1366,7 @@
 
         try {
           const response = await fetch(
-            `/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`,
+            `/api/business/status?dateTo=${dateTo}&dateFrom=${dateFrom}`,
             {
               method: "GET",
               headers: { "Content-Type": "application/json" },
@@ -1410,7 +1410,7 @@
 
         try {
           const response = await fetch(
-            `/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`,
+            `/api/transactions/pending?dateTo=${dateTo}&dateFrom=${dateFrom}&pageNo=${currentPage}&pageSize=${pageSize}`,
 
             {
               method: "GET",
@@ -1506,7 +1506,7 @@
 
         try {
           const response = await fetch(
-            `/transactions/${transactionId}`,
+            `/api/transactions/${transactionId}`,
 
             {
               method: "DELETE",
@@ -1549,7 +1549,7 @@
 
         try {
           const response = await fetch(
-            `/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
+            `/api/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
 
             {
               method: "GET",
@@ -1572,7 +1572,7 @@
 
             for (const transaction of data.data) {
               const response = await fetch(
-                `/categories/${transaction.categoryId}`,
+                `/api/categories/${transaction.categoryId}`,
 
                 {
                   method: "GET",
@@ -1745,7 +1745,7 @@
 
         try {
           const response = await fetch(
-            `/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
+            `/api/transactions/?type=${type}&dateTo=${dateTo}&dateFrom=${dateFrom}&pageSize=${pageSize}&pageNo=${currentPage}`,
 
             {
               method: "GET",
@@ -1766,7 +1766,7 @@
               // document.querySelector(".pagination-exp-tr").classList.remove("hidden");
 
               const response = await fetch(
-                `/categories/${transaction.categoryId}`,
+                `/api/categories/${transaction.categoryId}`,
                 {
                   method: "GET",
                   headers: { "Content-Type": "application/json" },
@@ -2002,7 +2002,7 @@
         const name = document.getElementById("category-name-label").value;
 
         try {
-          const response = await fetch(`/categories/`, {
+          const response = await fetch(`/api/categories/`, {
             method: "POST",
             credentials: "include",
             headers: {
