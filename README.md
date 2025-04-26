@@ -1,4 +1,4 @@
-# **FINANCE TRACKER APPLICATION - BACK-END PROJECT DOCUMENTATION** #
+# **FINANCE TRACKER APPLICATION - FULLSTACK PROJECT DOCUMENTATION** #
 
 ### **_Project Overview_** ###
 This application can be your reliable companion for managing and tracking your financial transactions effortlessly. This application is designed to provide a seamless experience for users to record, categorize, and analyze their expenses and incomes, helping them gain insights into their spending habits and savings.
