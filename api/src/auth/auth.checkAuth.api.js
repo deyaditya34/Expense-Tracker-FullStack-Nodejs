@@ -1,6 +1,6 @@
 const httpError = require("http-errors");
 const buildApiHandler = require("../api-utils/build-api-handler");
-const authService = require("../auth/auth.service");
+const authService = require("./auth.service");
 
 async function controller(req, res) {
   const token = req.cookies.token;
