@@ -27,8 +27,7 @@ async function start() {
     cors({
       credentials: true,
       origin: [
-        'https://et.adityadey.com',
-        'https://www.et.adityadey.com',
+          "http://127.0.0.1:3090",
       ],
     })
   );

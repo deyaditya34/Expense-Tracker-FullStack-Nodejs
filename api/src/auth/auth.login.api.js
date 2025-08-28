@@ -4,7 +4,6 @@ const paramsValidator = require("../middlewares/params-validator");
 
 async function controller(req, res) {
   const { username, password } = req.body;
-  console.log("username -", username);
   const token = await authService.login(username, password);
 
   res.cookie("token", token, {

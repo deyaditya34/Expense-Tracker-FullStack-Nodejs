@@ -4,117 +4,134 @@ const database = require("../services/database.service");
 const jwtService = require("../services/jwt.service");
 const { buildUser, encryptPassword } = require("./auth.utils");
 
-async function register(username, password) {
-  const existingUser = await database
-    .getCollection(config.COLLECTION_NAMES_USERS)
-    .findOne({
-      username,
-    });
+async function register(username, password, provider) {
+    const existingUser = await database
+        .getCollection(config.COLLECTION_NAMES_USERS)
+        .findOne({
+            username,
+            provider
+        });
 
-  if (existingUser) {
-    throw new httpError.UnprocessableEntity(
-      `Username '${username}' is already taken`
-    );
-  }
+    if (existingUser) {
+        throw new httpError.UnprocessableEntity(
+            `Username '${username}' is already taken`
+        );
+    }
 
-  const userDetails = buildUser(username, password);
-  console.log("userDetails", userDetails);
-  await database.getCollection(config.COLLECTION_NAMES_USERS).insertOne(userDetails);
+    const userDetails = buildUser(username, password, provider);
+    console.log("userDetails", userDetails);
+    await database.getCollection(config.COLLECTION_NAMES_USERS).insertOne(userDetails);
+}
+
+async function checkUserRegistered(username, provider) {
+    const existingUser = await database
+        .getCollection(config.COLLECTION_NAMES_USERS)
+        .findOne({
+            username,
+            provider
+        });
+
+    if (existingUser) {
+        return true
+    }
+
+    return false;
 }
 
 async function login(username, password) {
-  const user = await database.getCollection(config.COLLECTION_NAMES_USERS).findOne({
-    username,
-    password: encryptPassword(password),
-  
-  });
+    const user = await database.getCollection(config.COLLECTION_NAMES_USERS).findOne({
+        username,
+        password: encryptPassword(password),
 
-  if (!user) {
-    throw new httpError.Unauthorized("Username/Password combo incorrect");
-  
-  }
+    });
 
-  const token = jwtService.createToken({ username });
-  
-  return token;
+    if (!user) {
+        throw new httpError.Unauthorized("Username/Password combo incorrect");
+
+    }
+
+    const token = jwtService.createToken({ username });
+
+    return token;
 }
 
 async function getUserFromToken(token) {
-  const payload = jwtService.decodeToken(token);
+    const payload = jwtService.decodeToken(token);
 
-  if (!payload) {
-    return null;
-  }
+    if (!payload) {
+        return null;
+    }
 
-  const username = payload.username;
-  const user = await database
-    .getCollection(config.COLLECTION_NAMES_USERS)
-    .findOne({ username }, { projection: { _id: false, password: false } });
+    const username = payload.username;
+    const user = await database
+        .getCollection(config.COLLECTION_NAMES_USERS)
+        .findOne({ username }, { projection: { _id: false, password: false } });
 
-  return user;
+    return user;
 }
 
 async function findUsers(criteria) {
-  return database
-    .getCollection(config.COLLECTION_NAMES_USERS)
-    .find(criteria)
-    .toArray();
+    return database
+        .getCollection(config.COLLECTION_NAMES_USERS)
+        .find(criteria)
+        .toArray();
 }
 
 async function changePassword(username, password, newPassword) {
-  const user = await database.getCollection(config.COLLECTION_NAMES_USERS).findOne({
-    username,
-    password: encryptPassword(password),
-  });
+    const user = await database.getCollection(config.COLLECTION_NAMES_USERS).findOne({
+        username,
+        password: encryptPassword(password),
+    });
 
-  if (!user) {
-    throw new httpError.Unauthorized("Username/Password combo incorrect");
-  }
+    if (!user) {
+        throw new httpError.Unauthorized("Username/Password combo incorrect");
+    }
 
-  let updatedUser = buildUser(username, newPassword);
+    let updatedUser = buildUser(username, newPassword);
 
-  await database
-    .getCollection(config.COLLECTION_NAMES_USERS)
-    .updateOne({ username }, { $set: { password: updatedUser.password } });
+    await database
+        .getCollection(config.COLLECTION_NAMES_USERS)
+        .updateOne({ username }, { $set: { password: updatedUser.password } });
 
-  const token = jwtService.createToken({ username });
+    const token = jwtService.createToken({ username });
 
-  return token;
+    return token;
 }
 
 async function retrieveUserDetails(username) {
-  return database
-    .getCollection(config.COLLECTION_NAMES_USERS)
-    .findOne({ username: username });
+    return database
+        .getCollection(config.COLLECTION_NAMES_USERS)
+        .findOne({ username: username });
 }
 
 async function updatePassword(userDetails, username, password, newPassword) {
-  if (userDetails.username !== username) {
-    throw new httpError.Unauthorized(
-      "Username provided does not match with the username stored in the database."
-    );
-  }
+    if (userDetails.username !== username) {
+        throw new httpError.Unauthorized(
+            "Username provided does not match with the username stored in the database."
+        );
+    }
 
-  if (userDetails.password !== encryptPassword(password)) {
-    throw new httpError.Unauthorized(
-      "Password doesnot match with the user Password saved in the database."
-    );
-  }
+    if (userDetails.password !== encryptPassword(password)) {
+        throw new httpError.Unauthorized(
+            "Password doesnot match with the user Password saved in the database."
+        );
+    }
 
-  await database
-    .getCollection(config.COLLECTION_NAMES_USERS)
-    .updateOne(
-      { username: userDetails.username },
-      { $set: { password: encryptPassword(newPassword) } }
-    );
+    await database
+        .getCollection(config.COLLECTION_NAMES_USERS)
+        .updateOne(
+            { username: userDetails.username },
+            { $set: { password: encryptPassword(newPassword) } }
+        );
 }
 
 module.exports = {
-  register,
-  login,
-  getUserFromToken,
-  findUsers,
-  changePassword,
-  retrieveUserDetails,
-  updatePassword,
+    register,
+    login,
+    getUserFromToken,
+    findUsers,
+    changePassword,
+    retrieveUserDetails,
+    updatePassword,
+    checkUserRegistered
 };

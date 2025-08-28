@@ -1,30 +1,41 @@
 const httpError = require("http-errors");
-const {scryptSync} = require("crypto");
-const {PASSWORD_SALT} = require("../config")
+const { scryptSync } = require("crypto");
+const { PASSWORD_SALT } = require("../config")
 
 function validateUsername(req, res, next) {
-  const { username, password } = req.body;
+    const { username, password } = req.body;
 
-  if (typeof username !== "string" || typeof password !== "string") {
-    throw new httpError.BadRequest("Username and Password should be text only");
-  }
+    if (typeof username !== "string" || typeof password !== "string") {
+        throw new httpError.BadRequest("Username and Password should be text only");
+    }
 
-  if (username.length < 4) {
-    throw new httpError.BadRequest("Username must be atleast 4 characters");
-  }
+    if (username.length < 4) {
+        throw new httpError.BadRequest("Username must be atleast 4 characters");
+    }
 
-  next();
+    next();
 }
 
-function buildUser(username, password) {
-  return {
-    username: username,
-    password: encryptPassword(password),
-    role: "user"}
+function buildUser(username, password, provider) {
+    if (provider === "local") {
+        return {
+            username: username,
+            password: encryptPassword(password),
+            provider: provider,
+            role: "user"
+        }
+    } else {
+        return {
+            username: username,
+            password: null,
+            provider: provider,
+            role: "user"
+        }
+    }
 }
 
 function encryptPassword(password) {
-  return scryptSync(password, PASSWORD_SALT, 64).toString("hex");
+    return scryptSync(password, PASSWORD_SALT, 64).toString("hex");
 }
 
-module.exports = {validateUsername, buildUser, encryptPassword};
+module.exports = { validateUsername, buildUser, encryptPassword };
