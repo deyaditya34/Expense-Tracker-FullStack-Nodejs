@@ -43,8 +43,8 @@ This application can be your reliable companion for managing and tracking your f
   * #### **Paginated Response** ###
     * All of the response sent from the server is properly paginated and also a default pagination is set.
   
-  * #### **Invite-Only Registration System** ####
-    * For a user to register, the user will be needing the token of the **"ADMIN"** user, failing to which the user cannot register to the application.
+  * #### **Implented Google Oauth** ####
+    * Google oauth is completely integrated with the application. Either you sign in manually or through google, the application will handle authentication and authorization effectively.
 
 ### **_API's Walkthrough_** ###
 
